@@ -10,15 +10,10 @@
 UML diagram: https://app.diagrams.net/#G18MWO3bp974lfK4Ceehz2vUfH8YmqEEfE
 """
 
-import storefront
-
-
-# Name:
-# Student number:
+import store_front
 
 
 def main():
-	store_front = storefront
 	store_front.display_menu()
 
 
