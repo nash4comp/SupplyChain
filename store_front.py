@@ -12,6 +12,7 @@ UML diagram: https://app.diagrams.net/#G18MWO3bp974lfK4Ceehz2vUfH8YmqEEfE
 
 import gift_factory
 
+
 def display_menu():
 	user_input = None
 	while user_input != 3:

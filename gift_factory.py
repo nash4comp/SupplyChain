@@ -1,4 +1,15 @@
-import abc
+"""
+# TODO: Add title and description
+
+# Name1: Nash Baek (nash4comp@gmail.com)
+# Student number1: A01243888
+
+# Name2: Taylor Ji (taylor.ji719@gmail.com)
+# Student number2: A01304056
+
+UML diagram: https://app.diagrams.net/#G18MWO3bp974lfK4Ceehz2vUfH8YmqEEfE
+"""
+
 from abc import ABC
 
 
@@ -21,60 +32,80 @@ class GiftFactory(ABC):
 
 class ChristmasGiftFactory(GiftFactory):
 
-	def create_item(self, item, num):
+	def __init__(self):
+		super().__init__()
+
+	def create_item(self, item, quantity):
 		if item == 'Toys':
-			self.create_toy(num)
+			product_name = 'SantasWorkshop'
+			self.create_toy(product_name, quantity)
 		elif item == 'Stuffed_animal':
-			self.create_stuffed_animal(num)
+			product_name = 'Reindeer'
+			self.create_stuffed_animal(product_name, quantity)
 		elif item == 'Candy':
-			self.create_candy(num)
+			product_name = 'CandyCane'
+			self.create_candy(product_name, quantity)
 
-	def create_toy(self, num):
-		print("Christmas toy created: " + str(num) + " toys created")
+	def create_toy(self, product_name, num):
+		print(str(num) + " " + product_name + " created.")
 
-	def create_stuffed_animal(self, num):
-		print("Christmas stuffed animal created: " + str(num) + " stuffed animals created")
+	def create_stuffed_animal(self, product_name, num):
+		print(str(num) + " " + product_name + " created.")
 
-	def create_candy(self, num):
-		print("Christmas candy created: " + str(num) + " candies created")
+	def create_candy(self, product_name, num):
+		print(str(num) + " " + product_name + " created.")
 
 
 class HalloweenGiftFactory(GiftFactory):
+
+	def __init__(self):
+		super().__init__()
+
 	def create_item(self, item, num):
 		if item == 'Toys':
-			self.create_toy(num)
+			product_name = 'RCSniper'
+			self.create_toy(product_name, num)
 		elif item == 'Stuffed_animal':
-			self.create_stuffed_animal(num)
+			product_name = 'DancingSkeleton'
+			self.create_stuffed_animal(product_name, num)
 		elif item == 'Candy':
-			self.create_candy(num)
+			product_name = 'PumpkinCaramelToffee'
+			self.create_candy(product_name, num)
 
-	def create_toy(self, num):
-		print("Halloween toy created: " + str(num) + " toys created")
+	def create_toy(self, product_name, num):
+		print(str(num) + " " + product_name + " created.")
 
-	def create_stuffed_animal(self, num):
-		print("Halloween stuffed animal created: " + str(num) + " stuffed animals created")
+	def create_stuffed_animal(self, product_name, num):
+		print(str(num) + " " + product_name + " created.")
 
-	def create_candy(self, num):
-		print("Halloween candy created: " + str(num) + " candies created")
+	def create_candy(self, product_name, num):
+		print(str(num) + " " + product_name + " created.")
 
 
 class EasterGiftFactory(GiftFactory):
+
+	def __init__(self):
+		super().__init__()
+
 	def create_item(self, item, num):
 		if item == 'Toys':
-			self.create_toy(num)
+			product_name = 'RobotBunny'
+			self.create_toy(product_name, num)
 		elif item == 'Stuffed_animal':
-			self.create_stuffed_animal(num)
+			product_name = 'EasterBunny'
+			self.create_stuffed_animal(product_name, num)
 		elif item == 'Candy':
-			self.create_candy(num)
+			product_name = 'CreamEggs'
+			self.create_candy(product_name, num)
 
-	def create_toy(self, num):
-		print("Easter toy created: " + str(num) + " toys created")
+	def create_toy(self, product_name, num):
+		print(str(num) + " " + product_name + " created.")
 
-	def create_stuffed_animal(self, num):
-		print("Easter stuffed animal created: " + str(num) + " stuffed animals created")
+	def create_stuffed_animal(self, product_name, num):
+		print(str(num) + " " + product_name + " created.")
 
-	def create_candy(self, num):
-		print("Easter candy created: " + str(num) + " candies created")
+	def create_candy(self, product_name, num):
+		print(str(num) + " " + product_name + " created.")
 
 
 class Product(ABC):
@@ -130,3 +161,79 @@ class RobotBunny(Toy):
 
 	def __str__(self):
 		return "RobotBunny"
+
+
+class StuffedAnimal(Product):
+	def __init__(self, name, description, pid, theme, stuffing, size, fabric):
+		super().__init__(name, description, pid, theme)
+		self._stuffing = stuffing
+		self._size = size
+		self._fabric = fabric
+
+	def __str__(self):
+		return "StuffedAnimal"
+
+
+class DancingSkeleton(StuffedAnimal):
+	def __init__(self, name, description, pid, theme, stuffing, size, fabric, is_glowing):
+		super().__init__(name, description, pid, theme, stuffing, size, fabric)
+		self._is_glowing = is_glowing
+
+	def __str__(self):
+		return "DancingSkeleton"
+
+
+class Reindeer(StuffedAnimal):
+	def __init__(self, name, description, pid, theme, stuffing, size, fabric, has_glow):
+		super().__init__(name, description, pid, theme, stuffing, size, fabric)
+		self._has_glow = has_glow
+
+	def __str__(self):
+		return "Reindeer"
+
+
+class EasterBunny(StuffedAnimal):
+	def __init__(self, name, description, pid, theme, stuffing, size, fabric, num_of_sound_effects, color):
+		super().__init__(name, description, pid, theme, stuffing, size, fabric)
+		self._num_of_sound_effects = num_of_sound_effects
+		self._color = color
+
+	def __str__(self):
+		return "EasterBunny"
+
+
+class Candy(Product):
+	def __init__(self, name, description, pid, theme, contains_nuts, is_lactose_free):
+		super().__init__(name, description, pid, theme)
+		self._contains_nuts = contains_nuts
+		self._is_lactose_free = is_lactose_free
+
+	def __str__(self):
+		return "Candy"
+
+
+class PumpkinCaramelToffee(Candy):
+	def __init__(self, name, description, pid, theme, contains_nuts, is_lactose_free, flavor):
+		super().__init__(name, description, pid, theme, contains_nuts, is_lactose_free)
+		self._flavor = flavor
+
+	def __str__(self):
+		return "PumpkinCaramelToffee"
+
+
+class CandyCanes(Candy):
+	def __init__(self, name, description, pid, theme, contains_nuts, is_lactose_free, color):
+		super().__init__(name, description, pid, theme, contains_nuts, is_lactose_free)
+		self._color = color
+
+	def __str__(self):
+		return "CandyCanes"
+
+
+class CreamEggs(Candy):
+	def __init__(self, name, description, pid, theme, contains_nuts, is_lactose_free, pack_size):
+		super().__init__(name, description, pid, theme, contains_nuts, is_lactose_free)
+		self._pack_size = pack_size
+
+	def __str__(self):
+		return "CreamEggs"
