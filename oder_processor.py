@@ -12,7 +12,6 @@ class OrderProcessor:
         """
         Converts an Excel file to dictionary. Replace nan with empty String.
         :param excel_file: String, the name of Excel file to convert
-        :return: dictionary
         """
         excel_data_df = pd.read_excel(excel_file, sheet_name='Sheet1')
         excel_data_df.fillna('', inplace=True)
@@ -20,18 +19,39 @@ class OrderProcessor:
         self.update_excel_to_dict(dict_version)
 
     def update_excel_to_dict(self, dict):
+        """
+        Setter for updating excel_to_dict
+        :param dict: dictionary that updates excel_to_dict
+        """
         self._excel_to_dict = dict
 
     def get_excel_to_dict(self):
+        """
+        Getter for excel_to_dict.
+        :return: dictionary, excel_to_dict
+        """
         return self._excel_to_dict
 
     def get_orders(self):
+        """
+        Getter for created order dictionary.
+        :return: dictionary, order_dict
+        """
         return self._orders_dict
 
     def add_order(self, order, holiday):
+        """
+        Add order and holiday to order_dictionary
+        :param order: Created Order
+        :param holiday: holiday type
+        """
         self.get_orders()[order.get_order_num()] = {order, holiday}
 
     def create_oders(self):
+        """
+        Creates order based on each order from excel_to_dict.
+        Add the created order to order_dict. Key is order number and value is Order and holiday.
+        """
         required_properties = {"order_number": "", "item": "", "name": "", "product_id": ""}
         description = {}
         created_order = None
