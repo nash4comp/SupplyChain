@@ -9,8 +9,13 @@ class OrderProcessor:
         self._excel_to_dict = {}
 
     def convert_dict_from_excel_file(self, excel_file):
+        """
+        Converts an Excel file to dictionary. Replace nan with empty String.
+        :param excel_file: String, the name of Excel file to convert
+        :return: dictionary
+        """
         excel_data_df = pd.read_excel(excel_file, sheet_name='Sheet1')
-        excel_data_df.fillna('', inplace=True)  # replace nan with empty string
+        excel_data_df.fillna('', inplace=True)
         dict_version = excel_data_df.to_dict('index')
         self.update_excel_to_dict(dict_version)
 
