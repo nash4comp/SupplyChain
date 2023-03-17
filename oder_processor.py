@@ -7,6 +7,7 @@ class OrderProcessor:
     def __init__(self):
         self._orders_dict = {}
         self._excel_to_dict = {}
+        self._order_ids = set()
 
     def convert_dict_from_excel_file(self, excel_file):
         """
@@ -39,15 +40,18 @@ class OrderProcessor:
         """
         return self._orders_dict
 
+    def get_order_ids(self):
+        return self._order_ids
+
     def add_order(self, order, holiday):
         """
         Add order and holiday to order_dictionary
         :param order: Created Order
         :param holiday: holiday type
         """
-        self.get_orders()[order.get_order_num()] = {order, holiday}
+        self.get_orders()[order.get_order_num()] = [order, holiday]
 
-    def create_oders(self):
+    def create_orders(self):
         """
         Creates order based on each order from excel_to_dict.
         Add the created order to order_dict. Key is order number and value is Order and holiday.
@@ -86,12 +90,22 @@ class OrderProcessor:
                                       name=required_properties.get("name"),
                                       pid=required_properties.get("product_id"),
                                       description=description)
-            self.add_order(created_order, holiday)
-            holiday = ""
+            if self.validate_order(created_order):
+                self.add_order(created_order, holiday)
+                self.get_order_ids().add(created_order.get_id())
+            # print(created_order)
+                holiday = ""
+
+    def validate_order(self, order):
+        if order.get_id() in self.get_order_ids():
+            return False
+        else:
+            return True
 
 
 test = OrderProcessor()
 test.convert_dict_from_excel_file('orders.xlsx')
-test.create_oders()
-print(test.get_orders().items())
-
+test.create_orders()
+print(test.get_orders())
+# print(type(test.get_orders().get(1)))
+# print(test.get_orders().get(1)[0], "\n", test.get_orders().get(1)[1])

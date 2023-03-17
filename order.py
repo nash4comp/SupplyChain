@@ -26,9 +26,21 @@ class Order:
     def get_description(self):
         return self._detail.items()
 
+    def __str__(self):
+        return f"order number: {self.get_order_num()}, "\
+               f"item type: {self._item_type}, " \
+               f"name: {self._name}, " \
+               f"id: {self.get_id()}, " \
+               f"description : {self.get_description()}"
+
 
 class Item(Enum):
     TOY = "Toy",
     STUFFED_ANIMAL = "Stuffed Animal",
     CANDY = "Candy"
 
+
+class Holiday(Enum):
+    XMAS = "Christmas",
+    EASTER = "Easter",
+    HALLOWEEN = "Halloween"
