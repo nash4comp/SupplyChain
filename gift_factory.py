@@ -15,6 +15,26 @@ from abc import ABC
 from enum import Enum
 
 
+class Products(Enum):
+	class Toy(Enum):
+		Toys = 1
+		SantasWorkshop = 2
+		RCSpider = 3
+		RobotBunny = 4
+
+	class StuffedAnimal(Enum):
+		Stuffed_animal = 1
+		DancingSkeleton = 2
+		Reindeer = 3
+		EasterBunny = 4
+
+	class Candy(Enum):
+		Candy = 1
+		PumpkinCaramelToffee = 2
+		CandyCanes = 3
+		CreamEggs = 4
+
+
 class Theme(Enum):
 	Christmas = 1
 	Halloween = 2
@@ -67,13 +87,13 @@ class GiftFactory(ABC):
 
 	@staticmethod
 	def classify_item(theme, item, num):
-		if theme == 'Christmas':
+		if theme == Theme.Christmas:
 			cf = ChristmasGiftFactory()
 			cf.create_item(item, num)
-		elif theme == 'Halloween':
+		elif theme == Theme.Halloween:
 			hf = HalloweenGiftFactory()
 			hf.create_item(item, num)
-		elif theme == 'Easter':
+		elif theme == Theme.Easter:
 			ef = EasterGiftFactory()
 			ef.create_item(item, num)
 
@@ -84,14 +104,14 @@ class ChristmasGiftFactory(GiftFactory):
 		super().__init__()
 
 	def create_item(self, item, quantity):
-		if item == 'Toys':
-			product_name = 'SantasWorkshop'
+		if item == Products.Toy.Toys:
+			product_name = Products.Toy.SantasWorkshop
 			self.create_toy(product_name, quantity)
-		elif item == 'Stuffed_animal':
-			product_name = 'Reindeer'
+		elif item == Products.StuffedAnimal.Stuffed_animal:
+			product_name = Products.StuffedAnimal.Reindeer
 			self.create_stuffed_animal(product_name, quantity)
-		elif item == 'Candy':
-			product_name = 'CandyCane'
+		elif item == Products.Candy.Candy:
+			product_name = Products.Candy.CandyCanes
 			self.create_candy(product_name, quantity)
 
 	def create_toy(self, product_name, num):
@@ -110,14 +130,14 @@ class HalloweenGiftFactory(GiftFactory):
 		super().__init__()
 
 	def create_item(self, item, num):
-		if item == 'Toys':
-			product_name = 'RCSniper'
+		if item == Products.Toy.Toys:
+			product_name = Products.Toy.RCSpider
 			self.create_toy(product_name, num)
-		elif item == 'Stuffed_animal':
-			product_name = 'DancingSkeleton'
+		elif item == Products.StuffedAnimal.Stuffed_animal:
+			product_name = Products.StuffedAnimal.DancingSkeleton
 			self.create_stuffed_animal(product_name, num)
-		elif item == 'Candy':
-			product_name = 'PumpkinCaramelToffee'
+		elif item == Products.Candy.Candy:
+			product_name = Products.Candy.PumpkinCaramelToffee
 			self.create_candy(product_name, num)
 
 	def create_toy(self, product_name, num):
@@ -136,14 +156,14 @@ class EasterGiftFactory(GiftFactory):
 		super().__init__()
 
 	def create_item(self, item, num):
-		if item == 'Toys':
-			product_name = 'RobotBunny'
+		if item == Products.Toy.Toys:
+			product_name = Products.Toy.RobotBunny
 			self.create_toy(product_name, num)
-		elif item == 'Stuffed_animal':
-			product_name = 'EasterBunny'
+		elif item == Products.StuffedAnimal.Stuffed_animal:
+			product_name = Products.StuffedAnimal.EasterBunny
 			self.create_stuffed_animal(product_name, num)
-		elif item == 'Candy':
-			product_name = 'CreamEggs'
+		elif item == Products.Candy.Candy:
+			product_name = Products.Candy.CreamEggs
 			self.create_candy(product_name, num)
 
 	def create_toy(self, product_name, num):
@@ -182,11 +202,11 @@ class Product(ABC):
 		self._pid = pid
 
 	def set_theme(self, theme):
-		if theme == "Christmas":
+		if theme == Theme.Christmas:
 			self._theme = Theme.Christmas
-		elif theme == "Halloween":
+		elif theme == Theme.Halloween:
 			self._theme = Theme.Halloween
-		elif theme == "Easter":
+		elif theme == Theme.Easter:
 			self._theme = Theme.Easter
 		else:
 			self._theme = None
@@ -303,9 +323,9 @@ class RCSpider(Toy):
 		self._is_glowing = is_glowing
 
 	def set_spider_type(self, spider_type):
-		if spider_type == "Tarantula":
+		if spider_type == SpiderType.Tarantula:
 			self._spider_type = SpiderType.Tarantula
-		elif spider_type == "Wolf":
+		elif spider_type == SpiderType.WolfSpider:
 			self._spider_type = SpiderType.WolfSpider
 		else:
 			self._spider_type = None
@@ -343,11 +363,11 @@ class RobotBunny(Toy):
 		self._num_of_sound_effects = num_of_sound_effects
 
 	def set_color(self, color):
-		if color == "Orange":
+		if color == Color.Orange:
 			self._color = Color.Orange
-		elif color == "Pink":
+		elif color == Color.Pink:
 			self._color = Color.Pink
-		elif color == "Blue":
+		elif color == Color.Blue:
 			self._color = Color.Blue
 		else:
 			self._color = None
@@ -374,29 +394,29 @@ class StuffedAnimal(Product):
 		self._fabric = fabric
 
 	def set_stuffing(self, stuffing):
-		if stuffing == "Polyester_Fibrefill":
+		if stuffing == Stuffing.Polyester_Fibrefill:
 			self._stuffing = Stuffing.Polyester_Fibrefill
-		elif stuffing == "Wool":
+		elif stuffing == Stuffing.Wool:
 			self._stuffing = Stuffing.Wool
 		else:
 			self._stuffing = None
 
 	def set_size(self, size):
-		if size == "S":
+		if size == Size.S:
 			self._size = Size.S
-		elif size == "M":
+		elif size == Size.M:
 			self._size = Size.M
-		elif size == "L":
+		elif size == Size.L:
 			self._size = Size.L
 		else:
 			self._size = None
 
 	def set_fabric(self, fabric):
-		if fabric == "Linen":
+		if fabric == Fabric.Linen:
 			self._fabric = Fabric.Linen
-		elif fabric == "Cotton":
+		elif fabric == Fabric.Cotton:
 			self._fabric = Fabric.Cotton
-		elif fabric == "Acrylic":
+		elif fabric == Fabric.Acrylic:
 			self._fabric = Fabric.Acrylic
 		else:
 			self._fabric = None
@@ -459,13 +479,13 @@ class EasterBunny(StuffedAnimal):
 		self._num_of_sound_effects = num_of_sound_effects
 
 	def set_color(self, color):
-		if color == "White":
+		if color == Color.White:
 			self._color = Color.White
-		elif color == "Grey":
+		elif color == Color.Grey:
 			self._color = Color.Grey
-		elif color == "Pink":
+		elif color == Color.Pink:
 			self._color = Color.Pink
-		elif color == "Blue":
+		elif color == Color.Blue:
 			self._color = Color.Blue
 		else:
 			self._color = None
@@ -516,9 +536,9 @@ class PumpkinCaramelToffee(Candy):
 		self._flavor = flavor
 
 	def set_flavor(self, flavor):
-		if flavor == "Sea_Salt":
+		if flavor == PumpkinCaramelFlavor.Sea_Salt:
 			self._flavor = PumpkinCaramelFlavor.Sea_Salt
-		elif flavor == "Regular":
+		elif flavor == PumpkinCaramelFlavor.Regular:
 			self._flavor = PumpkinCaramelFlavor.Regular
 		else:
 			self._flavor = None
@@ -540,9 +560,9 @@ class CandyCanes(Candy):
 		self._strips = strips
 
 	def set_strips(self, strips):
-		if strips == "Red":
+		if strips == CandyCanesStrips.Red:
 			self._strips = CandyCanesStrips.Red
-		elif strips == "Green":
+		elif strips == CandyCanesStrips.Green:
 			self._strips = CandyCanesStrips.Green
 		else:
 			self._strips = None
