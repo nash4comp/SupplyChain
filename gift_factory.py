@@ -261,9 +261,7 @@ class Toy(Product):
 
 class SantasWorkshop(Toy):
 	def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, is_battery_operated=False,
-	             min_age='',
-	             width=0.0,
-	             height=0.0, num_of_rooms=0):
+	             min_age='', width=0.0, height=0.0, num_of_rooms=0):
 		super().__init__(quantity, name, description, pid, theme, is_battery_operated, min_age)
 		self._width = width
 		self._height = height
@@ -351,8 +349,7 @@ class RCSpider(Toy):
 
 class RobotBunny(Toy):
 	def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, is_battery_operated=False,
-	             min_age=0,
-	             num_of_sound_effects=0, color=None):
+	             min_age=0, num_of_sound_effects=0, color=None):
 		super().__init__(quantity, name, description, pid, theme, is_battery_operated, min_age)
 		self._num_of_sound_effects = num_of_sound_effects
 		self._color = color
