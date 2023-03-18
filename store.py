@@ -72,6 +72,5 @@ class Store:
 
 test = Store()
 test.display_menu()
-# print(test.text_file_name_generator())
-# test.export_daily_transaction_report()
+
 

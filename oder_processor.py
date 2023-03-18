@@ -1,5 +1,6 @@
 import pandas as pd
 from order import Order
+import gift_factory
 from gift_factory import ChristmasGiftFactory
 from gift_factory import HalloweenGiftFactory
 from gift_factory import EasterGiftFactory
@@ -10,8 +11,8 @@ class OrderProcessor:
         self._orders_dict = {}
         self._excel_to_dict = {}
         self._order_ids = set()
-        self._factory_map_dict = {"Christmas": ChristmasGiftFactory, "Halloween": HalloweenGiftFactory,
-                                  "Easter": EasterGiftFactory}
+        self._factory_map_dict = {"Christmas": ChristmasGiftFactory(), "Halloween": HalloweenGiftFactory(),
+                                  "Easter": EasterGiftFactory()}
 
     def convert_dict_from_excel_file(self, excel_file):
         """
@@ -105,9 +106,7 @@ class OrderProcessor:
                 print(holiday)
                 print(item_type)
                 print(self._factory_map_dict[holidays])
-                item = self._factory_map_dict[holidays].create_item(item=item_type,
-                                                                    quantity=10)
-                return item
+                self._factory_map_dict[holidays].create_item(item=item_type, quantity=10)
 
     def validate_order(self, order):
         # duplicated id
