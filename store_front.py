@@ -11,9 +11,10 @@ UML diagram: https://app.diagrams.net/#G18MWO3bp974lfK4Ceehz2vUfH8YmqEEfE
 """
 
 import gift_factory
+import inventory
 
 
-def display_menu():
+def display_menu(inv):
 	user_input = None
 	while user_input != 3:
 		print("Welcome to the store")
@@ -21,6 +22,7 @@ def display_menu():
 		print("1. Process web orders")
 		print("2. Check inventory")
 		print("3. Exit")
+		print("4. Inventory test")
 		string_input = input("Please enter a number from 1 - 3\n> ")
 
 		if string_input == '':
@@ -43,10 +45,11 @@ def display_menu():
 			# self.process_web_orders()
 			pass
 		elif user_input == 2:
-			# self.check_inventory()
-			pass
+			inv.display_inventory()
 		elif user_input == 3:
 			pass
+		elif user_input == 4:
+			inv.inventory_test()
 		else:
 			print("Could not process the input. Please enter a number from 1 - 3.")
 	print("Thank you for visiting the store.")
