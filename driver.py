@@ -11,10 +11,12 @@ UML diagram: https://app.diagrams.net/#G18MWO3bp974lfK4Ceehz2vUfH8YmqEEfE
 """
 
 import store_front
+import inventory
 
 
 def main():
-	store_front.display_menu()
+	inv = inventory.Inventory()
+	store_front.display_menu(inv)
 
 
 if __name__ == '__main__':
