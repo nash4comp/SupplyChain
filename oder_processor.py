@@ -1,6 +1,8 @@
-# read excel file
 import pandas as pd
 from order import Order
+from gift_factory import ChristmasGiftFactory
+from gift_factory import HalloweenGiftFactory
+from gift_factory import EasterGiftFactory
 
 
 class OrderProcessor:
@@ -8,6 +10,8 @@ class OrderProcessor:
         self._orders_dict = {}
         self._excel_to_dict = {}
         self._order_ids = set()
+        self._factory_map_dict = {"Christmas": ChristmasGiftFactory, "Halloween": HalloweenGiftFactory,
+                                  "Easter": EasterGiftFactory}
 
     def convert_dict_from_excel_file(self, excel_file):
         """
@@ -19,12 +23,12 @@ class OrderProcessor:
         dict_version = excel_data_df.to_dict('index')
         self.update_excel_to_dict(dict_version)
 
-    def update_excel_to_dict(self, dict):
+    def update_excel_to_dict(self, dict_to_update):
         """
         Setter for updating excel_to_dict
-        :param dict: dictionary that updates excel_to_dict
+        :param dict_to_update: dictionary that updates excel_to_dict
         """
-        self._excel_to_dict = dict
+        self._excel_to_dict = dict_to_update
 
     def get_excel_to_dict(self):
         """
@@ -62,25 +66,19 @@ class OrderProcessor:
         holiday = ""
         for key in self.get_excel_to_dict().keys():
             order_to_process = self.get_excel_to_dict()[key]  # get the nth dictionary
-            # print(order_to_process)
             for key in order_to_process.keys():
                 value_from_key = order_to_process[key]
-                # print(value_from_key)
                 if value_from_key != "":
                     if key != "holiday":
                         if key in required_properties.keys():
                             if key == "product_id":
                                 required_properties["product_id"] = value_from_key
-                                # print(required_properties["product_id"])
                             if key == "item":
                                 required_properties["item"] = value_from_key
-                                # print(required_properties["item"])
                             if key == "name":
                                 required_properties["name"] = value_from_key
-                                # print(required_properties["name"])
                             if key == "order_number":
                                 required_properties["order_number"] = value_from_key
-                                # print(required_properties["order_number"])
                         else:
                             description[key] = value_from_key
                     else:
@@ -93,19 +91,29 @@ class OrderProcessor:
             if self.validate_order(created_order):
                 self.add_order(created_order, holiday)
                 self.get_order_ids().add(created_order.get_id())
-            # print(created_order)
                 holiday = ""
+                description = {}  # empty the dictionary
+
+    def get_holiday_of_an_item(self, order):
+        return self.get_orders()[order][1]
+
+    def get_corresponding_factory(self, order):
+        holiday = self.get_holiday_of_an_item(order)
+        item_type = self.get_orders()[order][0].get_item_type()
+        for holidays in self._factory_map_dict.keys():
+            if holiday == holidays:
+                print(holiday)
+                print(item_type)
+                print(self._factory_map_dict[holidays])
+                item = self._factory_map_dict[holidays].create_item(item=item_type,
+                                                                    quantity=10)
+                return item
 
     def validate_order(self, order):
+        # duplicated id
+        # invalid description (not proper attribute), after factory mapping
+
         if order.get_id() in self.get_order_ids():
             return False
         else:
             return True
-
-
-test = OrderProcessor()
-test.convert_dict_from_excel_file('orders.xlsx')
-test.create_orders()
-print(test.get_orders())
-# print(type(test.get_orders().get(1)))
-# print(test.get_orders().get(1)[0], "\n", test.get_orders().get(1)[1])

@@ -26,6 +26,9 @@ class Order:
     def get_description(self):
         return self._detail.items()
 
+    def get_item_type(self):
+        return self._item_type
+
     def __str__(self):
         return f"order number: {self.get_order_num()}, "\
                f"item type: {self._item_type}, " \
@@ -36,7 +39,7 @@ class Order:
 
 class Item(Enum):
     TOY = "Toy",
-    STUFFED_ANIMAL = "Stuffed Animal",
+    STUFFED_ANIMAL = "StuffedAnimal",
     CANDY = "Candy"
 
 
