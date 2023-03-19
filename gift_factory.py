@@ -13,26 +13,24 @@ UML diagram: https://app.diagrams.net/#G18MWO3bp974lfK4Ceehz2vUfH8YmqEEfE
 import abc
 from abc import ABC
 from enum import Enum
+import inventory
 
 
 class Products(Enum):
 	class Toy(Enum):
-		Toys = 1
-		SantasWorkshop = 2
-		RCSpider = 3
-		RobotBunny = 4
+		SantasWorkshop = 1
+		RCSpider = 2
+		RobotBunny = 3
 
 	class StuffedAnimal(Enum):
-		Stuffed_animal = 1
-		DancingSkeleton = 2
-		Reindeer = 3
-		EasterBunny = 4
+		DancingSkeleton = 1
+		Reindeer = 2
+		EasterBunny = 3
 
 	class Candy(Enum):
-		Candy = 1
-		PumpkinCaramelToffee = 2
-		CandyCanes = 3
-		CreamEggs = 4
+		PumpkinCaramelToffee = 1
+		CandyCanes = 2
+		CreamEggs = 3
 
 
 class Theme(Enum):
@@ -86,16 +84,16 @@ class GiftFactory(ABC):
 		pass
 
 	@staticmethod
-	def classify_item(theme, item, num):
+	def classify_item(theme, item, quantity):
 		if theme == Theme.Christmas:
 			cf = ChristmasGiftFactory()
-			cf.create_item(item, num)
+			cf.create_item(item, quantity)
 		elif theme == Theme.Halloween:
 			hf = HalloweenGiftFactory()
-			hf.create_item(item, num)
+			hf.create_item(item, quantity)
 		elif theme == Theme.Easter:
 			ef = EasterGiftFactory()
-			ef.create_item(item, num)
+			ef.create_item(item, quantity)
 
 
 class ChristmasGiftFactory(GiftFactory):
@@ -104,24 +102,25 @@ class ChristmasGiftFactory(GiftFactory):
 		super().__init__()
 
 	def create_item(self, item, quantity):
-		if item == Products.Toy.Toys:
+		if item == "Toy":
 			product_name = Products.Toy.SantasWorkshop
 			self.create_toy(product_name, quantity)
-		elif item == Products.StuffedAnimal.Stuffed_animal:
+		elif item == "StuffedAnimal":
 			product_name = Products.StuffedAnimal.Reindeer
 			self.create_stuffed_animal(product_name, quantity)
-		elif item == Products.Candy.Candy:
+		elif item == "Candy":
 			product_name = Products.Candy.CandyCanes
 			self.create_candy(product_name, quantity)
 
-	def create_toy(self, product_name, num):
-		print(str(num) + " " + product_name + " created.")
+	def create_toy(self, product_name, quantity):
+		inventory.Inventory().add_item("Toy", product_name, quantity, Theme.Christmas)
+		print(str(quantity) + " " + product_name + " created.")
 
-	def create_stuffed_animal(self, product_name, num):
-		print(str(num) + " " + product_name + " created.")
+	def create_stuffed_animal(self, product_name, quantity):
+		print(str(quantity) + " " + product_name + " created.")
 
-	def create_candy(self, product_name, num):
-		print(str(num) + " " + product_name + " created.")
+	def create_candy(self, product_name, quantity):
+		print(str(quantity) + " " + product_name + " created.")
 
 
 class HalloweenGiftFactory(GiftFactory):
@@ -129,25 +128,25 @@ class HalloweenGiftFactory(GiftFactory):
 	def __init__(self):
 		super().__init__()
 
-	def create_item(self, item, num):
-		if item == Products.Toy.Toys:
+	def create_item(self, item, quantity):
+		if item == "Toy":
 			product_name = Products.Toy.RCSpider
-			self.create_toy(product_name, num)
-		elif item == Products.StuffedAnimal.Stuffed_animal:
+			self.create_toy(product_name, quantity)
+		elif item == "StuffedAnimal":
 			product_name = Products.StuffedAnimal.DancingSkeleton
-			self.create_stuffed_animal(product_name, num)
-		elif item == Products.Candy.Candy:
+			self.create_stuffed_animal(product_name, quantity)
+		elif item == "Candy":
 			product_name = Products.Candy.PumpkinCaramelToffee
-			self.create_candy(product_name, num)
+			self.create_candy(product_name, quantity)
 
-	def create_toy(self, product_name, num):
-		print(str(num) + " " + product_name + " created.")
+	def create_toy(self, product_name, quantity):
+		print(str(quantity) + " " + product_name + " created.")
 
-	def create_stuffed_animal(self, product_name, num):
-		print(str(num) + " " + product_name + " created.")
+	def create_stuffed_animal(self, product_name, quantity):
+		print(str(quantity) + " " + product_name + " created.")
 
-	def create_candy(self, product_name, num):
-		print(str(num) + " " + product_name + " created.")
+	def create_candy(self, product_name, quantity):
+		print(str(quantity) + " " + product_name + " created.")
 
 
 class EasterGiftFactory(GiftFactory):
@@ -155,25 +154,25 @@ class EasterGiftFactory(GiftFactory):
 	def __init__(self):
 		super().__init__()
 
-	def create_item(self, item, num):
-		if item == Products.Toy.Toys:
+	def create_item(self, item, quantity):
+		if item == "Toy":
 			product_name = Products.Toy.RobotBunny
-			self.create_toy(product_name, num)
-		elif item == Products.StuffedAnimal.Stuffed_animal:
+			self.create_toy(product_name, quantity)
+		elif item == "StuffedAnimal":
 			product_name = Products.StuffedAnimal.EasterBunny
-			self.create_stuffed_animal(product_name, num)
-		elif item == Products.Candy.Candy:
+			self.create_stuffed_animal(product_name, quantity)
+		elif item == "Candy":
 			product_name = Products.Candy.CreamEggs
-			self.create_candy(product_name, num)
+			self.create_candy(product_name, quantity)
 
-	def create_toy(self, product_name, num):
-		print(str(num) + " " + product_name + " created.")
+	def create_toy(self, product_name, quantity):
+		print(str(quantity) + " " + product_name + " created.")
 
-	def create_stuffed_animal(self, product_name, num):
-		print(str(num) + " " + product_name + " created.")
+	def create_stuffed_animal(self, product_name, quantity):
+		print(str(quantity) + " " + product_name + " created.")
 
-	def create_candy(self, product_name, num):
-		print(str(num) + " " + product_name + " created.")
+	def create_candy(self, product_name, quantity):
+		print(str(quantity) + " " + product_name + " created.")
 
 
 class Product(ABC):
