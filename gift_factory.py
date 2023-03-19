@@ -84,10 +84,10 @@ class ChristmasGiftFactory(GiftFactory):
 		super().__init__()
 
 	def create_item(self, item, quantity):
-		if item == 'Toys':
+		if item == 'Toy':
 			product_name = 'SantasWorkshop'
-			self.create_toy(product_name, quantity)
-		elif item == 'Stuffed_animal':
+			self.create_toy(product_name, quantity)  # how about details?
+		elif item == 'StuffedAnimal':
 			product_name = 'Reindeer'
 			self.create_stuffed_animal(product_name, quantity)
 		elif item == 'Candy':
@@ -95,6 +95,8 @@ class ChristmasGiftFactory(GiftFactory):
 			self.create_candy(product_name, quantity)
 
 	def create_toy(self, product_name, num):
+		# return Toy object named SantasWorksShop
+		# get the detail from order
 		print(str(num) + " " + product_name + " created.")
 
 	def create_stuffed_animal(self, product_name, num):
@@ -109,16 +111,16 @@ class HalloweenGiftFactory(GiftFactory):
 	def __init__(self):
 		super().__init__()
 
-	def create_item(self, item, num):
-		if item == 'Toys':
-			product_name = 'RCSniper'
-			self.create_toy(product_name, num)
-		elif item == 'Stuffed_animal':
+	def create_item(self, item, quantity):
+		if item == 'Toy':
+			product_name = 'RCSpider'
+			self.create_toy(product_name, quantity)
+		elif item == 'StuffedAnimal':
 			product_name = 'DancingSkeleton'
-			self.create_stuffed_animal(product_name, num)
+			self.create_stuffed_animal(product_name, quantity)
 		elif item == 'Candy':
 			product_name = 'PumpkinCaramelToffee'
-			self.create_candy(product_name, num)
+			self.create_candy(product_name, quantity)
 
 	def create_toy(self, product_name, num):
 		print(str(num) + " " + product_name + " created.")
@@ -135,16 +137,16 @@ class EasterGiftFactory(GiftFactory):
 	def __init__(self):
 		super().__init__()
 
-	def create_item(self, item, num):
-		if item == 'Toys':
+	def create_item(self, item, quantity):
+		if item == 'Toy':
 			product_name = 'RobotBunny'
-			self.create_toy(product_name, num)
-		elif item == 'Stuffed_animal':
+			self.create_toy(product_name, quantity)
+		elif item == 'StuffedAnimal':
 			product_name = 'EasterBunny'
-			self.create_stuffed_animal(product_name, num)
+			self.create_stuffed_animal(product_name, quantity)
 		elif item == 'Candy':
 			product_name = 'CreamEggs'
-			self.create_candy(product_name, num)
+			self.create_candy(product_name, quantity)
 
 	def create_toy(self, product_name, num):
 		print(str(num) + " " + product_name + " created.")

@@ -23,18 +23,18 @@ class Order:
         """
         return self._orderNum
 
-    def get_description(self):
-        return self._detail.items()
+    def get_attributes(self):
+        return self._detail['attribute']
 
     def get_item_type(self):
         return self._item_type
 
     def __str__(self):
-        return f"order number: {self.get_order_num()}, "\
+        return f"order number: {self.get_order_num()}, " \
                f"item type: {self._item_type}, " \
                f"name: {self._name}, " \
                f"id: {self.get_id()}, " \
-               f"description : {self.get_description()}"
+               f"attribute : {self.get_attributes()}"
 
 
 class Item(Enum):

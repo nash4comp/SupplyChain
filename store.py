@@ -39,11 +39,20 @@ class Store:
             elif user_input == 3:
                 self.export_daily_transaction_report()
             elif user_input == 4:
-                # print(self.get_order_processor().get_orders().get(1))
+                print(self.get_order_processor().get_orders().items())
+                for order in self.get_order_processor().get_orders().values():
+                    order_object = order[0]
+                    holiday = order[1]
+                    item_type = order_object.get_item_type()
+                    print(order_object)
+                    print(item_type)
+                    print(holiday)
+                    self.get_order_processor().get_corresponding_factory(item_type, holiday)
+
                 # print(self.get_order_processor().get_holiday_of_an_item(1))
                 # print(self.get_order_processor().get_orders().get(1)[0])
                 # print(self.get_order_processor().get_orders().get(1)[0].get_item_type())
-                print(self.get_order_processor().get_corresponding_factory(1))
+                # print(self.get_order_processor().get_corresponding_factory(1))
                 # print(self.get_order_processor().get_orders().get(2))
                 # print(self.get_order_processor().get_orders().get(2)[0])
             else:

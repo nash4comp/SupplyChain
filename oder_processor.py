@@ -1,6 +1,6 @@
 import pandas as pd
 from order import Order
-import gift_factory
+from gift_factory import GiftFactory
 from gift_factory import ChristmasGiftFactory
 from gift_factory import HalloweenGiftFactory
 from gift_factory import EasterGiftFactory
@@ -11,8 +11,9 @@ class OrderProcessor:
         self._orders_dict = {}
         self._excel_to_dict = {}
         self._order_ids = set()
-        self._factory_map_dict = {"Christmas": ChristmasGiftFactory(), "Halloween": HalloweenGiftFactory(),
-                                  "Easter": EasterGiftFactory()}
+        # self._factory_map_dict = {"Christmas": ChristmasGiftFactory(), "Halloween": HalloweenGiftFactory(),
+        #                           "Easter": EasterGiftFactory()}
+        self._factory_map = GiftFactory()
 
     def convert_dict_from_excel_file(self, excel_file):
         """
@@ -62,7 +63,7 @@ class OrderProcessor:
         Add the created order to order_dict. Key is order number and value is Order and holiday.
         """
         required_properties = {"order_number": "", "item": "", "name": "", "product_id": ""}
-        description = {}
+        attributes = {}
         created_order = None
         holiday = ""
         for key in self.get_excel_to_dict().keys():
@@ -81,32 +82,30 @@ class OrderProcessor:
                             if key == "order_number":
                                 required_properties["order_number"] = value_from_key
                         else:
-                            description[key] = value_from_key
+                            attributes[key] = value_from_key
                     else:
                         holiday = value_from_key
                 created_order = Order(item_type=required_properties.get("item"),
                                       order_number=required_properties.get("order_number"),
                                       name=required_properties.get("name"),
                                       pid=required_properties.get("product_id"),
-                                      description=description)
-            if self.validate_order(created_order):
-                self.add_order(created_order, holiday)
-                self.get_order_ids().add(created_order.get_id())
-                holiday = ""
-                description = {}  # empty the dictionary
+                                      attribute=attributes)
+            self.add_order(created_order, holiday)
+            self.get_order_ids().add(created_order.get_id())
+            holiday = ""
+            attributes = {}  # empty the dictionary
 
     def get_holiday_of_an_item(self, order):
         return self.get_orders()[order][1]
 
-    def get_corresponding_factory(self, order):
-        holiday = self.get_holiday_of_an_item(order)
-        item_type = self.get_orders()[order][0].get_item_type()
-        for holidays in self._factory_map_dict.keys():
-            if holiday == holidays:
-                print(holiday)
-                print(item_type)
-                print(self._factory_map_dict[holidays])
-                self._factory_map_dict[holidays].create_item(item=item_type, quantity=10)
+    def get_corresponding_factory(self, item_type, holiday):
+        # holiday = self.get_holiday_of_an_item(order)
+        # item_type = self.get_orders()[order][0].get_item_type()
+
+        # for holidays in self._factory_map_dict.keys():
+        #     if holiday == holidays:
+        #         self._factory_map_dict[holidays].create_item(item=item_type, quantity=10)
+        self._factory_map.classify_item(holiday, item_type, 10)
 
     def validate_order(self, order):
         # duplicated id
