@@ -3,9 +3,12 @@ import gift_factory as gf
 
 class Inventory:
 	def __init__(self):
-		self._inventory_toy = [gf.Toy(), gf.SantasWorkshop(), gf.RCSpider(), gf.RobotBunny()]
-		self._inventory_stuffed_animal = [gf.StuffedAnimal(), gf.DancingSkeleton(), gf.Reindeer(), gf.EasterBunny()]
-		self._inventory_candy = [gf.Candy(), gf.PumpkinCaramelToffee(), gf.CandyCanes(), gf.CreamEggs()]
+		# self._inventory_toy = [gf.SantasWorkshop(), gf.RCSpider(), gf.RobotBunny()]
+		# self._inventory_stuffed_animal = [gf.DancingSkeleton(), gf.Reindeer(), gf.EasterBunny()]
+		# self._inventory_candy = [gf.PumpkinCaramelToffee(), gf.CandyCanes(), gf.CreamEggs()]
+		self._inventory_toy = []
+		self._inventory_stuffed_animal = []
+		self._inventory_candy = []
 
 	def check_inventory(self, quantity):
 		if quantity >= 10:
@@ -17,6 +20,29 @@ class Inventory:
 		else:
 			return "Out of Stock"
 
+	def add_item(self, item, product_name, quantity, theme):
+		if item == "Toy":
+			if theme == gf.Theme.Christmas:
+				self._inventory_toy.append(gf.SantasWorkshop())
+			elif theme == gf.Theme.Halloween:
+				self._inventory_toy.append(gf.RCSpider())
+			elif theme == gf.Theme.Easter:
+				self._inventory_toy.append(gf.RobotBunny())
+		elif item == "StuffedAnimal":
+			if theme == gf.Theme.Christmas:
+				self._inventory_stuffed_animal.append(gf.DancingSkeleton())
+			elif theme == gf.Theme.Halloween:
+				self._inventory_stuffed_animal.append(gf.Reindeer())
+			elif theme == gf.Theme.Easter:
+				self._inventory_stuffed_animal.append(gf.EasterBunny())
+		elif item == "Candy":
+			if theme == gf.Theme.Christmas:
+				self._inventory_candy.append(gf.PumpkinCaramelToffee())
+			elif theme == gf.Theme.Halloween:
+				self._inventory_candy.append(gf.CandyCanes())
+			elif theme == gf.Theme.Easter:
+				self._inventory_candy.append(gf.CreamEggs())
+
 	def inventory_test(self):
 		self._inventory_toy[0].set_name("Nash's Toy")
 		self._inventory_toy[0].set_quantity(15)
@@ -24,8 +50,6 @@ class Inventory:
 		self._inventory_toy[1].set_quantity(5)
 		self._inventory_toy[2].set_name("Jeff's RC Spider")
 		self._inventory_toy[2].set_quantity(2)
-		self._inventory_toy[3].set_name("Mark's RobotBunny")
-		self._inventory_toy[3].set_quantity(0)
 
 	def display_inventory(self):
 		print("Inventory List")
