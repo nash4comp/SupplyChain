@@ -1,9 +1,6 @@
 import pandas as pd
 from order import Order
 from gift_factory import GiftFactory
-from gift_factory import ChristmasGiftFactory
-from gift_factory import HalloweenGiftFactory
-from gift_factory import EasterGiftFactory
 
 
 class OrderProcessor:
