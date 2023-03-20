@@ -23,7 +23,7 @@ class Store:
                 continue
             user_input = int(string_input)
 
-            if user_input == 0:  # read the Excel file and create order object
+            if user_input == 0:  # read the Excel file and create order object and validate order
                 file_to_read = int(input("If you want to read orders.xlsx enter 1 "))
                 if file_to_read == 1:
                     excel_file = "orders.xlsx"
@@ -41,15 +41,16 @@ class Store:
             elif user_input == 3:
                 self.export_daily_transaction_report()
             elif user_input == 4:
-                print(self.get_order_processor().get_orders().items())
+                # print(self.get_order_processor().get_orders().items())
                 for order in self.get_order_processor().get_orders().values():
                     order_object = order[0]
                     holiday = order[1]
                     item_type = order_object.get_item_type()
-                    print(order_object)
-                    print(item_type)
-                    print(holiday)
-                    self.get_order_processor().get_corresponding_factory(item_type, holiday)
+                    # print(order_object)
+                    # print(item_type)
+                    # print(holiday)
+                    # print(order_object.get_attributes())
+                    order_object.validate_details(holiday)
             else:
                 print("Could not process the input. Please enter a number from 1 - 3.")
         print("Thank you for visiting the store.")

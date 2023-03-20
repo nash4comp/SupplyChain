@@ -1,4 +1,5 @@
 from enum import Enum
+import gift_factory
 
 
 class Order:
@@ -16,6 +17,13 @@ class Order:
         """
         return self._pid
 
+    def get_name(self):
+        """
+        Getter for id
+        :return: String, id
+        """
+        return self._name
+
     def get_order_num(self):
         """
         Getter for id
@@ -28,6 +36,29 @@ class Order:
 
     def get_item_type(self):
         return self._item_type
+
+    def validate_details(self, holiday):
+        item_type = self.get_item_type()
+        if holiday == "Christmas":
+            if item_type == "Toy":
+                result = gift_factory.Toy.validate_attribute(self.get_attributes())
+                if type(result) == dict:
+                    santa_detail = gift_factory.SantasWorkshop.santa_detail_validator(self.get_attributes())
+                    if santa_detail is not None:
+                        santa_workshop = gift_factory.SantasWorkshop(quantity=result["quantity"], name=self.get_name(),
+                                                                     description=result["description"],
+                                                                     pid=self.get_id(), theme=holiday,
+                                                                     is_battery_operated=result["has_batteries"],
+                                                                     min_age=result["min_age"],
+                                                                     dimension=santa_detail["dimension"],
+                                                                     num_of_rooms=santa_detail["num_of_rooms"])
+                        print("validated_santa_house")
+                        return santa_workshop
+
+
+
+
+
 
     def __str__(self):
         return f"order number: {self.get_order_num()}, " \

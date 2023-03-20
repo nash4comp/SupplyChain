@@ -1,7 +1,6 @@
 import pandas as pd
 from order import Order
 from gift_factory import GiftFactory
-import gift_factory
 
 
 class OrderProcessor:
@@ -9,8 +8,6 @@ class OrderProcessor:
         self._orders_dict = {}
         self._excel_to_dict = {}
         self._order_ids = set()
-        # self._factory_map_dict = {"Christmas": ChristmasGiftFactory(), "Halloween": HalloweenGiftFactory(),
-        #                           "Easter": EasterGiftFactory()}
         self._factory_map = GiftFactory()
 
     def convert_dict_from_excel_file(self, excel_file):
@@ -77,13 +74,13 @@ class OrderProcessor:
                                 if key not in self.get_order_ids() and key is not None:
                                     required_properties["product_id"] = value_from_key
                             if key == "item":
-                                if key in valid_theme:
+                                if value_from_key in valid_item_types:
                                     required_properties["item"] = value_from_key
                                 else:
                                     print("Item type error")
                             if key == "name":
-                                # if name is not none and in Enum name
-                                required_properties["name"] = value_from_key
+                                if value_from_key is not None:
+                                    required_properties["name"] = value_from_key
                             if key == "order_number":
                                 if key not in self.get_order_ids():
                                     required_properties["order_number"] = value_from_key
@@ -92,7 +89,10 @@ class OrderProcessor:
                         else:
                             attributes[key] = value_from_key
                     else:
-                        holiday = value_from_key
+                        if value_from_key in valid_theme:
+                            holiday = value_from_key
+                        else:
+                            print("Invalid theme")
                 created_order = Order(item_type=required_properties.get("item"),
                                       order_number=required_properties.get("order_number"),
                                       name=required_properties.get("name"),
@@ -100,6 +100,7 @@ class OrderProcessor:
                                       attribute=attributes)
             self.add_order(created_order, holiday)
             self.get_order_ids().add(created_order.get_id())
+            # created_order.validate_details(holiday)
             holiday = ""
             attributes = {}  # empty the dictionary
 
@@ -116,11 +117,7 @@ class OrderProcessor:
         self._factory_map.classify_item(holiday, item_type, 10)
 
     def validate_order(self, order):
-        # duplicated id
-        # invalid description (not proper attribute), after factory mapping
-
-        if order.get_id() in self.get_order_ids():
-            return False
-        else:
-            return True
+        # product_id, name, and item_type are validated inside create_orders
+        # validate only details
+        pass
 
