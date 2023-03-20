@@ -234,9 +234,6 @@ class Toy(Product):
 	valid_attributes_toy = {"quantity", 'name', "description", "pid", "theme", "is_battery_operated",
 	             "min_age"}
 
-	@staticmethod
-	def is_valid_attributes():
-
 
 	def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, is_battery_operated=False,
 	             min_age=0):

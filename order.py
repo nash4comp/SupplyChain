@@ -4,7 +4,7 @@ from enum import Enum
 class Order:
     def __init__(self, item_type, order_number, name, pid, **kwargs):
         self._item_type = item_type
-        self._orderNum = order_number
+        self._orderNum = int(order_number)
         self._name = name
         self._pid = pid
         self._detail = kwargs  # decode the kwargs

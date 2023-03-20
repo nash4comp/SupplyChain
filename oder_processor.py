@@ -1,6 +1,7 @@
 import pandas as pd
 from order import Order
 from gift_factory import GiftFactory
+import gift_factory
 
 
 class OrderProcessor:
@@ -60,6 +61,8 @@ class OrderProcessor:
         Add the created order to order_dict. Key is order number and value is Order and holiday.
         """
         required_properties = {"order_number": "", "item": "", "name": "", "product_id": ""}
+        valid_item_types = {"Toy", "StuffedAnimal", "Candy"}
+        valid_theme = {"Christmas", "Halloween", "Easter"}
         attributes = {}
         created_order = None
         holiday = ""
@@ -71,13 +74,21 @@ class OrderProcessor:
                     if key != "holiday":
                         if key in required_properties.keys():
                             if key == "product_id":
-                                required_properties["product_id"] = value_from_key
+                                if key not in self.get_order_ids() and key is not None:
+                                    required_properties["product_id"] = value_from_key
                             if key == "item":
-                                required_properties["item"] = value_from_key
+                                if key in valid_theme:
+                                    required_properties["item"] = value_from_key
+                                else:
+                                    print("Item type error")
                             if key == "name":
+                                # if name is not none and in Enum name
                                 required_properties["name"] = value_from_key
                             if key == "order_number":
-                                required_properties["order_number"] = value_from_key
+                                if key not in self.get_order_ids():
+                                    required_properties["order_number"] = value_from_key
+                                else:
+                                    print("duplicated product id")
                         else:
                             attributes[key] = value_from_key
                     else:
@@ -112,3 +123,4 @@ class OrderProcessor:
             return False
         else:
             return True
+

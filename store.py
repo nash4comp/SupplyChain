@@ -24,10 +24,12 @@ class Store:
             user_input = int(string_input)
 
             if user_input == 0:  # read the Excel file and create order object
-                file_to_read = input("Please enter the excel file name to read: ")
-                self.get_order_processor().convert_dict_from_excel_file(file_to_read)
-                self.get_order_processor().create_orders()  # just create orders without any validation
-                self.update_orders_without_validation(self.get_order_processor().get_orders())
+                file_to_read = int(input("If you want to read orders.xlsx enter 1 "))
+                if file_to_read == 1:
+                    excel_file = "orders.xlsx"
+                    self.get_order_processor().convert_dict_from_excel_file(excel_file)
+                    self.get_order_processor().create_orders()  # just create orders without any validation
+                    self.update_orders_without_validation(self.get_order_processor().get_orders())
                 print(self.get_order_processor().get_orders())
 
             if user_input == 1:  #
@@ -48,13 +50,6 @@ class Store:
                     print(item_type)
                     print(holiday)
                     self.get_order_processor().get_corresponding_factory(item_type, holiday)
-
-                # print(self.get_order_processor().get_holiday_of_an_item(1))
-                # print(self.get_order_processor().get_orders().get(1)[0])
-                # print(self.get_order_processor().get_orders().get(1)[0].get_item_type())
-                # print(self.get_order_processor().get_corresponding_factory(1))
-                # print(self.get_order_processor().get_orders().get(2))
-                # print(self.get_order_processor().get_orders().get(2)[0])
             else:
                 print("Could not process the input. Please enter a number from 1 - 3.")
         print("Thank you for visiting the store.")
