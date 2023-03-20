@@ -52,6 +52,9 @@ class Order:
                                                                      min_age=result["min_age"],
                                                                      dimension=santa_detail["dimension"],
                                                                      num_of_rooms=santa_detail["num_of_rooms"])
+                        print(santa_workshop.get_name())
+                        print(santa_workshop.get_description())
+                        print(santa_workshop.get_is_battery_operated())
                         print("validated_santa_house")
                         return santa_workshop
 

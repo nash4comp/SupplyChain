@@ -45,7 +45,7 @@ class Store:
                 for order in self.get_order_processor().get_orders().values():
                     order_object = order[0]
                     holiday = order[1]
-                    item_type = order_object.get_item_type()
+                    # item_type = order_object.get_item_type()
                     # print(order_object)
                     # print(item_type)
                     # print(holiday)

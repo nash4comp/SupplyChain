@@ -245,10 +245,18 @@ class Toy(Product):
                     valid_attributes_toy["description"] = attribute_dict[attribute]
                     valid_attribute_count += 1
                 if attribute == "has_batteries":
-                    valid_attributes_toy["has_batteries"] = attribute_dict[attribute]
-                    valid_attribute_count += 1
+                    if attribute_dict["has_batteries"] == "N":
+                        valid_attributes_toy["has_batteries"] = False
+                        valid_attribute_count += 1
+                    elif attribute_dict["has_batteries"] == "Y" :
+                        valid_attributes_toy["has_batteries"] = True
+                        valid_attribute_count += 1
+                    else:
+                        print("Invalid battery input")
+                    # valid_attributes_toy["has_batteries"] = attribute_dict[attribute]
                 if attribute == "min_age" and type(attribute_dict[attribute]) == float:
-                    valid_attributes_toy["min_age"] = attribute_dict[attribute]
+                    int_age = int(attribute_dict[attribute])
+                    valid_attributes_toy["min_age"] = int_age
                     valid_attribute_count += 1
         if valid_attribute_count != len(valid_attributes_toy):
             print("Invalid order")
@@ -286,6 +294,10 @@ class SantasWorkshop(Toy):
 
     @staticmethod
     def santa_detail_validator(att_dict):
+        valid_attributes_count = 6
+        if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
+            print("extra column")
+            return None
         valid_santa_attributes = {"dimension": "", "num_of_rooms": 0}
         for key_att_dict in att_dict.keys():
             if key_att_dict == "dimensions":
@@ -320,11 +332,11 @@ class SantasWorkshop(Toy):
     def get_product_type(self):
         return "SantasWorkshop"
 
-    def get_width(self):
-        return self._width
-
-    def get_height(self):
-        return self._height
+    # def get_width(self):
+    #     return self._width
+    #
+    # def get_height(self):
+    #     return self._height
 
     def get_num_of_rooms(self):
         return self._num_of_rooms
