@@ -9,6 +9,7 @@ class OrderProcessor:
         self._excel_to_dict = {}
         self._order_ids = set()
         self._factory_map = GiftFactory()
+        self._valid_orders = []
 
     def convert_dict_from_excel_file(self, excel_file):
         """
@@ -100,7 +101,9 @@ class OrderProcessor:
                                       attribute=attributes)
             self.add_order(created_order, holiday)
             self.get_order_ids().add(created_order.get_id())
-            # created_order.validate_details(holiday)
+            valid_order = created_order.validate_details(holiday)
+            if valid_order is not None:
+                self.get_valid_orders_list().append(valid_order)
             holiday = ""
             attributes = {}  # empty the dictionary
 
@@ -116,8 +119,11 @@ class OrderProcessor:
         #         self._factory_map_dict[holidays].create_item(item=item_type, quantity=10)
         self._factory_map.classify_item(holiday, item_type, 10)
 
-    def validate_order(self, order):
-        # product_id, name, and item_type are validated inside create_orders
-        # validate only details
-        pass
+    def get_valid_orders_list(self):
+        return self._valid_orders
+
+    def print_valid_order_product_name(self):
+        for item in self.get_valid_orders_list():
+            print(item.get_name())
+        print(len(self.get_valid_orders_list()))
 

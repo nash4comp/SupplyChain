@@ -248,7 +248,7 @@ class Toy(Product):
                     if attribute_dict["has_batteries"] == "N":
                         valid_attributes_toy["has_batteries"] = False
                         valid_attribute_count += 1
-                    elif attribute_dict["has_batteries"] == "Y" :
+                    elif attribute_dict["has_batteries"] == "Y":
                         valid_attributes_toy["has_batteries"] = True
                         valid_attribute_count += 1
                     else:
@@ -302,9 +302,14 @@ class SantasWorkshop(Toy):
         for key_att_dict in att_dict.keys():
             if key_att_dict == "dimensions":
                 valid_santa_attributes["dimension"] = att_dict[key_att_dict]
-            if key_att_dict == "num_rooms":
-                valid_santa_attributes["num_of_rooms"] = att_dict[key_att_dict]
-        return valid_santa_attributes
+            if key_att_dict == "num_rooms" and type(att_dict[key_att_dict]) != str:
+                int_room_num = int(att_dict[key_att_dict])
+                valid_santa_attributes["num_of_rooms"] = int_room_num
+        if valid_santa_attributes["dimension"] == "" \
+                or valid_santa_attributes["num_of_rooms"] == 0:
+            return None
+        else:
+            return valid_santa_attributes
 
     def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, is_battery_operated=False,
                  min_age='', dimension="", num_of_rooms=0):
@@ -346,6 +351,52 @@ class SantasWorkshop(Toy):
 
 
 class RCSpider(Toy):
+
+    @staticmethod
+    def rc_spider_detail_validator(att_dict):
+        # desc, quan, has_batteries, min_age
+        # speed, jump_height, has_glow, spider_type
+        valid_attributes_count = 8
+        valid_attribute_count = 0
+        if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
+            print("extra column")
+            return None
+        valid_spider_attributes = {"speed": 0, "jump_height": 0, "has_glow": "", "spider_type": ""}
+        for key_att_dict in att_dict.keys():
+            if key_att_dict == "speed":
+                int_speed = int(att_dict[key_att_dict])
+                valid_spider_attributes["speed"] = int_speed
+                valid_attribute_count += 1
+            if key_att_dict == "jump_height" and type(att_dict[key_att_dict]) != str:
+                int_jump = int(att_dict[key_att_dict])
+                valid_spider_attributes["jump_height"] = int_jump
+                valid_attribute_count += 1
+            if key_att_dict == "has_glow":
+                if att_dict["has_glow"] == "N":
+                    valid_spider_attributes["has_glow"] = False
+                    valid_attribute_count += 1
+                elif att_dict["has_glow"] == "Y":
+                    valid_spider_attributes["has_glow"] = True
+                    valid_attribute_count += 1
+                else:
+                    print("Invalid glow input")
+            if key_att_dict == "spider_type":
+                if att_dict["spider_type"] == "Tarantula":
+                    valid_spider_attributes["spider_type"] = "Tarantula"
+                    valid_attribute_count += 1
+                elif att_dict["spider_type"] == "Wolf Spider":
+                    valid_spider_attributes["spider_type"] = "Wolf Spider"
+                    valid_attribute_count += 1
+                else:
+                    print("Invalid spider type input")
+        if valid_spider_attributes["speed"] == 0 \
+                or valid_spider_attributes["jump_height"] == 0 \
+                or valid_spider_attributes["has_glow"] == ""\
+                or valid_spider_attributes["spider_type"] == "":
+            return None
+        else:
+            return valid_spider_attributes
+
     def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, is_battery_operated=False,
                  min_age=0, speed=0.0, jump_height=0.0, is_glowing=False, spider_type=None):
         super().__init__(quantity, name, description, pid, theme, is_battery_operated, min_age)
@@ -395,6 +446,40 @@ class RCSpider(Toy):
 
 
 class RobotBunny(Toy):
+
+    @staticmethod
+    def robot_bunny_detail_validator(att_dict):
+        # desc, quan, has_batteries, min_age
+        # num_sound, colour,
+        valid_attributes_count = 6
+        valid_attribute_count = 0
+        if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
+            print("extra column")
+            return None
+        valid_robot_bunny_details = {"num_sound": 0, "colour": ""}
+        for key_att_dict in att_dict.keys():
+            value_from_dict = att_dict[key_att_dict]
+            if key_att_dict == "num_sound" and type(att_dict[key_att_dict]) != str:
+                int_num_sound = int(att_dict[key_att_dict])
+                valid_robot_bunny_details["num_sound"] = int_num_sound
+                valid_attribute_count += 1
+            if key_att_dict == "colour":
+                # Orange, Blue, Pink
+                if key_att_dict == "colour":
+                    if value_from_dict == "Orange":
+                        valid_robot_bunny_details["colour"] = "Orange"
+                    if value_from_dict == "Blue":
+                        valid_robot_bunny_details["colour"] = "Blue"
+                    if value_from_dict == "Pink":
+                        valid_robot_bunny_details["colour"] = "Pink"
+                valid_attribute_count += 1
+
+        if valid_robot_bunny_details["num_sound"] == 0 \
+                or valid_robot_bunny_details["colour"] == "":
+            return None
+        else:
+            return valid_robot_bunny_details
+
     def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, is_battery_operated=False,
                  min_age=0, num_of_sound_effects=0, color=None):
         super().__init__(quantity, name, description, pid, theme, is_battery_operated, min_age)
@@ -430,6 +515,44 @@ class RobotBunny(Toy):
 
 
 class StuffedAnimal(Product):
+    @staticmethod
+    def validate_attribute(attribute_dict):
+        valid_attributes_stuffed_animal = {"quantity": 0, "description": "", "stuffing": "", "size": ""}
+        valid_attribute_count = 0
+        for attribute in valid_attributes_stuffed_animal.keys():
+            if attribute in attribute_dict.keys():
+                if attribute == "quantity" and type(attribute_dict[attribute]) == int:
+                    valid_attributes_stuffed_animal["quantity"] = attribute_dict[attribute]
+                    valid_attribute_count += 1
+                if attribute == "description" and attribute_dict[attribute] is not None:
+                    valid_attributes_stuffed_animal["description"] = attribute_dict[attribute]
+                    valid_attribute_count += 1
+                if attribute == "stuffing":
+                    if attribute_dict["stuffing"] == "Polyester Fibrefill":
+                        valid_attributes_stuffed_animal["stuffing"] = "Polyester Fibrefill"
+                        valid_attribute_count += 1
+                    elif attribute_dict["stuffing"] == "Wool":
+                        valid_attributes_stuffed_animal["stuffing"] = "Wool"
+                        valid_attribute_count += 1
+                    else:
+                        print("Invalid stuffing input")
+                if attribute == "size":
+                    if attribute_dict["size"] == "S":
+                        valid_attributes_stuffed_animal["size"] = "S"
+                        valid_attribute_count += 1
+                    elif attribute_dict["size"] == "M":
+                        valid_attributes_stuffed_animal["size"] = "M"
+                        valid_attribute_count += 1
+                    elif attribute_dict["size"] == "L":
+                        valid_attributes_stuffed_animal["size"] = "L"
+                        valid_attribute_count += 1
+                    else:
+                        print("Invalid size input")
+        if valid_attribute_count != len(valid_attributes_stuffed_animal):
+            print("Invalid order")
+        else:
+            return valid_attributes_stuffed_animal
+
     def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, stuffing=None, size=None,
                  fabric=None):
         super().__init__(quantity, name, description, pid, theme)
@@ -473,6 +596,36 @@ class StuffedAnimal(Product):
 
 
 class DancingSkeleton(StuffedAnimal):
+    @staticmethod
+    def dancing_skeleton_detail_validator(att_dict):
+        # quantity": 0, "description": "", "stuffing": "", "size": ""
+        valid_attributes_count = 6
+        if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
+            print("extra column")
+            return None
+        valid_dancing_skeleton_attributes = {"fabric": "", "has_glow": ""}
+        for key_att_dict in att_dict.keys():
+            value_from_dict = att_dict[key_att_dict]
+            if key_att_dict == "fabric":
+                if value_from_dict == "Linen":
+                    valid_dancing_skeleton_attributes["fabric"] = "Linen"
+                if value_from_dict == "Cotton":
+                    valid_dancing_skeleton_attributes["fabric"] = "Cotton"
+                if value_from_dict == "Acrylic":
+                    valid_dancing_skeleton_attributes["fabric"] = "Acrylic"
+            if key_att_dict == "has_glow":
+                if value_from_dict == "N":
+                    valid_dancing_skeleton_attributes["has_glow"] = False
+                elif value_from_dict == "Y":
+                    valid_dancing_skeleton_attributes["has_glow"] = True
+                else:
+                    print("Invalid fabric")
+        if valid_dancing_skeleton_attributes["fabric"] == "" \
+                or valid_dancing_skeleton_attributes["has_glow"] == "":
+            return None
+        else:
+            return valid_dancing_skeleton_attributes
+
     def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, stuffing=None, size=None,
                  fabric=None, is_glowing=False):
         super().__init__(quantity, name, description, pid, theme, stuffing, size, fabric)
@@ -492,6 +645,36 @@ class DancingSkeleton(StuffedAnimal):
 
 
 class Reindeer(StuffedAnimal):
+
+    @staticmethod
+    def rein_deer_detail_validator(att_dict):
+        valid_attributes_count = 6
+        if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
+            print("extra column")
+            return None
+        valid_reindeer_attributes = {"fabric": "", "has_glow": ""}
+        for key_att_dict in att_dict.keys():
+            value_from_dict = att_dict[key_att_dict]
+            if key_att_dict == "fabric":
+                if value_from_dict == "Linen":
+                    valid_reindeer_attributes["fabric"] = "Linen"
+                if value_from_dict == "Cotton":
+                    valid_reindeer_attributes["fabric"] = "Cotton"
+                if value_from_dict == "Acrylic":
+                    valid_reindeer_attributes["fabric"] = "Acrylic"
+            if key_att_dict == "has_glow":
+                if value_from_dict == "N":
+                    valid_reindeer_attributes["has_glow"] = False
+                elif value_from_dict == "Y":
+                    valid_reindeer_attributes["has_glow"] = True
+                else:
+                    print("Invalid glow")
+        if valid_reindeer_attributes["fabric"] == "" \
+                or valid_reindeer_attributes["has_glow"] == "":
+            return None
+        else:
+            return valid_reindeer_attributes
+
     def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, stuffing=None, size=None,
                  fabric=None, has_glow=False):
         super().__init__(quantity, name, description, pid, theme, stuffing, size, fabric)
@@ -511,10 +694,50 @@ class Reindeer(StuffedAnimal):
 
 
 class EasterBunny(StuffedAnimal):
+    @staticmethod
+    def east_bunny_detail_validator(att_dict):
+        # quantity": 0, "description": "", "stuffing": "", "size": ""
+        # Orange = 1
+        # Blue = 2
+        # Pink = 3
+        # White = 4
+        # Grey = 5
+        valid_attributes_count = 6
+        if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
+            print("extra column")
+            return None
+        valid_reindeer_attributes = {"fabric": "", "colour": ""}
+        for key_att_dict in att_dict.keys():
+            value_from_dict = att_dict[key_att_dict]
+            if key_att_dict == "fabric":
+                if value_from_dict == "Linen":
+                    valid_reindeer_attributes["fabric"] = "Linen"
+                if value_from_dict == "Cotton":
+                    valid_reindeer_attributes["fabric"] = "Cotton"
+                if value_from_dict == "Acrylic":
+                    valid_reindeer_attributes["fabric"] = "Acrylic"
+            if key_att_dict == "colour":
+                if value_from_dict == "Orange":
+                    valid_reindeer_attributes["colour"] = "Orange"
+                if value_from_dict == "Blue":
+                    valid_reindeer_attributes["colour"] = "Blue"
+                if value_from_dict == "Pink":
+                    valid_reindeer_attributes["colour"] = "Pink"
+                if value_from_dict == "White":
+                    valid_reindeer_attributes["colour"] = "White"
+                if value_from_dict == "Grey":
+                    valid_reindeer_attributes["colour"] = "Grey"
+        if valid_reindeer_attributes["fabric"] == "" \
+                or valid_reindeer_attributes["colour"] == "":
+            return None
+        else:
+            return valid_reindeer_attributes
+
+# num of sound effect??
     def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, stuffing=None, size=None,
-                 fabric=None, num_of_sound_effects=0, color=None):
+                 fabric=None, color=None):
         super().__init__(quantity, name, description, pid, theme, stuffing, size, fabric)
-        self._num_of_sound_effects = num_of_sound_effects
+        # self._num_of_sound_effects = num_of_sound_effects  #
         self._color = color
 
     def set_num_of_sound_effects(self, num_of_sound_effects):
@@ -548,6 +771,42 @@ class EasterBunny(StuffedAnimal):
 
 
 class Candy(Product):
+
+    @staticmethod
+    def validate_attribute(attribute_dict):
+        valid_attributes_candy = {"quantity": 0, "description": "", "has_nuts": "", "has_lactose": ""}
+        valid_attribute_count = 0
+        for attribute in valid_attributes_candy.keys():
+            if attribute in attribute_dict.keys():
+                if attribute == "quantity" and type(attribute_dict[attribute]) == int:
+                    valid_attributes_candy["quantity"] = attribute_dict[attribute]
+                    valid_attribute_count += 1
+                if attribute == "description" and attribute_dict[attribute] is not None:
+                    valid_attributes_candy["description"] = attribute_dict[attribute]
+                    valid_attribute_count += 1
+                if attribute == "has_nuts":
+                    if attribute_dict["has_nuts"] == "N":
+                        valid_attributes_candy["has_nuts"] = False
+                        valid_attribute_count += 1
+                    elif attribute_dict["has_nuts"] == "Y":
+                        valid_attributes_candy["has_nuts"] = True
+                        valid_attribute_count += 1
+                    else:
+                        print("Invalid has_nuts input")
+                if attribute == "has_lactose":
+                    if attribute_dict["has_lactose"] == "N":
+                        valid_attributes_candy["has_lactose"] = False
+                        valid_attribute_count += 1
+                    elif attribute_dict["has_lactose"] == "Y":
+                        valid_attributes_candy["has_lactose"] = True
+                        valid_attribute_count += 1
+                    else:
+                        print("Invalid has_lactose input")
+        if valid_attribute_count != len(valid_attributes_candy):
+            print("Invalid order")
+        else:
+            return valid_attributes_candy
+
     def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, contains_nuts=False,
                  is_lactose_free=False):
         super().__init__(quantity, name, description, pid, theme)
@@ -574,6 +833,26 @@ class Candy(Product):
 
 
 class PumpkinCaramelToffee(Candy):
+    @staticmethod
+    def pumpkin_toffee_detail_validator(att_dict):
+        # quantity": 0, "description": "", "has_nuts": "", "has_lactose": ""
+        valid_attributes_count = 5
+        if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
+            print("extra column")
+            return None
+        valid_halloween_candy_attributes = {"variety": ""}
+        for key_att_dict in att_dict.keys():
+            value_from_dict = att_dict[key_att_dict]
+            if key_att_dict == "variety":
+                if value_from_dict == "Sea Salt":
+                    valid_halloween_candy_attributes["variety"] = value_from_dict
+                if value_from_dict == "Regular":
+                    valid_halloween_candy_attributes["variety"] = value_from_dict
+        if valid_halloween_candy_attributes["variety"] == "":
+            return None
+        else:
+            return valid_halloween_candy_attributes
+
     def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, contains_nuts=False,
                  is_lactose_free=False, flavor=None):
         super().__init__(quantity, name, description, pid, theme, contains_nuts, is_lactose_free)
@@ -598,6 +877,29 @@ class PumpkinCaramelToffee(Candy):
 
 
 class CandyCanes(Candy):
+
+    @staticmethod
+    def candy_cane_detail_validator(att_dict):
+        # quantity": 0, "description": "", "has_nuts": "", "has_lactose": "", "colour":"",
+        # Red = 1
+        # Green = 2
+        valid_attributes_count = 5
+        if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
+            print("extra column")
+            return None
+        valid_candy_cane_attributes = {"colour": ""}
+        for key_att_dict in att_dict.keys():
+            value_from_dict = att_dict[key_att_dict]
+            if key_att_dict == "colour":
+                if value_from_dict == "Red":
+                    valid_candy_cane_attributes["colour"] = value_from_dict
+                if value_from_dict == "Green":
+                    valid_candy_cane_attributes["colour"] = value_from_dict
+        if valid_candy_cane_attributes["colour"] == "":
+            return None
+        else:
+            return valid_candy_cane_attributes
+
     def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, contains_nuts=False,
                  is_lactose_free=False, strips=None):
         super().__init__(quantity, name, description, pid, theme, contains_nuts, is_lactose_free)
@@ -622,6 +924,25 @@ class CandyCanes(Candy):
 
 
 class CreamEggs(Candy):
+
+    @staticmethod
+    def cream_egg_detail_validator(att_dict):
+        # quantity": 0, "description": "", "has_nuts": "", "has_lactose": "", "colour":""
+        # pack_size
+        valid_attributes_count = 5
+        if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
+            print("extra column")
+            return None
+        valid_cream_egg_attributes = {"pack_size": ""}
+        for key_att_dict in att_dict.keys():
+            value_from_dict = att_dict[key_att_dict]
+            if key_att_dict == "pack_size" and type(value_from_dict) != str:
+                int_pack_size = int(value_from_dict)
+                valid_cream_egg_attributes["pack_size"] = int_pack_size
+        if valid_cream_egg_attributes["pack_size"] == "":
+            return None
+        else:
+            return valid_cream_egg_attributes
     def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, contains_nuts=False,
                  is_lactose_free=False, pack_size=0):
         super().__init__(quantity, name, description, pid, theme, contains_nuts, is_lactose_free)
