@@ -218,7 +218,7 @@ class Order:
                         dancing_skeleton = gift_factory.DancingSkeleton(
                             quantity=result["quantity"], name=self.get_name(), description=result["description"],
                             pid=self.get_id(), theme=holiday, stuffing=result["stuffing"], size=result["size"],
-                            fabric=dancing_skeleton_detail["fabric"], is_glowing=dancing_skeleton_detail["has_glow"]
+                            fabric=dancing_skeleton_detail["fabric"], has_glow=dancing_skeleton_detail["has_glow"]
                         )
                         print(
                             "inside validation function: dancing skeleton--------------------------------------------")

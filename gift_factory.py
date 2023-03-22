@@ -106,7 +106,8 @@ class GiftFactory:
 
 
 class Product(ABC):
-    def __init__(self, quantity=0, name='No name', description='', pid='', theme=None):
+    def __init__(self, item_type=None, quantity=0, name='No name', description='', pid='', theme=None):
+        self._item_type = item_type
         self._quantity = quantity
         self._name = name
         self._description = description
@@ -192,9 +193,10 @@ class Toy(Product):
         else:
             return valid_attributes_toy
 
-    def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, is_battery_operated=False,
+    def __init__(self, item_type='TOY', quantity=0, name='No name', description='', pid='', theme=None, is_battery_operated=False,
                  min_age=0):
-        super().__init__(quantity, name, description, pid, theme)
+        super().__init__(item_type, quantity, name, description, pid, theme)
+        self._item_type = item_type
         self._is_battery_operated = is_battery_operated
         self._min_age = min_age
 
@@ -240,9 +242,9 @@ class SantasWorkshop(Toy):
         else:
             return valid_santa_attributes
 
-    def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, is_battery_operated=False,
+    def __init__(self, item_type='TOY', quantity=0, name='No name', description='', pid='', theme=None, is_battery_operated=False,
                  min_age='', dimension="", num_of_rooms=0):
-        super().__init__(quantity, name, description, pid, theme, is_battery_operated, min_age)
+        super().__init__(item_type, quantity, name, description, pid, theme, is_battery_operated, min_age)
         self._dimension = dimension
         # self._width = width
         # self._height = height
@@ -326,9 +328,9 @@ class RCSpider(Toy):
         else:
             return valid_spider_attributes
 
-    def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, is_battery_operated=False,
+    def __init__(self, item_type='TOY', quantity=0, name='No name', description='', pid='', theme=None, is_battery_operated=False,
                  min_age=0, speed=0, jump_height=0, is_glowing=False, spider_type=None):
-        super().__init__(quantity, name, description, pid, theme, is_battery_operated, min_age)
+        super().__init__(item_type, quantity, name, description, pid, theme, is_battery_operated, min_age)
         self._speed = speed
         self._jump_height = jump_height
         self._is_glowing = is_glowing
@@ -409,9 +411,9 @@ class RobotBunny(Toy):
         else:
             return valid_robot_bunny_details
 
-    def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, is_battery_operated=False,
+    def __init__(self, item_type='TOY', quantity=0, name='No name', description='', pid='', theme=None, is_battery_operated=False,
                  min_age=0, num_of_sound_effects=0, color=None):
-        super().__init__(quantity, name, description, pid, theme, is_battery_operated, min_age)
+        super().__init__(item_type, quantity, name, description, pid, theme, is_battery_operated, min_age)
         self._num_of_sound_effects = num_of_sound_effects
         self._color = color
 
@@ -482,9 +484,9 @@ class StuffedAnimal(Product):
         else:
             return valid_attributes_stuffed_animal
 
-    def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, stuffing=None, size=None,
+    def __init__(self, item_type='StuffedAnimal', quantity=0, name='No name', description='', pid='', theme=None, stuffing=None, size=None,
                  fabric=None):
-        super().__init__(quantity, name, description, pid, theme)
+        super().__init__(item_type, quantity, name, description, pid, theme)
         self._stuffing = stuffing
         self._size = size
         self._fabric = fabric
@@ -555,19 +557,19 @@ class DancingSkeleton(StuffedAnimal):
         else:
             return valid_dancing_skeleton_attributes
 
-    def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, stuffing=None, size=None,
-                 fabric=None, is_glowing=False):
-        super().__init__(quantity, name, description, pid, theme, stuffing, size, fabric)
-        self._is_glowing = is_glowing
+    def __init__(self, item_type='StuffedAnimal', quantity=0, name='No name', description='', pid='', theme=None, stuffing=None, size=None,
+                 fabric=None, has_glow=False):
+        super().__init__(item_type, quantity, name, description, pid, theme, stuffing, size, fabric)
+        self._has_glow = has_glow
 
-    def set_is_glowing(self, is_glowing):
-        self._is_glowing = is_glowing
+    def set_has_glow(self, has_glow):
+        self._has_glow = has_glow
 
     def get_product_type(self):
         return "DancingSkeleton"
 
-    def get_is_glowing(self):
-        return self._is_glowing
+    def get_has_glow(self):
+        return self._has_glow
 
     def __str__(self):
         return "DancingSkeleton"
@@ -604,9 +606,9 @@ class Reindeer(StuffedAnimal):
         else:
             return valid_reindeer_attributes
 
-    def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, stuffing=None, size=None,
+    def __init__(self, item_type='StuffedAnimal', quantity=0, name='No name', description='', pid='', theme=None, stuffing=None, size=None,
                  fabric=None, has_glow=False):
-        super().__init__(quantity, name, description, pid, theme, stuffing, size, fabric)
+        super().__init__(item_type, quantity, name, description, pid, theme, stuffing, size, fabric)
         self._has_glow = has_glow
 
     def set_has_glow(self, has_glow):
@@ -663,9 +665,9 @@ class EasterBunny(StuffedAnimal):
             return valid_reindeer_attributes
 
 # num of sound effect??
-    def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, stuffing=None, size=None,
+    def __init__(self, item_type='StuffedAnimal', quantity=0, name='No name', description='', pid='', theme=None, stuffing=None, size=None,
                  fabric=None, color=None):
-        super().__init__(quantity, name, description, pid, theme, stuffing, size, fabric)
+        super().__init__(item_type, quantity, name, description, pid, theme, stuffing, size, fabric)
         # self._num_of_sound_effects = num_of_sound_effects  #
         self._color = color
 
@@ -736,9 +738,9 @@ class Candy(Product):
         else:
             return valid_attributes_candy
 
-    def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, contains_nuts=False,
+    def __init__(self, item_type='Candy', quantity=0, name='No name', description='', pid='', theme=None, contains_nuts=False,
                  is_lactose_free=False):
-        super().__init__(quantity, name, description, pid, theme)
+        super().__init__(item_type, quantity, name, description, pid, theme)
         self._contains_nuts = contains_nuts
         self._is_lactose_free = is_lactose_free
 
@@ -782,10 +784,11 @@ class PumpkinCaramelToffee(Candy):
         else:
             return valid_halloween_candy_attributes
 
-    def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, contains_nuts=False,
-                 is_lactose_free=False, flavor=None):
-        super().__init__(quantity, name, description, pid, theme, contains_nuts, is_lactose_free)
+    def __init__(self, item_type='Candy', quantity=0, name='No name', description='', pid='', theme=None, contains_nuts=False,
+                 is_lactose_free=False, flavor=None, variety=''):
+        super().__init__(item_type, quantity, name, description, pid, theme, contains_nuts, is_lactose_free)
         self._flavor = flavor
+        self._variety = variety
 
     def set_flavor(self, flavor):
         if flavor == PumpkinCaramelFlavor.Sea_Salt:
@@ -829,9 +832,9 @@ class CandyCanes(Candy):
         else:
             return valid_candy_cane_attributes
 
-    def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, contains_nuts=False,
+    def __init__(self, item_type='Candy', quantity=0, name='No name', description='', pid='', theme=None, contains_nuts=False,
                  is_lactose_free=False, strips=None):
-        super().__init__(quantity, name, description, pid, theme, contains_nuts, is_lactose_free)
+        super().__init__(item_type, quantity, name, description, pid, theme, contains_nuts, is_lactose_free)
         self._strips = strips
 
     def set_strips(self, strips):
@@ -872,9 +875,9 @@ class CreamEggs(Candy):
             return None
         else:
             return valid_cream_egg_attributes
-    def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, contains_nuts=False,
+    def __init__(self, item_type='Candy', quantity=0, name='No name', description='', pid='', theme=None, contains_nuts=False,
                  is_lactose_free=False, pack_size=0):
-        super().__init__(quantity, name, description, pid, theme, contains_nuts, is_lactose_free)
+        super().__init__(item_type, quantity, name, description, pid, theme, contains_nuts, is_lactose_free)
         self._pack_size = pack_size
 
     def set_pack_size(self, pack_size):

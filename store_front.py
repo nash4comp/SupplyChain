@@ -12,6 +12,7 @@ UML diagram: https://app.diagrams.net/#G18MWO3bp974lfK4Ceehz2vUfH8YmqEEfE
 
 from store import Store
 
+
 # def display_menu(inv, factory):
 # 	santas_workshop = factory.create_item(theme="Christmas", item_type="Toys")
 # 	reindeer = factory.create_item(theme="Christmas", item_type="StuffedAnimal")
@@ -80,8 +81,7 @@ class StoreFront:
 		cream_eggs = factory.create_item(theme="Easter", item_type="Candy")
 
 		items = [santas_workshop, reindeer, candy_canes, rc_spider, dancing_skeleton, pumpkin_caramel_toffee,
-				 robot_bunny,
-				 easter_bunny, cream_eggs]
+		         robot_bunny, easter_bunny, cream_eggs]
 
 		user_input = None
 		while user_input != 3:
@@ -103,7 +103,7 @@ class StoreFront:
 				pass
 
 			if user_input == 1:
-				self._store.menu_process_web_orders()
+				self._store.menu_process_web_orders(factory)
 			elif user_input == 2:
 				inv.display_inventory()
 			elif user_input == 3:
