@@ -832,14 +832,14 @@ class CandyCanes(Candy):
             return valid_candy_cane_attributes
 
     def __init__(self, item_type='Candy', quantity=0, name='No name', description='', product_id='', holiday=None, has_nuts=False,
-                 has_lactose=False, strips=None):
+                 has_lactose=False, colour=None):
         super().__init__(item_type, quantity, name, description, product_id, holiday, has_nuts, has_lactose)
-        self._strips = strips
+        self._strips = colour
 
-    def set_strips(self, strips):
-        if strips == CandyCanesStrips.Red:
+    def set_strips(self, colour):
+        if colour == CandyCanesStrips.Red:
             self._strips = CandyCanesStrips.Red
-        elif strips == CandyCanesStrips.Green:
+        elif colour == CandyCanesStrips.Green:
             self._strips = CandyCanesStrips.Green
         else:
             self._strips = None

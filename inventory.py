@@ -76,7 +76,7 @@ class Inventory:
 				                                  name=spec["name"],
 				                                  description=spec["description"], product_id=spec["product_id"],
 				                                  holiday=spec["holiday"], has_nuts=spec["has_nuts"],
-				                                  has_lactose=spec["has_lactose"], strips=spec["strips"])
+				                                  has_lactose=spec["has_lactose"], colour=spec["colour"])
 				self._inventory_candy.append(candy_canes)
 			elif holiday == "Halloween":
 				pumpkin_caramel_toffee = factory.create_item(item_type=spec["item_type"], quantity=spec["quantity"],
@@ -123,7 +123,7 @@ class Inventory:
 		         "holiday": "Christmas", "item_type": "Candy", "has_batteries": False, "min_age": 8,
 		         "dimension": "", "num_rooms": 1, "stuffing": "Polyester", "size": "Medium", "fabric": "Cotton",
 		         "has_glow": False, "num_sound": 0, "colour": "", "variety": "Sea Salt", "has_lactose": True,
-		         "has_nuts": False, "strips": "Red"}
+		         "has_nuts": False, "colour": "Red"}
 		spec4 = {
 			"quantity": 20,
 			"name": "Nash's Halloween RC Spider",
@@ -144,7 +144,7 @@ class Inventory:
 			"variety": "Sea Salt",
 			"has_lactose": True,
 			"has_nuts": False,
-			"strips": "Red",
+			"colour": "Red",
 			"jump_height": 10,
 			"pack_size": 1,
 			"speed": 10,
@@ -171,7 +171,7 @@ class Inventory:
 			"variety": "Sea Salt",
 			"has_lactose": True,
 			"has_nuts": False,
-			"strips": "Red",
+			"colour": "Red",
 			"jump_height": 10,
 			"pack_size": 1,
 			"speed": 10,
@@ -198,7 +198,7 @@ class Inventory:
 			"variety": "Sea Salt",
 			"has_lactose": True,
 			"has_nuts": False,
-			"strips": "Red",
+			"colour": "Red",
 			"jump_height": 10,
 			"pack_size": 1,
 			"speed": 10,
@@ -225,7 +225,7 @@ class Inventory:
 			"variety": "Sea Salt",
 			"has_lactose": True,
 			"has_nuts": False,
-			"strips": "Red",
+			"colour": "Red",
 			"jump_height": 10,
 			"pack_size": 1,
 			"speed": 10,
@@ -252,7 +252,7 @@ class Inventory:
 			"variety": "Sea Salt",
 			"has_lactose": True,
 			"has_nuts": False,
-			"strips": "Red",
+			"colour": "Red",
 			"jump_height": 10,
 			"pack_size": 1,
 			"speed": 10,
@@ -279,7 +279,7 @@ class Inventory:
 			"variety": "Sea Salt",
 			"has_lactose": True,
 			"has_nuts": False,
-			"strips": "Red",
+			"colour": "Red",
 			"jump_height": 10,
 			"pack_size": 1,
 			"speed": 10,
