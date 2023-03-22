@@ -68,7 +68,7 @@ class Fabric(Enum):
     Acrylic = 3
 
 
-class PumpkinCaramelFlavor(Enum):
+class PumpkinCaramelVariety(Enum):
     Sea_Salt = 1
     Regular = 2
 
@@ -329,11 +329,11 @@ class RCSpider(Toy):
             return valid_spider_attributes
 
     def __init__(self, item_type='TOY', quantity=0, name='No name', description='', pid='', theme=None, is_battery_operated=False,
-                 min_age=0, speed=0, jump_height=0, is_glowing=False, spider_type=None):
+                 min_age=0, speed=0, jump_height=0, has_glow=False, spider_type=None):
         super().__init__(item_type, quantity, name, description, pid, theme, is_battery_operated, min_age)
         self._speed = speed
         self._jump_height = jump_height
-        self._is_glowing = is_glowing
+        self._has_glow = has_glow
         self._spider_type = spider_type
 
     def set_speed(self, speed):
@@ -346,8 +346,8 @@ class RCSpider(Toy):
             self._jump_height = 0
         self._jump_height = jump_height
 
-    def set_is_glowing(self, is_glowing):
-        self._is_glowing = is_glowing
+    def set_has_glow(self, has_glow):
+        self._has_glow = has_glow
 
     def set_spider_type(self, spider_type):
         if spider_type == SpiderType.Tarantula:
@@ -366,8 +366,8 @@ class RCSpider(Toy):
     def get_jump_height(self):
         return self._jump_height
 
-    def get_is_glowing(self):
-        return self._is_glowing
+    def get_has_glow(self):
+        return self._has_glow
 
     def get_spider_type(self):
         return self._spider_type
@@ -785,24 +785,23 @@ class PumpkinCaramelToffee(Candy):
             return valid_halloween_candy_attributes
 
     def __init__(self, item_type='Candy', quantity=0, name='No name', description='', pid='', theme=None, contains_nuts=False,
-                 is_lactose_free=False, flavor=None, variety=''):
+                 is_lactose_free=False, variety=''):
         super().__init__(item_type, quantity, name, description, pid, theme, contains_nuts, is_lactose_free)
-        self._flavor = flavor
         self._variety = variety
 
-    def set_flavor(self, flavor):
-        if flavor == PumpkinCaramelFlavor.Sea_Salt:
-            self._flavor = PumpkinCaramelFlavor.Sea_Salt
-        elif flavor == PumpkinCaramelFlavor.Regular:
-            self._flavor = PumpkinCaramelFlavor.Regular
+    def set_variety(self, variety):
+        if variety == PumpkinCaramelVariety.Sea_Salt:
+            self._variety = PumpkinCaramelVariety.Sea_Salt
+        elif variety == PumpkinCaramelVariety.Regular:
+            self._variety = PumpkinCaramelVariety.Regular
         else:
-            self._flavor = None
+            self._variety = None
 
     def get_product_type(self):
         return "PumpkinCaramelToffee"
 
-    def get_flavor(self):
-        return self._flavor
+    def get_variety(self):
+        return self._variety
 
     def __str__(self):
         return "PumpkinCaramelToffee"
