@@ -21,7 +21,7 @@ class Order:
                                  "min_age": 0, "dimension": "", "num_rooms": 0, "stuffing": "", "size": "",  # 5
                                  "has_nuts": False, "has_lactose": False, "speed": 0,  # 3
                                  "jump_height": 0,  # 1
-                                 "spider_type": "", "fabric": "", "is_glowing": False, "num_sound": 0,  # 4
+                                 "spider_type": "", "fabric": "", "has_glow": False, "num_sound": 0,  # 4
                                  "colour": "", "pack_size": "", "variety": ""}  # 3
 
     def get_id(self):
@@ -211,7 +211,7 @@ class Order:
                         self._all_information["stuffing"] = result["stuffing"]
                         self._all_information["size"] = result["size"]
                         self._all_information["fabric"] = dancing_skeleton_detail["fabric"]
-                        self._all_information["is_glowing"] = dancing_skeleton_detail["has_glow"]
+                        self._all_information["has_glow"] = dancing_skeleton_detail["has_glow"]
 
 
 

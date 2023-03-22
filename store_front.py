@@ -103,7 +103,7 @@ class StoreFront:
 				pass
 
 			if user_input == 1:
-				self._store.menu_process_web_orders(factory)
+				self._store.menu_process_web_orders(inv, factory)
 			elif user_input == 2:
 				inv.display_inventory()
 			elif user_input == 3:

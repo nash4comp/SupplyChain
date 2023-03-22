@@ -8,7 +8,7 @@ class Store:
         self._orders_without_validation = {}
         self._records = {}  # this record has only valid orders
 
-    def menu_process_web_orders(self, factory):
+    def menu_process_web_orders(self, inv, factory):
         order_num_index = 1
         file_to_read = int(input("If you want to read orders.xlsx enter 1 "))
         if file_to_read == 1:
@@ -20,7 +20,7 @@ class Store:
         # print(self.get_order_processor().get_orders())
         for each_order in self.get_order_processor().get_orders().values():
             print(each_order[0].get_all_info_dict_for_factory_creation())
-            # item = factory.create_item(each_order[0].get_all_info_dict_for_factory_creation())
+            inv.add_item(each_order[0].get_all_info_dict_for_factory_creation(), factory)
 
         # print(self.get_order_processor().get_orders()[1][0].get_all_info_dict_for_factory_creation())
 
