@@ -107,7 +107,7 @@ class StoreFront:
 			elif user_input == 2:
 				inv.display_inventory()
 			elif user_input == 3:
-				pass
+				self._store.export_daily_transaction_report()
 			elif user_input == 4:
 				inv.inventory_test(items)
 			elif user_input == 5:
