@@ -14,17 +14,17 @@ from store import Store
 
 
 # def display_menu(inv, factory):
-# 	santas_workshop = factory.create_item(theme="Christmas", item_type="Toys")
-# 	reindeer = factory.create_item(theme="Christmas", item_type="StuffedAnimal")
-# 	candy_canes = factory.create_item(theme="Christmas", item_type="Candy")
+# 	santas_workshop = factory.create_item(holiday="Christmas", item_type="Toys")
+# 	reindeer = factory.create_item(holiday="Christmas", item_type="StuffedAnimal")
+# 	candy_canes = factory.create_item(holiday="Christmas", item_type="Candy")
 #
-# 	rc_spider = factory.create_item(theme="Halloween", item_type="Toys")
-# 	dancing_skeleton = factory.create_item(theme="Halloween", item_type="StuffedAnimal")
-# 	pumpkin_caramel_toffee = factory.create_item(theme="Halloween", item_type="Candy")
+# 	rc_spider = factory.create_item(holiday="Halloween", item_type="Toys")
+# 	dancing_skeleton = factory.create_item(holiday="Halloween", item_type="StuffedAnimal")
+# 	pumpkin_caramel_toffee = factory.create_item(holiday="Halloween", item_type="Candy")
 #
-# 	robot_bunny = factory.create_item(theme="Easter", item_type="Toys")
-# 	easter_bunny = factory.create_item(theme="Easter", item_type="StuffedAnimal")
-# 	cream_eggs = factory.create_item(theme="Easter", item_type="Candy")
+# 	robot_bunny = factory.create_item(holiday="Easter", item_type="Toys")
+# 	easter_bunny = factory.create_item(holiday="Easter", item_type="StuffedAnimal")
+# 	cream_eggs = factory.create_item(holiday="Easter", item_type="Candy")
 #
 # 	items = [santas_workshop, reindeer, candy_canes, rc_spider, dancing_skeleton, pumpkin_caramel_toffee, robot_bunny,
 # 	         easter_bunny, cream_eggs]
@@ -68,17 +68,17 @@ class StoreFront:
 		self._store = Store()
 
 	def display_menu(self, inv, factory):
-		santas_workshop = factory.create_item(theme="Christmas", item_type="Toy")
-		reindeer = factory.create_item(theme="Christmas", item_type="StuffedAnimal")
-		candy_canes = factory.create_item(theme="Christmas", item_type="Candy")
+		santas_workshop = factory.create_item(holiday="Christmas", item_type="Toy")
+		reindeer = factory.create_item(holiday="Christmas", item_type="StuffedAnimal")
+		candy_canes = factory.create_item(holiday="Christmas", item_type="Candy")
 
-		rc_spider = factory.create_item(theme="Halloween", item_type="Toy")
-		dancing_skeleton = factory.create_item(theme="Halloween", item_type="StuffedAnimal")
-		pumpkin_caramel_toffee = factory.create_item(theme="Halloween", item_type="Candy")
+		rc_spider = factory.create_item(holiday="Halloween", item_type="Toy")
+		dancing_skeleton = factory.create_item(holiday="Halloween", item_type="StuffedAnimal")
+		pumpkin_caramel_toffee = factory.create_item(holiday="Halloween", item_type="Candy")
 
-		robot_bunny = factory.create_item(theme="Easter", item_type="Toy")
-		easter_bunny = factory.create_item(theme="Easter", item_type="StuffedAnimal")
-		cream_eggs = factory.create_item(theme="Easter", item_type="Candy")
+		robot_bunny = factory.create_item(holiday="Easter", item_type="Toy")
+		easter_bunny = factory.create_item(holiday="Easter", item_type="StuffedAnimal")
+		cream_eggs = factory.create_item(holiday="Easter", item_type="Candy")
 
 		items = [santas_workshop, reindeer, candy_canes, rc_spider, dancing_skeleton, pumpkin_caramel_toffee,
 		         robot_bunny, easter_bunny, cream_eggs]

@@ -93,11 +93,11 @@ class OrderProcessor:
                         if value_from_key in valid_theme:
                             holiday = value_from_key
                         else:
-                            print("Invalid theme")
+                            print("Invalid holiday")
                 created_order = Order(item_type=required_properties.get("item"),
                                       order_number=required_properties.get("order_number"),
                                       name=required_properties.get("name"),
-                                      pid=required_properties.get("product_id"),
+                                      product_id=required_properties.get("product_id"),
                                       attribute=attributes)
             self.add_order(created_order, holiday)
             self.get_order_ids().add(created_order.get_id())

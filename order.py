@@ -8,20 +8,20 @@ import gift_factory
 # }
 
 class Order:
-    def __init__(self, item_type, order_number, name, pid, **kwargs):
+    def __init__(self, item_type, order_number, name, product_id, **kwargs):
         self._item_type = item_type
         self._orderNum = int(order_number)
         self._name = name
-        self._pid = pid
+        self._pid = product_id
         self._detail = kwargs  # decode the kwargs
         self._factory = None
         self._all_information = {"quantity": "", "name": "", "item_type": "", #3
-                                 "description": "", "pid": "", "theme": "",  # 3
-                                 "is_battery_operated": False,  # 1
-                                 "min_age": 0, "dimension": "", "num_of_rooms": 0, "stuffing": "", "size": "",  # 5
-                                 "contains_nuts": False, "is_lactose_free": False, "speed": 0,  # 3
+                                 "description": "", "product_id": "", "holiday": "",  # 3
+                                 "has_batteries": False,  # 1
+                                 "min_age": 0, "dimension": "", "num_rooms": 0, "stuffing": "", "size": "",  # 5
+                                 "has_nuts": False, "has_lactose": False, "speed": 0,  # 3
                                  "jump_height": 0,  # 1
-                                 "spider_type": "", "fabric": "", "is_glowing": False, "num_of_sound_effects": 0,  # 4
+                                 "spider_type": "", "fabric": "", "is_glowing": False, "num_sound": 0,  # 4
                                  "colour": "", "pack_size": "", "variety": ""}  # 3
 
     def get_id(self):
@@ -72,23 +72,23 @@ class Order:
                         self._all_information["item_type"] = self.get_item_type()
                         self._all_information["name"] = self.get_name()
                         self._all_information["description"] = result["description"]
-                        self._all_information["pid"] = self.get_id()
-                        self._all_information["is_battery_operated"] = result["has_batteries"]
+                        self._all_information["product_id"] = self.get_id()
+                        self._all_information["has_batteries"] = result["has_batteries"]
                         self._all_information["min_age"] = result["min_age"]
                         self._all_information["dimension"] = santa_detail["dimension"]
-                        self._all_information["num_of_rooms"] = santa_detail["num_of_rooms"]
-                        self._all_information["theme"] = holiday
+                        self._all_information["num_rooms"] = santa_detail["num_rooms"]
+                        self._all_information["holiday"] = holiday
 
 
 
 
                         santa_workshop = gift_factory.SantasWorkshop(quantity=result["quantity"], name=self.get_name(),
                                                                      description=result["description"],
-                                                                     pid=self.get_id(), theme=holiday,
-                                                                     is_battery_operated=result["has_batteries"],
+                                                                     product_id=self.get_id(), holiday=holiday,
+                                                                     has_batteries=result["has_batteries"],
                                                                      min_age=result["min_age"],
                                                                      dimension=santa_detail["dimension"],
-                                                                     num_of_rooms=santa_detail["num_of_rooms"])
+                                                                     num_rooms=santa_detail["num_rooms"])
                         print("inside validation function: santa house---------------------------")
                         # print(santa_workshop.get_name())
                         # print(santa_workshop.get_description())
@@ -106,8 +106,8 @@ class Order:
                         self._all_information["name"] = self.get_name()
                         self._all_information["description"] = result["description"]
                         self._all_information["item_type"] = self.get_item_type()
-                        self._all_information["pid"] = self.get_id()
-                        self._all_information["theme"] = holiday
+                        self._all_information["product_id"] = self.get_id()
+                        self._all_information["holiday"] = holiday
                         self._all_information["stuffing"] = result["stuffing"]
                         self._all_information["size"] = result["size"]
 
@@ -115,7 +115,7 @@ class Order:
 
                         rein_deer_workshop = gift_factory.Reindeer(quantity=result["quantity"], name=self.get_name(),
                                                                    description=result["description"],
-                                                                   pid=self.get_id(), theme=holiday,
+                                                                   product_id=self.get_id(), holiday=holiday,
                                                                    stuffing=result["stuffing"],
                                                                    size=result["size"])
                         print("inside validation function: rein deer--------------------------------------------")
@@ -134,18 +134,18 @@ class Order:
                         self._all_information["quantity"] = result["quantity"]
                         self._all_information["name"] = self.get_name()
                         self._all_information["description"] = result["description"]
-                        self._all_information["pid"] = self.get_id()
+                        self._all_information["product_id"] = self.get_id()
                         self._all_information["item_type"] = self.get_item_type()
-                        self._all_information["theme"] = holiday
-                        self._all_information["contains_nuts"] = result["has_nuts"]
-                        self._all_information["is_lactose_free"] = result["has_lactose"]
+                        self._all_information["holiday"] = holiday
+                        self._all_information["has_nuts"] = result["has_nuts"]
+                        self._all_information["has_lactose"] = result["has_lactose"]
 
 
                         candy_cane = gift_factory.CandyCanes(quantity=result["quantity"], name=self.get_name(),
                                                              description=result["description"],
-                                                             pid=self.get_id(), theme=holiday,
-                                                             contains_nuts=result["has_nuts"],
-                                                             is_lactose_free=result["has_lactose"])
+                                                             product_id=self.get_id(), holiday=holiday,
+                                                             has_nuts=result["has_nuts"],
+                                                             has_lactose=result["has_lactose"])
                         print("inside validation function: candy cane--------------------------------------------")
                         # print(candy_cane.get_name())
                         # print(candy_cane.get_description())
@@ -167,10 +167,10 @@ class Order:
                         self._all_information["quantity"] = result["quantity"]
                         self._all_information["name"] = self.get_name()
                         self._all_information["description"] = result["description"]
-                        self._all_information["pid"] = self.get_id()
+                        self._all_information["product_id"] = self.get_id()
                         self._all_information["item_type"] = self.get_item_type()
-                        self._all_information["theme"] = holiday
-                        self._all_information["is_battery_operated"] = result["has_batteries"]
+                        self._all_information["holiday"] = holiday
+                        self._all_information["has_batteries"] = result["has_batteries"]
                         self._all_information["min_age"] = result["min_age"]
                         self._all_information["speed"] = spider_detail["speed"]
                         self._all_information["jump_height"] = spider_detail["jump_height"]
@@ -182,8 +182,8 @@ class Order:
 
                         spider = gift_factory.RCSpider(quantity=result["quantity"], name=self.get_name(),
                                                        description=result["description"],
-                                                       pid=self.get_id(), theme=holiday,
-                                                       is_battery_operated=result["has_batteries"],
+                                                       product_id=self.get_id(), holiday=holiday,
+                                                       has_batteries=result["has_batteries"],
                                                        min_age=result["min_age"],
                                                        speed=spider_detail["speed"],
                                                        jump_height=spider_detail["jump_height"],
@@ -205,9 +205,9 @@ class Order:
                         self._all_information["quantity"] = result["quantity"]
                         self._all_information["name"] = self.get_name()
                         self._all_information["description"] = result["description"]
-                        self._all_information["pid"] = self.get_id()
+                        self._all_information["product_id"] = self.get_id()
                         self._all_information["item_type"] = self.get_item_type()
-                        self._all_information["theme"] = holiday
+                        self._all_information["holiday"] = holiday
                         self._all_information["stuffing"] = result["stuffing"]
                         self._all_information["size"] = result["size"]
                         self._all_information["fabric"] = dancing_skeleton_detail["fabric"]
@@ -217,7 +217,7 @@ class Order:
 
                         dancing_skeleton = gift_factory.DancingSkeleton(
                             quantity=result["quantity"], name=self.get_name(), description=result["description"],
-                            pid=self.get_id(), theme=holiday, stuffing=result["stuffing"], size=result["size"],
+                            product_id=self.get_id(), holiday=holiday, stuffing=result["stuffing"], size=result["size"],
                             fabric=dancing_skeleton_detail["fabric"], has_glow=dancing_skeleton_detail["has_glow"]
                         )
                         print(
@@ -238,21 +238,21 @@ class Order:
                         self._all_information["quantity"] = result["quantity"]
                         self._all_information["name"] = self.get_name()
                         self._all_information["description"] = result["description"]
-                        self._all_information["pid"] = self.get_id()
+                        self._all_information["product_id"] = self.get_id()
                         self._all_information["item_type"] = self.get_item_type()
-                        self._all_information["theme"] = holiday
-                        self._all_information["contains_nuts"] = result["has_nuts"]
-                        self._all_information["is_lactose_free"] = result["has_lactose"]
+                        self._all_information["holiday"] = holiday
+                        self._all_information["has_nuts"] = result["has_nuts"]
+                        self._all_information["has_lactose"] = result["has_lactose"]
                         self._all_information["variety"] = pumpkin_candy_detail["variety"]
 
 
                         pumpkin_candy = gift_factory.PumpkinCaramelToffee(quantity=result["quantity"],
                                                                           name=self.get_name(),
                                                                           description=result["description"],
-                                                                          pid=self.get_id(), theme=holiday,
-                                                                          contains_nuts=result["has_nuts"],
-                                                                          is_lactose_free=result["has_lactose"],
-                                                                          flavor=pumpkin_candy_detail["variety"])
+                                                                          product_id=self.get_id(), holiday=holiday,
+                                                                          has_nuts=result["has_nuts"],
+                                                                          has_lactose=result["has_lactose"],
+                                                                          variety=pumpkin_candy_detail["variety"])
                         print("inside validation function: pumpkin_candy--------------------------------------------")
                         # print(candy_cane.get_name())
                         # print(candy_cane.get_description())
@@ -272,22 +272,22 @@ class Order:
                         self._all_information["quantity"] = result["quantity"]
                         self._all_information["name"] = self.get_name()
                         self._all_information["description"] = result["description"]
-                        self._all_information["pid"] = self.get_id()
+                        self._all_information["product_id"] = self.get_id()
                         self._all_information["item_type"] = self.get_item_type()
-                        self._all_information["theme"] = holiday
-                        self._all_information["is_battery_operated"] = result["has_batteries"]
+                        self._all_information["holiday"] = holiday
+                        self._all_information["has_batteries"] = result["has_batteries"]
                         self._all_information["min_age"] = result["min_age"]
-                        self._all_information["num_of_sound_effects"] = robot_bunny_detail["num_sound"]
+                        self._all_information["num_sound"] = robot_bunny_detail["num_sound"]
                         self._all_information["colour"] = robot_bunny_detail["colour"]
 
 
                         robot_bunny = gift_factory.RobotBunny(quantity=result["quantity"], name=self.get_name(),
                                                               description=result["description"],
-                                                              pid=self.get_id(), theme=holiday,
-                                                              is_battery_operated=result["has_batteries"],
+                                                              product_id=self.get_id(), holiday=holiday,
+                                                              has_batteries=result["has_batteries"],
                                                               min_age=result["min_age"],
-                                                              num_of_sound_effects=robot_bunny_detail["num_sound"],
-                                                              color=robot_bunny_detail["colour"])
+                                                              num_sound=robot_bunny_detail["num_sound"],
+                                                              colour=robot_bunny_detail["colour"])
                         print("inside validation function: robot_bunny---------------------------")
                         print("validated_robot_bunny")
                         return self
@@ -301,9 +301,9 @@ class Order:
                         self._all_information["quantity"] = result["quantity"]
                         self._all_information["name"] = self.get_name()
                         self._all_information["description"] = result["description"]
-                        self._all_information["pid"] = self.get_id()
+                        self._all_information["product_id"] = self.get_id()
                         self._all_information["item_type"] = self.get_item_type()
-                        self._all_information["theme"] = holiday
+                        self._all_information["holiday"] = holiday
                         self._all_information["stuffing"] = result["stuffing"]
                         self._all_information["size"] = result["size"]
                         self._all_information["fabric"] = east_bunny_detail["fabric"]
@@ -312,11 +312,11 @@ class Order:
 
                         east_bunny = gift_factory.EasterBunny(quantity=result["quantity"], name=self.get_name(),
                                                               description=result["description"],
-                                                              pid=self.get_id(), theme=holiday,
+                                                              product_id=self.get_id(), holiday=holiday,
                                                               stuffing=result["stuffing"],
                                                               size=result["size"],
                                                               fabric=east_bunny_detail["fabric"],
-                                                              color=east_bunny_detail["colour"])
+                                                              colour=east_bunny_detail["colour"])
                         print("inside validation function: east_bunny--------------------------------------------")
                         print("validated_east bunny")
                         return self
@@ -330,18 +330,18 @@ class Order:
                         self._all_information["quantity"] = result["quantity"]
                         self._all_information["name"] = self.get_name()
                         self._all_information["description"] = result["description"]
-                        self._all_information["pid"] = self.get_id()
+                        self._all_information["product_id"] = self.get_id()
                         self._all_information["item_type"] = self.get_item_type()
-                        self._all_information["theme"] = holiday
-                        self._all_information["contains_nuts"] = result["has_nuts"]
-                        self._all_information["is_lactose_free"] = result["has_lactose"]
+                        self._all_information["holiday"] = holiday
+                        self._all_information["has_nuts"] = result["has_nuts"]
+                        self._all_information["has_lactose"] = result["has_lactose"]
                         self._all_information["pack_size"] = cream_egg_detail["pack_size"]
 
                         cream_egg = gift_factory.CreamEggs(quantity=result["quantity"], name=self.get_name(),
                                                            description=result["description"],
-                                                           pid=self.get_id(), theme=holiday,
-                                                           contains_nuts=result["has_nuts"],
-                                                           is_lactose_free=result["has_lactose"],
+                                                           product_id=self.get_id(), holiday=holiday,
+                                                           has_nuts=result["has_nuts"],
+                                                           has_lactose=result["has_lactose"],
                                                            pack_size=cream_egg_detail["pack_size"])
                         print("inside validation function: cream egg--------------------------------------------")
                         # print(candy_cane.get_name())
