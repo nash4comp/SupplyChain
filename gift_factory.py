@@ -292,7 +292,7 @@ class RCSpider(Toy):
             return None
         valid_spider_attributes = {"speed": 0, "jump_height": 0, "has_glow": "", "spider_type": ""}
         for key_att_dict in att_dict.keys():
-            if key_att_dict == "speed":
+            if key_att_dict == "speed" and att_dict[key_att_dict] != str:
                 int_speed = int(att_dict[key_att_dict])
                 valid_spider_attributes["speed"] = int_speed
                 valid_attribute_count += 1

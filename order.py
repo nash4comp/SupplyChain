@@ -75,9 +75,10 @@ class Order:
                         self._all_information["pid"] = self.get_id()
                         self._all_information["is_battery_operated"] = result["has_batteries"]
                         self._all_information["min_age"] = result["min_age"]
-                        self._all_information["dimension"] = santa_detail["dimension"],
+                        self._all_information["dimension"] = santa_detail["dimension"]
                         self._all_information["num_of_rooms"] = santa_detail["num_of_rooms"]
                         self._all_information["theme"] = holiday
+
 
 
 
@@ -107,7 +108,7 @@ class Order:
                         self._all_information["item_type"] = self.get_item_type()
                         self._all_information["pid"] = self.get_id()
                         self._all_information["theme"] = holiday
-                        self._all_information["stuffing"] = result["stuffing"],
+                        self._all_information["stuffing"] = result["stuffing"]
                         self._all_information["size"] = result["size"]
 
 
@@ -161,6 +162,8 @@ class Order:
                 if type(result) == dict:
                     spider_detail = gift_factory.RCSpider.rc_spider_detail_validator(self.get_attributes())
                     if spider_detail is not None:
+                        print(spider_detail["speed"])
+                        print(spider_detail["spider_type"])
                         self._all_information["quantity"] = result["quantity"]
                         self._all_information["name"] = self.get_name()
                         self._all_information["description"] = result["description"]
@@ -169,7 +172,7 @@ class Order:
                         self._all_information["theme"] = holiday
                         self._all_information["is_battery_operated"] = result["has_batteries"]
                         self._all_information["min_age"] = result["min_age"]
-                        self._all_information["speed"] = spider_detail["speed"],
+                        self._all_information["speed"] = spider_detail["speed"]
                         self._all_information["jump_height"] = spider_detail["jump_height"]
                         self._all_information["spider_type"] = spider_detail["spider_type"]
 
@@ -207,7 +210,7 @@ class Order:
                         self._all_information["theme"] = holiday
                         self._all_information["stuffing"] = result["stuffing"]
                         self._all_information["size"] = result["size"]
-                        self._all_information["fabric"] = dancing_skeleton_detail["fabric"],
+                        self._all_information["fabric"] = dancing_skeleton_detail["fabric"]
                         self._all_information["is_glowing"] = dancing_skeleton_detail["has_glow"]
 
 
@@ -274,7 +277,7 @@ class Order:
                         self._all_information["theme"] = holiday
                         self._all_information["is_battery_operated"] = result["has_batteries"]
                         self._all_information["min_age"] = result["min_age"]
-                        self._all_information["num_of_sound_effects"] = robot_bunny_detail["num_sound"],
+                        self._all_information["num_of_sound_effects"] = robot_bunny_detail["num_sound"]
                         self._all_information["colour"] = robot_bunny_detail["colour"]
 
 
@@ -303,7 +306,7 @@ class Order:
                         self._all_information["theme"] = holiday
                         self._all_information["stuffing"] = result["stuffing"]
                         self._all_information["size"] = result["size"]
-                        self._all_information["fabric"] = east_bunny_detail["fabric"],
+                        self._all_information["fabric"] = east_bunny_detail["fabric"]
                         self._all_information["colour"] = east_bunny_detail["colour"]
 
 
