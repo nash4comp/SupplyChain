@@ -23,8 +23,7 @@ class Inventory:
 				                                      description=spec["description"], pid=spec["pid"],
 				                                      theme=spec["theme"],
 				                                      is_battery_operated=spec["is_battery_operated"],
-				                                      min_age=spec["min_age"], width=spec["width"],
-				                                      height=spec["height"],
+				                                      min_age=spec["min_age"], dimention=spec["dimension"],
 				                                      num_of_rooms=spec["num_of_rooms"])
 				self._inventory_toy.append(santas_workshop)
 			elif theme == "Halloween":
