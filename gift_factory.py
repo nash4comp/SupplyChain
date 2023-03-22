@@ -13,7 +13,6 @@ UML diagram: https://app.diagrams.net/#G18MWO3bp974lfK4Ceehz2vUfH8YmqEEfE
 import abc
 from abc import ABC
 from enum import Enum
-import inventory
 
 
 class Products(Enum):
@@ -79,100 +78,31 @@ class CandyCanesStrips(Enum):
     Green = 2
 
 
-class GiftFactory(ABC):
-    def __init__(self):
-        pass
-
-    @staticmethod
-    def classify_item(theme, item, quantity):
-        if theme == Theme.Christmas:
-            cf = ChristmasGiftFactory()
-            cf.create_item(item, quantity)
-        elif theme == Theme.Halloween:
-            hf = HalloweenGiftFactory()
-            hf.create_item(item, quantity)
-        elif theme == Theme.Easter:
-            ef = EasterGiftFactory()
-            ef.create_item(item, quantity)
-
-
-class ChristmasGiftFactory(GiftFactory):
-
-    def __init__(self):
-        super().__init__()
-
-    def create_item(self, item, quantity):
-        if item == "Toy":
-            product_name = Products.Toy.SantasWorkshop
-            self.create_toy(product_name, quantity)
-        elif item == "StuffedAnimal":
-            product_name = Products.StuffedAnimal.Reindeer
-            self.create_stuffed_animal(product_name, quantity)
-        elif item == "Candy":
-            product_name = Products.Candy.CandyCanes
-            self.create_candy(product_name, quantity)
-
-    def create_toy(self, product_name, quantity):
-        inventory.Inventory().add_item("Toy", product_name, quantity, Theme.Christmas)
-        print(str(quantity) + " " + product_name + " created.")
-
-    def create_stuffed_animal(self, product_name, quantity):
-        print(str(quantity) + " " + product_name + " created.")
-
-    def create_candy(self, product_name, quantity):
-        print(str(quantity) + " " + product_name + " created.")
-
-
-class HalloweenGiftFactory(GiftFactory):
-
-    def __init__(self):
-        super().__init__()
-
-    def create_item(self, item, quantity):
-        if item == "Toy":
-            product_name = Products.Toy.RCSpider
-            self.create_toy(product_name, quantity)
-        elif item == "StuffedAnimal":
-            product_name = Products.StuffedAnimal.DancingSkeleton
-            self.create_stuffed_animal(product_name, quantity)
-        elif item == "Candy":
-            product_name = Products.Candy.PumpkinCaramelToffee
-            self.create_candy(product_name, quantity)
-
-    def create_toy(self, product_name, quantity):
-        print(str(quantity) + " " + product_name + " created.")
-
-    def create_stuffed_animal(self, product_name, quantity):
-        print(str(quantity) + " " + product_name + " created.")
-
-    def create_candy(self, product_name, quantity):
-        print(str(quantity) + " " + product_name + " created.")
-
-
-class EasterGiftFactory(GiftFactory):
-
-    def __init__(self):
-        super().__init__()
-
-    def create_item(self, item, quantity):
-        if item == "Toy":
-            product_name = Products.Toy.RobotBunny
-            self.create_toy(product_name, quantity)
-        elif item == "StuffedAnimal":
-            product_name = Products.StuffedAnimal.EasterBunny
-            self.create_stuffed_animal(product_name, quantity)
-        elif item == "Candy":
-            product_name = Products.Candy.CreamEggs
-            self.create_candy(product_name, quantity)
-
-    def create_toy(self, product_name, quantity):
-        print(str(quantity) + " " + product_name + " created.")
-
-    def create_stuffed_animal(self, product_name, quantity):
-        print(str(quantity) + " " + product_name + " created.")
-
-    def create_candy(self, product_name, quantity):
-        print(str(quantity) + " " + product_name + " created.")
+class GiftFactory:
+    def create_item(self, **kwargs):
+        item_type = kwargs["item_type"]
+        del kwargs["item_type"]
+        if kwargs["theme"] == Theme.Christmas.name:
+            if item_type == "Toys":
+                return SantasWorkshop(**kwargs)
+            elif item_type == "StuffedAnimal":
+                return Reindeer(**kwargs)
+            elif item_type == "Candy":
+                return CandyCanes(**kwargs)
+        elif kwargs["theme"] == Theme.Halloween.name:
+            if item_type == "Toys":
+                return RCSpider(**kwargs)
+            elif item_type == "StuffedAnimal":
+                return DancingSkeleton(**kwargs)
+            elif item_type == "Candy":
+                return PumpkinCaramelToffee(**kwargs)
+        elif kwargs["theme"] == Theme.Easter.name:
+            if item_type == "Toys":
+                return RobotBunny(**kwargs)
+            elif item_type == "StuffedAnimal":
+                return EasterBunny(**kwargs)
+            elif item_type == "Candy":
+                return CreamEggs(**kwargs)
 
 
 class Product(ABC):
@@ -231,7 +161,6 @@ class Product(ABC):
 
 
 class Toy(Product):
-
     @staticmethod
     def validate_attribute(attribute_dict):
         valid_attributes_toy = {"quantity": 0, "description": "", "has_batteries": False, "min_age": 0}

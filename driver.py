@@ -12,11 +12,13 @@ UML diagram: https://app.diagrams.net/#G18MWO3bp974lfK4Ceehz2vUfH8YmqEEfE
 
 import store_front
 import inventory
+import gift_factory
 
 
 def main():
 	inv = inventory.Inventory()
-	# store_front.display_menu(inv)
+	factory = gift_factory.GiftFactory()
+	store_front.display_menu(inv, factory)
 
 
 if __name__ == '__main__':
