@@ -105,11 +105,11 @@ class Inventory:
     def inventory_test2(self, factory):
         spec = {"quantity": 20, "name": "Nash's Santas Workshop", "description": "", "pid": "", "theme": "Christmas",
                 "item_type": "Toy",
-                "is_battery_operated": False, "min_age": 10, "width": 0.0, "height": 0.0, "num_of_rooms": 0}
+                "is_battery_operated": False, "min_age": 10, "dimension": "", "num_of_rooms": 0}
         santas_workshop = factory.create_item(theme=spec["theme"], item_type=spec["item_type"],
                                               quantity=spec["quantity"], name=spec["name"],
                                               is_battery_operated=spec["is_battery_operated"],
-                                              min_age=spec["min_age"], width=spec["width"], height=spec["height"])
+                                              min_age=spec["min_age"], dimension=spec["dimension"])
         self._inventory_toy.append(santas_workshop)
 
     def display_inventory(self):

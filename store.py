@@ -68,7 +68,26 @@ class Store:
             self.get_order_processor().convert_dict_from_excel_file(excel_file)
             self.get_order_processor().create_orders()  # just create orders without any validation
             self.update_orders_without_validation(self.get_order_processor().get_orders())
+            self.validate_order()
         print(self.get_order_processor().get_orders())
+
+
+    def validate_order(self):
+        # print(self.get_order_processor().get_orders().items())
+        for order in self.get_order_processor().get_orders().values():
+            # print(order)
+            order_object = order[0]
+            holiday = order[1]
+            # print(order_object)
+            # print(holiday)
+            # item_type = order_object.get_item_type()
+            # print(order_object)
+            # print(item_type)
+            # print(holiday)
+            # print(order_object.get_attributes())
+            order_object.validate_details(holiday)
+        # print(self.get_order_processor().get_valid_orders_list())
+        self.get_order_processor().print_valid_order_product_name()
 
     def export_daily_transaction_report(self):
         # create a txt file contains valid orders
@@ -102,5 +121,5 @@ class Store:
         self._orders_without_validation = dict_to_update
 
 
-test = Store()
-test.display_menu()
+# test = Store()
+# test.display_menu()

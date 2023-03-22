@@ -83,21 +83,21 @@ class GiftFactory:
         item_type = kwargs["item_type"]
         del kwargs["item_type"]
         if kwargs["theme"] == Theme.Christmas.name:
-            if item_type == "Toys":
+            if item_type == "Toy":
                 return SantasWorkshop(**kwargs)
             elif item_type == "StuffedAnimal":
                 return Reindeer(**kwargs)
             elif item_type == "Candy":
                 return CandyCanes(**kwargs)
         elif kwargs["theme"] == Theme.Halloween.name:
-            if item_type == "Toys":
+            if item_type == "Toy":
                 return RCSpider(**kwargs)
             elif item_type == "StuffedAnimal":
                 return DancingSkeleton(**kwargs)
             elif item_type == "Candy":
                 return PumpkinCaramelToffee(**kwargs)
         elif kwargs["theme"] == Theme.Easter.name:
-            if item_type == "Toys":
+            if item_type == "Toy":
                 return RobotBunny(**kwargs)
             elif item_type == "StuffedAnimal":
                 return EasterBunny(**kwargs)
