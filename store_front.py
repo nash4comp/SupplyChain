@@ -12,49 +12,51 @@ UML diagram: https://app.diagrams.net/#G18MWO3bp974lfK4Ceehz2vUfH8YmqEEfE
 
 import gift_factory
 import inventory
-
-
-def display_menu(inv):
-	user_input = None
-	while user_input != 3:
-		print("Welcome to the store")
-		print("0. Create Test")
-		print("1. Process web orders")
-		print("2. Check inventory")
-		print("3. Exit")
-		print("4. Inventory test")
-		string_input = input("Please enter a number from 1 - 3\n> ")
-
-		if string_input == '':
-			continue
-		user_input = int(string_input)
-
-		if user_input == 0:
-			gf = gift_factory.GiftFactory()
-			gf.classify_item('Christmas', 'Toys', 100)
-			gf.classify_item('Christmas', 'Stuffed_animal', 99)
-			gf.classify_item('Christmas', 'Candy', 98)
-			gf.classify_item('Halloween', 'Toys', 97)
-			gf.classify_item('Halloween', 'Stuffed_animal', 96)
-			gf.classify_item('Halloween', 'Candy', 95)
-			gf.classify_item('Easter', 'Toys', 94)
-			gf.classify_item('Easter', 'Stuffed_animal', 93)
-			gf.classify_item('Easter', 'Candy', 92)
-
-		if user_input == 1:
-			# self.process_web_orders()
-			pass
-		elif user_input == 2:
-			inv.display_inventory()
-		elif user_input == 3:
-			pass
-		elif user_input == 4:
-			inv.inventory_test()
-		else:
-			print("Could not process the input. Please enter a number from 1 - 3.")
-	print("Thank you for visiting the store.")
+from store import Store
 
 
 class StoreFront:
 	def __init__(self):
-		pass
+		self._store = Store()
+
+	def display_menu(self, inv):
+		user_input = None
+		while user_input != 3:
+			print("Welcome to the store")
+			print("0. Create Test")
+			print("1. Process web orders")
+			print("2. Check inventory")
+			print("3. Exit")
+			print("4. Inventory test")
+			string_input = input("Please enter a number from 1 - 3\n> ")
+
+			if string_input == '':
+				continue
+			user_input = int(string_input)
+
+			if user_input == 0:
+				gf = gift_factory.GiftFactory()
+				gf.classify_item('Christmas', 'Toys', 100)
+				gf.classify_item('Christmas', 'Stuffed_animal', 99)
+				gf.classify_item('Christmas', 'Candy', 98)
+				gf.classify_item('Halloween', 'Toys', 97)
+				gf.classify_item('Halloween', 'Stuffed_animal', 96)
+				gf.classify_item('Halloween', 'Candy', 95)
+				gf.classify_item('Easter', 'Toys', 94)
+				gf.classify_item('Easter', 'Stuffed_animal', 93)
+				gf.classify_item('Easter', 'Candy', 92)
+
+			if user_input == 1:
+				self.get_store().menu_process_web_orders()
+			elif user_input == 2:
+				inv.display_inventory()
+			elif user_input == 3:
+				pass
+			elif user_input == 4:
+				inv.inventory_test()
+			else:
+				print("Could not process the input. Please enter a number from 1 - 3.")
+		print("Thank you for visiting the store.")
+
+	def get_store(self):
+		return self._store

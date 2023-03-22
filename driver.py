@@ -16,7 +16,7 @@ import inventory
 
 def main():
 	inv = inventory.Inventory()
-	store_front.display_menu(inv)
+	# store_front.display_menu(inv)
 
 
 if __name__ == '__main__':

@@ -103,7 +103,7 @@ class OrderProcessor:
             self.get_order_ids().add(created_order.get_id())
             valid_order = created_order.validate_details(holiday)
             if valid_order is not None:
-                self.get_valid_orders_list().append(valid_order)
+                self.get_valid_orders_list().append({created_order.get_order_num(): valid_order})
             holiday = ""
             attributes = {}  # empty the dictionary
 
@@ -123,7 +123,10 @@ class OrderProcessor:
         return self._valid_orders
 
     def print_valid_order_product_name(self):
-        for item in self.get_valid_orders_list():
-            print(item.get_name())
+        key = 1
+        for order in self.get_valid_orders_list():
+            # print(order)
+            print(order[key])
+            key+=1
         print(len(self.get_valid_orders_list()))
 

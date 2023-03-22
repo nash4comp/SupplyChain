@@ -2,6 +2,11 @@ from enum import Enum
 import gift_factory
 
 
+# factory_mapping = {
+#     "Christmas" : ChristmasFactory,
+#     EASTER : EasterFactory
+# }
+
 class Order:
     def __init__(self, item_type, order_number, name, pid, **kwargs):
         self._item_type = item_type
@@ -9,6 +14,7 @@ class Order:
         self._name = name
         self._pid = pid
         self._detail = kwargs  # decode the kwargs
+        self._factory = None
 
     def get_id(self):
         """
@@ -34,17 +40,24 @@ class Order:
     def get_attributes(self):
         return self._detail['attribute']
 
+    def get_quantity(self):
+        return self.get_attributes()["quantity"]
+
     def get_item_type(self):
         return self._item_type
 
     def validate_details(self, holiday):
         item_type = self.get_item_type()
+        # self._factory = factory_mapping[holiday]
         if holiday == "Christmas":
+            # self._factory = ChristmasFactorytory
             if item_type == "Toy":
                 result = gift_factory.Toy.validate_attribute(self.get_attributes())
                 if type(result) == dict:
                     santa_detail = gift_factory.SantasWorkshop.santa_detail_validator(self.get_attributes())
                     if santa_detail is not None:
+                        # this order is valid
+
                         santa_workshop = gift_factory.SantasWorkshop(quantity=result["quantity"], name=self.get_name(),
                                                                      description=result["description"],
                                                                      pid=self.get_id(), theme=holiday,
@@ -57,7 +70,7 @@ class Order:
                         # print(santa_workshop.get_description())
                         # print(santa_workshop.get_is_battery_operated())
                         print("validated_santa_house")
-                        return santa_workshop
+                        return self
                     else:
                         return None
             elif item_type == "StuffedAnimal":
@@ -75,7 +88,7 @@ class Order:
                         # print(rein_deer_workshop.get_description())
                         # print(rein_deer_workshop.get_has_glow())
                         print("validated_rein_deer")
-                        return rein_deer_workshop
+                        return self
                     else:
                         return None
             elif item_type == "Candy":
@@ -93,7 +106,7 @@ class Order:
                         # print(candy_cane.get_description())
                         # print(candy_cane.get_contains_nuts())
                         print("validated_candy_cane")
-                        return candy_cane
+                        return self
                     else:
                         return None
             else:
@@ -117,7 +130,7 @@ class Order:
                         # print(santa_workshop.get_description())
                         # print(santa_workshop.get_is_battery_operated())
                         print("validated_RC spider")
-                        return spider
+                        return self
                     else:
                         return None
             elif item_type == "StuffedAnimal":
@@ -137,7 +150,7 @@ class Order:
                         # print(dancing_skeleton.get_description())
                         # print(rein_deer_workshop.get_has_glow())
                         print("validated_dancing skeleton")
-                        return dancing_skeleton
+                        return self
                     else:
                         return None
             elif item_type == "Candy":
@@ -158,7 +171,7 @@ class Order:
                         # print(candy_cane.get_description())
                         # print(candy_cane.get_contains_nuts())
                         print("validated_pumpkin_candy")
-                        return pumpkin_candy
+                        return self
                     else:
                         return None
             else:
@@ -181,7 +194,7 @@ class Order:
                         # print(santa_workshop.get_description())
                         # print(santa_workshop.get_is_battery_operated())
                         print("validated_robot_bunny")
-                        return robot_bunny
+                        return self
                     else:
                         return None
             elif item_type == "StuffedAnimal":
@@ -201,7 +214,7 @@ class Order:
                         # print(rein_deer_workshop.get_description())
                         # print(rein_deer_workshop.get_has_glow())
                         print("validated_east bunny")
-                        return east_bunny
+                        return self
                     else:
                         return None
             elif item_type == "Candy":
@@ -220,7 +233,7 @@ class Order:
                         # print(candy_cane.get_description())
                         # print(candy_cane.get_contains_nuts())
                         print("validated_cream egg")
-                        return cream_egg
+                        return self
                     else:
                         return None
             else:
@@ -233,7 +246,7 @@ class Order:
                f"item type: {self._item_type}, " \
                f"name: {self._name}, " \
                f"id: {self.get_id()}, " \
-               f"attribute : {self.get_attributes()}"
+               f"quantity : {self.get_quantity()}"
 
 
 class Item(Enum):

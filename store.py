@@ -30,7 +30,7 @@ class Store:
                     self.get_order_processor().convert_dict_from_excel_file(excel_file)
                     self.get_order_processor().create_orders()  # just create orders without any validation
                     self.update_orders_without_validation(self.get_order_processor().get_orders())
-                # print(self.get_order_processor().get_orders())
+                print(self.get_order_processor().get_orders())
 
             if user_input == 1:  #
                 # self.process_web_orders()
@@ -61,11 +61,32 @@ class Store:
                 print("Could not process the input. Please enter a number from 1 - 3.")
         print("Thank you for visiting the store.")
 
+    def menu_process_web_orders(self):
+        file_to_read = int(input("If you want to read orders.xlsx enter 1 "))
+        if file_to_read == 1:
+            excel_file = "orders.xlsx"
+            self.get_order_processor().convert_dict_from_excel_file(excel_file)
+            self.get_order_processor().create_orders()  # just create orders without any validation
+            self.update_orders_without_validation(self.get_order_processor().get_orders())
+        print(self.get_order_processor().get_orders())
+
     def export_daily_transaction_report(self):
         # create a txt file contains valid orders
         text_file_name = self.text_file_name_generator()
+        now = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
         with open(text_file_name, 'w') as f:
-            f.write('Create a new text file!')
+            f.write("Holiday Store - Daily Transaction Report(DTR)\n")
+            f.write(now)
+            f.write("\n")
+            key = 1
+            for order in self.get_order_processor().get_valid_orders_list():
+                # print(order)
+                f.write(f"{order[key]}\n")
+                key += 1
+            self.get_order_processor().print_valid_order_product_name()
+            # for valid_order in self.get_order_processor().get_valid_orders_list():
+            #     f.write(valid_order.daily_transaction_report_form())
+            # f.write('Create a new text file!')
 
     def get_order_processor(self):
         return self._order_processor
@@ -83,5 +104,3 @@ class Store:
 
 test = Store()
 test.display_menu()
-
-
