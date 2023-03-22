@@ -92,6 +92,7 @@ class StoreFront:
 			print("3. Exit")
 			print("4. Inventory append test with default values")
 			print("5. Inventory append test with hard coded values")
+			print("6. Inventory append test with hard coded values")
 			string_input = input("Please enter a number from 1 - 3\n> ")
 
 			if string_input == '':

@@ -327,7 +327,7 @@ class RCSpider(Toy):
             return valid_spider_attributes
 
     def __init__(self, quantity=0, name='No name', description='', pid='', theme=None, is_battery_operated=False,
-                 min_age=0, speed=0.0, jump_height=0.0, is_glowing=False, spider_type=None):
+                 min_age=0, speed=0, jump_height=0, is_glowing=False, spider_type=None):
         super().__init__(quantity, name, description, pid, theme, is_battery_operated, min_age)
         self._speed = speed
         self._jump_height = jump_height

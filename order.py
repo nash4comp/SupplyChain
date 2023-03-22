@@ -15,6 +15,14 @@ class Order:
         self._pid = pid
         self._detail = kwargs  # decode the kwargs
         self._factory = None
+        self._all_information = {"quantity": "", "name": "", "item_type": "", #3
+                                 "description": "", "pid": "", "theme": "",  # 3
+                                 "is_battery_operated": False,  # 1
+                                 "min_age": 0, "dimension": "", "num_of_rooms": 0, "stuffing": "", "size": "",  # 5
+                                 "contains_nuts": False, "is_lactose_free": False, "speed": 0,  # 3
+                                 "jump_height": 0,  # 1
+                                 "spider_type": "", "fabric": "", "is_glowing": False, "num_of_sound_effects": 0,  # 4
+                                 "colour": "", "pack_size": "", "variety": ""}  # 3
 
     def get_id(self):
         """
@@ -46,6 +54,9 @@ class Order:
     def get_item_type(self):
         return self._item_type
 
+    def get_all_info_dict_for_factory_creation(self):
+        return self._all_information
+
     def validate_details(self, holiday):
         item_type = self.get_item_type()
         # self._factory = factory_mapping[holiday]
@@ -57,6 +68,18 @@ class Order:
                     santa_detail = gift_factory.SantasWorkshop.santa_detail_validator(self.get_attributes())
                     if santa_detail is not None:
                         # this order is valid
+                        self._all_information["quantity"] = result["quantity"]
+                        self._all_information["item_type"] = self.get_item_type()
+                        self._all_information["name"] = self.get_name()
+                        self._all_information["description"] = result["description"]
+                        self._all_information["pid"] = self.get_id()
+                        self._all_information["is_battery_operated"] = result["has_batteries"]
+                        self._all_information["min_age"] = result["min_age"]
+                        self._all_information["dimension"] = santa_detail["dimension"],
+                        self._all_information["num_of_rooms"] = santa_detail["num_of_rooms"]
+                        self._all_information["theme"] = holiday
+
+
 
                         santa_workshop = gift_factory.SantasWorkshop(quantity=result["quantity"], name=self.get_name(),
                                                                      description=result["description"],
@@ -78,6 +101,17 @@ class Order:
                 if type(result) == dict:
                     rein_deer_detail = gift_factory.Reindeer.rein_deer_detail_validator(self.get_attributes())
                     if rein_deer_detail is not None:
+                        self._all_information["quantity"] = result["quantity"]
+                        self._all_information["name"] = self.get_name()
+                        self._all_information["description"] = result["description"]
+                        self._all_information["item_type"] = self.get_item_type()
+                        self._all_information["pid"] = self.get_id()
+                        self._all_information["theme"] = holiday
+                        self._all_information["stuffing"] = result["stuffing"],
+                        self._all_information["size"] = result["size"]
+
+
+
                         rein_deer_workshop = gift_factory.Reindeer(quantity=result["quantity"], name=self.get_name(),
                                                                    description=result["description"],
                                                                    pid=self.get_id(), theme=holiday,
@@ -96,6 +130,16 @@ class Order:
                 if type(result) == dict:
                     candy_detail = gift_factory.CandyCanes.candy_cane_detail_validator(self.get_attributes())
                     if candy_detail is not None:
+                        self._all_information["quantity"] = result["quantity"]
+                        self._all_information["name"] = self.get_name()
+                        self._all_information["description"] = result["description"]
+                        self._all_information["pid"] = self.get_id()
+                        self._all_information["item_type"] = self.get_item_type()
+                        self._all_information["theme"] = holiday
+                        self._all_information["contains_nuts"] = result["has_nuts"]
+                        self._all_information["is_lactose_free"] = result["has_lactose"]
+
+
                         candy_cane = gift_factory.CandyCanes(quantity=result["quantity"], name=self.get_name(),
                                                              description=result["description"],
                                                              pid=self.get_id(), theme=holiday,
@@ -117,6 +161,22 @@ class Order:
                 if type(result) == dict:
                     spider_detail = gift_factory.RCSpider.rc_spider_detail_validator(self.get_attributes())
                     if spider_detail is not None:
+                        self._all_information["quantity"] = result["quantity"]
+                        self._all_information["name"] = self.get_name()
+                        self._all_information["description"] = result["description"]
+                        self._all_information["pid"] = self.get_id()
+                        self._all_information["item_type"] = self.get_item_type()
+                        self._all_information["theme"] = holiday
+                        self._all_information["is_battery_operated"] = result["has_batteries"]
+                        self._all_information["min_age"] = result["min_age"]
+                        self._all_information["speed"] = spider_detail["speed"],
+                        self._all_information["jump_height"] = spider_detail["jump_height"]
+                        self._all_information["spider_type"] = spider_detail["spider_type"]
+
+
+
+
+
                         spider = gift_factory.RCSpider(quantity=result["quantity"], name=self.get_name(),
                                                        description=result["description"],
                                                        pid=self.get_id(), theme=holiday,
@@ -139,6 +199,19 @@ class Order:
                     dancing_skeleton_detail = gift_factory.DancingSkeleton.dancing_skeleton_detail_validator(
                         self.get_attributes())
                     if dancing_skeleton_detail is not None:
+                        self._all_information["quantity"] = result["quantity"]
+                        self._all_information["name"] = self.get_name()
+                        self._all_information["description"] = result["description"]
+                        self._all_information["pid"] = self.get_id()
+                        self._all_information["item_type"] = self.get_item_type()
+                        self._all_information["theme"] = holiday
+                        self._all_information["stuffing"] = result["stuffing"]
+                        self._all_information["size"] = result["size"]
+                        self._all_information["fabric"] = dancing_skeleton_detail["fabric"],
+                        self._all_information["is_glowing"] = dancing_skeleton_detail["has_glow"]
+
+
+
                         dancing_skeleton = gift_factory.DancingSkeleton(
                             quantity=result["quantity"], name=self.get_name(), description=result["description"],
                             pid=self.get_id(), theme=holiday, stuffing=result["stuffing"], size=result["size"],
@@ -159,6 +232,17 @@ class Order:
                     pumpkin_candy_detail = gift_factory.PumpkinCaramelToffee.pumpkin_toffee_detail_validator(
                         self.get_attributes())
                     if pumpkin_candy_detail is not None:
+                        self._all_information["quantity"] = result["quantity"]
+                        self._all_information["name"] = self.get_name()
+                        self._all_information["description"] = result["description"]
+                        self._all_information["pid"] = self.get_id()
+                        self._all_information["item_type"] = self.get_item_type()
+                        self._all_information["theme"] = holiday
+                        self._all_information["contains_nuts"] = result["has_nuts"]
+                        self._all_information["is_lactose_free"] = result["has_lactose"]
+                        self._all_information["variety"] = pumpkin_candy_detail["variety"]
+
+
                         pumpkin_candy = gift_factory.PumpkinCaramelToffee(quantity=result["quantity"],
                                                                           name=self.get_name(),
                                                                           description=result["description"],
@@ -182,6 +266,18 @@ class Order:
                 if type(result) == dict:
                     robot_bunny_detail = gift_factory.RobotBunny.robot_bunny_detail_validator(self.get_attributes())
                     if robot_bunny_detail is not None:
+                        self._all_information["quantity"] = result["quantity"]
+                        self._all_information["name"] = self.get_name()
+                        self._all_information["description"] = result["description"]
+                        self._all_information["pid"] = self.get_id()
+                        self._all_information["item_type"] = self.get_item_type()
+                        self._all_information["theme"] = holiday
+                        self._all_information["is_battery_operated"] = result["has_batteries"]
+                        self._all_information["min_age"] = result["min_age"]
+                        self._all_information["num_of_sound_effects"] = robot_bunny_detail["num_sound"],
+                        self._all_information["colour"] = robot_bunny_detail["colour"]
+
+
                         robot_bunny = gift_factory.RobotBunny(quantity=result["quantity"], name=self.get_name(),
                                                               description=result["description"],
                                                               pid=self.get_id(), theme=holiday,
@@ -190,9 +286,6 @@ class Order:
                                                               num_of_sound_effects=robot_bunny_detail["num_sound"],
                                                               color=robot_bunny_detail["colour"])
                         print("inside validation function: robot_bunny---------------------------")
-                        # print(santa_workshop.get_name())
-                        # print(santa_workshop.get_description())
-                        # print(santa_workshop.get_is_battery_operated())
                         print("validated_robot_bunny")
                         return self
                     else:
@@ -202,6 +295,18 @@ class Order:
                 if type(result) == dict:
                     east_bunny_detail = gift_factory.EasterBunny.east_bunny_detail_validator(self.get_attributes())
                     if east_bunny_detail is not None:
+                        self._all_information["quantity"] = result["quantity"]
+                        self._all_information["name"] = self.get_name()
+                        self._all_information["description"] = result["description"]
+                        self._all_information["pid"] = self.get_id()
+                        self._all_information["item_type"] = self.get_item_type()
+                        self._all_information["theme"] = holiday
+                        self._all_information["stuffing"] = result["stuffing"]
+                        self._all_information["size"] = result["size"]
+                        self._all_information["fabric"] = east_bunny_detail["fabric"],
+                        self._all_information["colour"] = east_bunny_detail["colour"]
+
+
                         east_bunny = gift_factory.EasterBunny(quantity=result["quantity"], name=self.get_name(),
                                                               description=result["description"],
                                                               pid=self.get_id(), theme=holiday,
@@ -210,9 +315,6 @@ class Order:
                                                               fabric=east_bunny_detail["fabric"],
                                                               color=east_bunny_detail["colour"])
                         print("inside validation function: east_bunny--------------------------------------------")
-                        # print(rein_deer_workshop.get_name())
-                        # print(rein_deer_workshop.get_description())
-                        # print(rein_deer_workshop.get_has_glow())
                         print("validated_east bunny")
                         return self
                     else:
@@ -222,12 +324,22 @@ class Order:
                 if type(result) == dict:
                     cream_egg_detail = gift_factory.CreamEggs.cream_egg_detail_validator(self.get_attributes())
                     if cream_egg_detail is not None:
+                        self._all_information["quantity"] = result["quantity"]
+                        self._all_information["name"] = self.get_name()
+                        self._all_information["description"] = result["description"]
+                        self._all_information["pid"] = self.get_id()
+                        self._all_information["item_type"] = self.get_item_type()
+                        self._all_information["theme"] = holiday
+                        self._all_information["contains_nuts"] = result["has_nuts"]
+                        self._all_information["is_lactose_free"] = result["has_lactose"]
+                        self._all_information["pack_size"] = cream_egg_detail["pack_size"]
+
                         cream_egg = gift_factory.CreamEggs(quantity=result["quantity"], name=self.get_name(),
-                                                            description=result["description"],
-                                                            pid=self.get_id(), theme=holiday,
-                                                            contains_nuts=result["has_nuts"],
-                                                            is_lactose_free=result["has_lactose"],
-                                                            pack_size=cream_egg_detail["pack_size"])
+                                                           description=result["description"],
+                                                           pid=self.get_id(), theme=holiday,
+                                                           contains_nuts=result["has_nuts"],
+                                                           is_lactose_free=result["has_lactose"],
+                                                           pack_size=cream_egg_detail["pack_size"])
                         print("inside validation function: cream egg--------------------------------------------")
                         # print(candy_cane.get_name())
                         # print(candy_cane.get_description())

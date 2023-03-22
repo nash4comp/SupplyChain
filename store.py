@@ -62,6 +62,7 @@ class Store:
         print("Thank you for visiting the store.")
 
     def menu_process_web_orders(self):
+        order_num_index = 1
         file_to_read = int(input("If you want to read orders.xlsx enter 1 "))
         if file_to_read == 1:
             excel_file = "orders.xlsx"
@@ -69,7 +70,11 @@ class Store:
             self.get_order_processor().create_orders()  # just create orders without any validation
             self.update_orders_without_validation(self.get_order_processor().get_orders())
             self.validate_order()
-        print(self.get_order_processor().get_orders())
+        # print(self.get_order_processor().get_orders())
+        for each_order in self.get_order_processor().get_orders().values():
+            print(each_order[0].get_all_info_dict_for_factory_creation())
+
+        # print(self.get_order_processor().get_orders()[1][0].get_all_info_dict_for_factory_creation())
 
 
     def validate_order(self):
