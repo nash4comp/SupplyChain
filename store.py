@@ -3,12 +3,26 @@ from order_processor import OrderProcessor
 
 
 class Store:
+    """
+    This class is backend for store_front.
+    Handles order_processing, inventory monitor, and daily transaction report.
+    """
     def __init__(self):
+        """
+        Initialize Store.
+        Records has valid orders.
+        """
         self._order_processor = OrderProcessor()
         self._orders_without_validation = {}
         self._records = {}  # this record has only valid orders
 
     def menu_process_web_orders(self, inv, factory):
+        """
+        Process web order by reading an Excel file and creating Order objects.
+        Based on created Order objects, validate them, if validate then check inventory
+        :param inv: Inventory
+        :param factory: GiftFactory
+        """
         file_to_read = int(input("If you want to read orders.xlsx enter 1 "))
         if file_to_read == 1:
             excel_file = "orders.xlsx"
@@ -20,13 +34,18 @@ class Store:
             inv.check_item_quantity(each_order[0].get_all_info_dict_for_factory_creation(), factory)
 
     def validate_order(self):
+        """
+        Validate each order inside valid orders inside OrderProcessing.
+        """
         for order in self.get_order_processor().get_orders().values():
             order_object = order[0]
             holiday = order[1]
             order_object.validate_details(holiday)
 
     def export_daily_transaction_report(self):
-        # create a txt file contains valid orders
+        """
+        Write Daily Transaction Report (DRT) that contains valid orders
+        """
         text_file_name = self.text_file_name_generator()
         now = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
         with open(text_file_name, 'w', encoding='utf-8') as f:
@@ -39,9 +58,17 @@ class Store:
                 key += 1
 
     def get_order_processor(self):
+        """
+        Getter for _order_processor
+        :return: OrderProcessor
+        """
         return self._order_processor
 
     def text_file_name_generator(self):
+        """
+        Format text_file_name
+        :return: formatted string
+        """
         now = datetime.datetime.now()
         date_str = now.strftime('%d%m%y')
         time_str = now.strftime('%H%M')
@@ -49,6 +76,10 @@ class Store:
         return file_name
 
     def update_orders_without_validation(self, dict_to_update):
+        """
+        Setter for orders_without_validation dictionary.
+        :param dict_to_update: dictionary
+        """
         self._orders_without_validation = dict_to_update
 
 
