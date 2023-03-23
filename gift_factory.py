@@ -217,6 +217,9 @@ class Toy(Product):
     def get_product_type(self):
         return "Toy"
 
+    def get_item_type(self):
+        return self._item_type
+
     def __str__(self):
         return "Toy"
 
@@ -277,8 +280,15 @@ class SantasWorkshop(Toy):
     def get_num_rooms(self):
         return self._num_rooms
 
+    def get_dimension(self):
+        return self._dimension
+
     def __str__(self):
-        return "SantasWorkshop"
+        ret = self.get_holiday() + ", " + self.get_item_type() + ", " + self.get_name() + ", Qty: " + \
+              str(self.get_quantity()) + ", PID: " + self.get_product_id() + ", " + self.get_description() + ", " + \
+              "Batteries: " + str(self.get_has_batteries()) + ", Min age:" + str(self.get_min_age()) + ", " + \
+              "Dimension: " + self.get_dimension() + ", Num of rooms:" + str(self.get_num_rooms())
+        return ret
 
 
 class RCSpider(Toy):

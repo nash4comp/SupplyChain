@@ -294,8 +294,9 @@ class Inventory:
         print("Inventory List")
         print("<Toy>")
         for item in self._inventory_toy:
-            print(item.get_product_type() + ", " + item.get_name() + ", " + str(item.get_quantity()) +
-                  ", " + self.check_inventory(item.get_quantity()))
+            # print(item.get_product_type() + ", " + item.get_name() + ", " + str(item.get_quantity()) +
+            #       ", " + self.check_inventory(item.get_quantity()))
+            print("[" + self.check_inventory(item.get_quantity()) + "] " + str(item))
         print("\n<Stuffed Animals>")
         for item in self._inventory_stuffed_animal:
             print(item.get_product_type() + ", " + item.get_name() + ", " + str(item.get_quantity()) +
