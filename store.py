@@ -41,13 +41,11 @@ class Store:
         :param inv: Inventory
         :param factory: GiftFactory
         """
-        file_to_read = int(input("If you want to read orders.xlsx enter 1 "))
-        if file_to_read == 1:
-            excel_file = "orders.xlsx"
-            self.get_order_processor().convert_dict_from_excel_file(excel_file)
-            self.get_order_processor().create_orders()  # just create orders without any validation
-            self.update_orders_without_validation(self.get_order_processor().get_orders())
-            self.validate_order()
+        file_to_read = input("Please enter the Excel file name: ")
+        self.get_order_processor().convert_dict_from_excel_file(file_to_read)
+        self.get_order_processor().create_orders()  # just create orders without any validation
+        self.update_orders_without_validation(self.get_order_processor().get_orders())
+        self.validate_order()
         for each_order in self.get_order_processor().get_orders().values():
             inv.check_item_quantity(each_order[0].get_all_info_dict_for_factory_creation(), factory)
 

@@ -85,52 +85,52 @@ class CandyCanesStrips(Enum):
 
 
 class GiftFactory:
-	@staticmethod
-	def create_item(**kwargs):
-		item_type = kwargs["item_type"]
-		del kwargs["item_type"]
-		if kwargs["holiday"] == Holiday.Christmas.name:
-			if item_type == "Toy":
-				return SantasWorkshop(**kwargs)
-			elif item_type == "StuffedAnimal":
-				return Reindeer(**kwargs)
-			elif item_type == "Candy":
-				return CandyCanes(**kwargs)
-		elif kwargs["holiday"] == Holiday.Halloween.name:
-			if item_type == "Toy":
-				return RCSpider(**kwargs)
-			elif item_type == "StuffedAnimal":
-				return DancingSkeleton(**kwargs)
-			elif item_type == "Candy":
-				return PumpkinCaramelToffee(**kwargs)
-		elif kwargs["holiday"] == Holiday.Easter.name:
-			if item_type == "Toy":
-				return RobotBunny(**kwargs)
-			elif item_type == "StuffedAnimal":
-				return EasterBunny(**kwargs)
-			elif item_type == "Candy":
-				return CreamEggs(**kwargs)
+    @staticmethod
+    def create_item(**kwargs):
+        item_type = kwargs["item_type"]
+        del kwargs["item_type"]
+        if kwargs["holiday"] == Holiday.Christmas.name:
+            if item_type == "Toy":
+                return SantasWorkshop(**kwargs)
+            elif item_type == "StuffedAnimal":
+                return Reindeer(**kwargs)
+            elif item_type == "Candy":
+                return CandyCanes(**kwargs)
+        elif kwargs["holiday"] == Holiday.Halloween.name:
+            if item_type == "Toy":
+                return RCSpider(**kwargs)
+            elif item_type == "StuffedAnimal":
+                return DancingSkeleton(**kwargs)
+            elif item_type == "Candy":
+                return PumpkinCaramelToffee(**kwargs)
+        elif kwargs["holiday"] == Holiday.Easter.name:
+            if item_type == "Toy":
+                return RobotBunny(**kwargs)
+            elif item_type == "StuffedAnimal":
+                return EasterBunny(**kwargs)
+            elif item_type == "Candy":
+                return CreamEggs(**kwargs)
 
 
 class Product(ABC):
-	def __init__(self, item_type=None, quantity=0, name='No name', description='', product_id='', holiday=None):
-		self._item_type = item_type
-		self._quantity = quantity
-		self._name = name
-		self._description = description
-		self._product_id = product_id
-		self._holiday = holiday
+    def __init__(self, item_type=None, quantity=0, name='No name', description='', product_id='', holiday=None):
+        self._item_type = item_type
+        self._quantity = quantity
+        self._name = name
+        self._description = description
+        self._product_id = product_id
+        self._holiday = holiday
 
-	def __str__(self):
-		return "Product"
+    def __str__(self):
+        return "Product"
 
     def set_quantity(self, quantity):
         if quantity < 0:
             raise ValueError("Quantity cannot be negative")
         self._quantity = quantity
 
-	# def set_name(self, name):
-	# 	self._name = name
+    # def set_name(self, name):
+    # 	self._name = name
     def initial_process(self, initial_order_count):
         initial_count = 100
         processed_count = initial_count - initial_order_count
@@ -149,40 +149,40 @@ class Product(ABC):
     def set_name(self, name):
         self._name = name
 
-	# def set_description(self, description):
-	# 	self._description = description
+    # def set_description(self, description):
+    # 	self._description = description
 
-	# def set_product_id(self, product_id):
-	# 	self._product_id = product_id
+    # def set_product_id(self, product_id):
+    # 	self._product_id = product_id
 
-	# def set_holiday(self, holiday):
-	# 	if holiday == Holiday.Christmas:
-	# 		self._holiday = Holiday.Christmas
-	# 	elif holiday == Holiday.Halloween:
-	# 		self._holiday = Holiday.Halloween
-	# 	elif holiday == Holiday.Easter:
-	# 		self._holiday = Holiday.Easter
-	# 	else:
-	# 		self._holiday = None
+    # def set_holiday(self, holiday):
+    # 	if holiday == Holiday.Christmas:
+    # 		self._holiday = Holiday.Christmas
+    # 	elif holiday == Holiday.Halloween:
+    # 		self._holiday = Holiday.Halloween
+    # 	elif holiday == Holiday.Easter:
+    # 		self._holiday = Holiday.Easter
+    # 	else:
+    # 		self._holiday = None
 
-	def get_quantity(self):
-		return self._quantity
+    def get_quantity(self):
+        return self._quantity
 
     def get_name(self):
         return self._name
 
-	# def get_description(self):
-	# 	return self._description
+    # def get_description(self):
+    # 	return self._description
 
-	def get_product_id(self):
-		return self._product_id
+    def get_product_id(self):
+        return self._product_id
 
-	# def get_holiday(self):
-	# 	return self._holiday
+    # def get_holiday(self):
+    # 	return self._holiday
 
-	@abc.abstractmethod
-	def get_item_type(self):
-		pass
+    @abc.abstractmethod
+    def get_item_type(self):
+        pass
 
 
 class Toy(Product):
@@ -221,36 +221,36 @@ class Toy(Product):
         else:
             return valid_attributes_toy
 
-	def __init__(self, item_type='TOY', quantity=0, name='No name', description='', product_id='', holiday=None,
-	             has_batteries=False,
-	             min_age=0):
-		super().__init__(item_type, quantity, name, description, product_id, holiday)
-		self._item_type = item_type
-		self._has_batteries = has_batteries
-		self._min_age = min_age
+    def __init__(self, item_type='TOY', quantity=0, name='No name', description='', product_id='', holiday=None,
+                 has_batteries=False,
+                 min_age=0):
+        super().__init__(item_type, quantity, name, description, product_id, holiday)
+        self._item_type = item_type
+        self._has_batteries = has_batteries
+        self._min_age = min_age
 
-	# def set_has_batteries(self, has_batteries):
-	# 	self._has_batteries = has_batteries
+    # def set_has_batteries(self, has_batteries):
+    # 	self._has_batteries = has_batteries
 
-	# def set_min_age(self, min_age):
-	# 	if min_age < 0:
-	# 		raise ValueError("Min age cannot be negative")
-	# 	self._min_age = min_age
+    # def set_min_age(self, min_age):
+    # 	if min_age < 0:
+    # 		raise ValueError("Min age cannot be negative")
+    # 	self._min_age = min_age
 
-	# def get_has_batteries(self):
-	# 	return self._has_batteries
+    # def get_has_batteries(self):
+    # 	return self._has_batteries
 
-	# def get_min_age(self):
-	# 	return self._min_age
+    # def get_min_age(self):
+    # 	return self._min_age
 
-	# def get_product_type(self):
-	# 	return "Toy"
+    # def get_item_type(self):
+    # 	return "Toy"
 
-	def get_item_type(self):
-		return self._item_type
+    def get_item_type(self):
+        return self._item_type
 
-	def __str__(self):
-		return "Toy"
+    def __str__(self):
+        return "Toy"
 
 
 class SantasWorkshop(Toy):
@@ -261,10 +261,10 @@ class SantasWorkshop(Toy):
         Validate Santa's attributes.
         :param att_dict: dictionary that has all the information required to create Santa Workshop.
         """
-        valid_attributes_count = 6
-        if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
-            # print("extra column santa")
-            return None
+        # valid_attributes_count = 6
+        # if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
+        #     # print("extra column santa")
+        #     return None
         valid_santa_attributes = {"dimension": "", "num_rooms": 0}
         for key_att_dict in att_dict.keys():
             if key_att_dict == "dimensions":
@@ -278,49 +278,49 @@ class SantasWorkshop(Toy):
         else:
             return valid_santa_attributes
 
-	def __init__(self, item_type='TOY', quantity=0, name='No name', description='', product_id='', holiday=None,
-	             has_batteries=False,
-	             min_age='', dimension="", num_rooms=0):
-		super().__init__(item_type, quantity, name, description, product_id, holiday, has_batteries, min_age)
-		self._dimension = dimension
-		# self._width = width
-		# self._height = height
-		self._num_rooms = num_rooms
+    def __init__(self, item_type='TOY', quantity=0, name='No name', description='', product_id='', holiday=None,
+                 has_batteries=False,
+                 min_age='', dimension="", num_rooms=0):
+        super().__init__(item_type, quantity, name, description, product_id, holiday, has_batteries, min_age)
+        self._dimension = dimension
+        # self._width = width
+        # self._height = height
+        self._num_rooms = num_rooms
 
-	# def set_width(self, width):
-	#     if width < 0:
-	#         self._width = 0
-	#     self._width = width
-	#
-	# def set_height(self, height):
-	#     if height < 0:
-	#         self._height = 0
-	#     self._height = height
+    # def set_width(self, width):
+    #     if width < 0:
+    #         self._width = 0
+    #     self._width = width
+    #
+    # def set_height(self, height):
+    #     if height < 0:
+    #         self._height = 0
+    #     self._height = height
 
-	# def set_num_rooms(self, num_rooms):
-	# 	if num_rooms < 0:
-	# 		self._num_rooms = 0
-	# 	self._num_rooms = num_rooms
+    # def set_num_rooms(self, num_rooms):
+    # 	if num_rooms < 0:
+    # 		self._num_rooms = 0
+    # 	self._num_rooms = num_rooms
 
-	def get_item_type(self):
-		return self._item_type
+    def get_item_type(self):
+        return self._item_type
 
-	# def get_width(self):
-	#     return self._width
-	#
-	# def get_height(self):
-	#     return self._height
+    # def get_width(self):
+    #     return self._width
+    #
+    # def get_height(self):
+    #     return self._height
 
-	# def get_num_rooms(self):
-	# 	return self._num_rooms
+    # def get_num_rooms(self):
+    # 	return self._num_rooms
 
-	# def get_dimension(self):
-	# 	return self._dimension
+    # def get_dimension(self):
+    # 	return self._dimension
 
-	def __str__(self):
-		ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
-		      str(self.get_quantity()) + ", Name: " + self.get_name()
-		return ret
+    def __str__(self):
+        ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
+              str(self.get_quantity()) + ", Name: " + self.get_name()
+        return ret
 
 
 class RCSpider(Toy):
@@ -331,11 +331,11 @@ class RCSpider(Toy):
         Validate RC Spider's attributes.
         :param att_dict: dictionary that has all the information required to create RC Spider.
         """
-        valid_attributes_count = 8
+
         valid_attribute_count = 0
-        if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
-            # print("extra column rc spider")
-            return None
+        # if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
+        #     # print("extra column rc spider")
+        #     return None
         valid_spider_attributes = {"speed": 0, "jump_height": 0, "has_glow": "", "spider_type": ""}
         for key_att_dict in att_dict.keys():
             if key_att_dict == "speed" and att_dict[key_att_dict] != str:
@@ -372,55 +372,55 @@ class RCSpider(Toy):
         else:
             return valid_spider_attributes
 
-	def __init__(self, item_type='TOY', quantity=0, name='No name', description='', product_id='', holiday=None,
-	             has_batteries=False,
-	             min_age=0, speed=0, jump_height=0, has_glow=False, spider_type=None):
-		super().__init__(item_type, quantity, name, description, product_id, holiday, has_batteries, min_age)
-		self._speed = speed
-		self._jump_height = jump_height
-		self._has_glow = has_glow
-		self._spider_type = spider_type
+    def __init__(self, item_type='TOY', quantity=0, name='No name', description='', product_id='', holiday=None,
+                 has_batteries=False,
+                 min_age=0, speed=0, jump_height=0, has_glow=False, spider_type=None):
+        super().__init__(item_type, quantity, name, description, product_id, holiday, has_batteries, min_age)
+        self._speed = speed
+        self._jump_height = jump_height
+        self._has_glow = has_glow
+        self._spider_type = spider_type
 
-	# def set_speed(self, speed):
-	# 	if speed < 0:
-	# 		self._speed = 0
-	# 	self._speed = speed
+    # def set_speed(self, speed):
+    # 	if speed < 0:
+    # 		self._speed = 0
+    # 	self._speed = speed
 
-	# def set_jump_height(self, jump_height):
-	# 	if jump_height < 0:
-	# 		self._jump_height = 0
-	# 	self._jump_height = jump_height
+    # def set_jump_height(self, jump_height):
+    # 	if jump_height < 0:
+    # 		self._jump_height = 0
+    # 	self._jump_height = jump_height
 
-	# def set_has_glow(self, has_glow):
-	# 	self._has_glow = has_glow
+    # def set_has_glow(self, has_glow):
+    # 	self._has_glow = has_glow
 
-	# def set_spider_type(self, spider_type):
-	# 	if spider_type == SpiderType.Tarantula:
-	# 		self._spider_type = SpiderType.Tarantula
-	# 	elif spider_type == SpiderType.WolfSpider:
-	# 		self._spider_type = SpiderType.WolfSpider
-	# 	else:
-	# 		self._spider_type = None
+    # def set_spider_type(self, spider_type):
+    # 	if spider_type == SpiderType.Tarantula:
+    # 		self._spider_type = SpiderType.Tarantula
+    # 	elif spider_type == SpiderType.WolfSpider:
+    # 		self._spider_type = SpiderType.WolfSpider
+    # 	else:
+    # 		self._spider_type = None
 
-	def get_item_type(self):
-		return self._item_type
+    def get_item_type(self):
+        return self._item_type
 
-	# def get_speed(self):
-	# 	return self._speed
-	#
-	# def get_jump_height(self):
-	# 	return self._jump_height
-	#
-	# def get_has_glow(self):
-	# 	return self._has_glow
-	#
-	# def get_spider_type(self):
-	# 	return self._spider_type
+    # def get_speed(self):
+    # 	return self._speed
+    #
+    # def get_jump_height(self):
+    # 	return self._jump_height
+    #
+    # def get_has_glow(self):
+    # 	return self._has_glow
+    #
+    # def get_spider_type(self):
+    # 	return self._spider_type
 
-	def __str__(self):
-		ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
-		      str(self.get_quantity()) + ", Name: " + self.get_name()
-		return ret
+    def __str__(self):
+        ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
+              str(self.get_quantity()) + ", Name: " + self.get_name()
+        return ret
 
 
 class RobotBunny(Toy):
@@ -431,11 +431,11 @@ class RobotBunny(Toy):
         Validate Robot bunny's attributes.
         :param att_dict: dictionary that has all the information required to create Robot bunny.
         """
-        valid_attributes_count = 6
+        # valid_attributes_count = 6
         valid_attribute_count = 0
-        if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
-            # print("extra column robot bunny")
-            return None
+        # if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
+        #     # print("extra column robot bunny")
+        #     return None
         valid_robot_bunny_details = {"num_sound": 0, "colour": ""}
         for key_att_dict in att_dict.keys():
             value_from_dict = att_dict[key_att_dict]
@@ -459,41 +459,41 @@ class RobotBunny(Toy):
         else:
             return valid_robot_bunny_details
 
-	def __init__(self, item_type='TOY', quantity=0, name='No name', description='', product_id='', holiday=None,
-	             has_batteries=False,
-	             min_age=0, num_sound=0, colour=None):
-		super().__init__(item_type, quantity, name, description, product_id, holiday, has_batteries, min_age)
-		self._num_of_sound_effects = num_sound
-		self._color = colour
+    def __init__(self, item_type='TOY', quantity=0, name='No name', description='', product_id='', holiday=None,
+                 has_batteries=False,
+                 min_age=0, num_sound=0, colour=None):
+        super().__init__(item_type, quantity, name, description, product_id, holiday, has_batteries, min_age)
+        self._num_of_sound_effects = num_sound
+        self._color = colour
 
-	# def set_num_of_sound_effects(self, num_sound):
-	# 	if num_sound < 0:
-	# 		self._num_of_sound_effects = 0
-	# 	self._num_of_sound_effects = num_sound
+    # def set_num_of_sound_effects(self, num_sound):
+    # 	if num_sound < 0:
+    # 		self._num_of_sound_effects = 0
+    # 	self._num_of_sound_effects = num_sound
 
-	# def set_color(self, colour):
-	# 	if colour == Colour.Orange:
-	# 		self._color = Colour.Orange
-	# 	elif colour == Colour.Pink:
-	# 		self._color = Colour.Pink
-	# 	elif colour == Colour.Blue:
-	# 		self._color = Colour.Blue
-	# 	else:
-	# 		self._color = None
+    # def set_color(self, colour):
+    # 	if colour == Colour.Orange:
+    # 		self._color = Colour.Orange
+    # 	elif colour == Colour.Pink:
+    # 		self._color = Colour.Pink
+    # 	elif colour == Colour.Blue:
+    # 		self._color = Colour.Blue
+    # 	else:
+    # 		self._color = None
 
-	def get_item_type(self):
-		return self._item_type
+    def get_item_type(self):
+        return self._item_type
 
-	# def get_num_of_sound_effects(self):
-	# 	return self._num_of_sound_effects
+    # def get_num_of_sound_effects(self):
+    # 	return self._num_of_sound_effects
 
-	# def get_color(self):
-	# 	return self._color
+    # def get_color(self):
+    # 	return self._color
 
-	def __str__(self):
-		ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
-		      str(self.get_quantity()) + ", Name: " + self.get_name()
-		return ret
+    def __str__(self):
+        ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
+              str(self.get_quantity()) + ", Name: " + self.get_name()
+        return ret
 
 
 class StuffedAnimal(Product):
@@ -534,57 +534,57 @@ class StuffedAnimal(Product):
                         valid_attribute_count += 1
                     else:
                         print("Invalid size input")
-        if valid_attribute_count != len(valid_attributes_stuffed_animal):
-            print("Invalid order stuffed animal")
-        else:
-            return valid_attributes_stuffed_animal
+        # if valid_attribute_count != len(valid_attributes_stuffed_animal):
+        #     print("Invalid order stuffed animal")
+        # else:
+        return valid_attributes_stuffed_animal
 
-	def __init__(self, item_type='StuffedAnimal', quantity=0, name='No name', description='', product_id='',
-	             holiday=None, stuffing=None, size=None,
-	             fabric=None):
-		super().__init__(item_type, quantity, name, description, product_id, holiday)
-		self._stuffing = stuffing
-		self._size = size
-		self._fabric = fabric
+    def __init__(self, item_type='StuffedAnimal', quantity=0, name='No name', description='', product_id='',
+                 holiday=None, stuffing=None, size=None,
+                 fabric=None):
+        super().__init__(item_type, quantity, name, description, product_id, holiday)
+        self._stuffing = stuffing
+        self._size = size
+        self._fabric = fabric
 
-	# def set_stuffing(self, stuffing):
-	# 	if stuffing == Stuffing.Polyester_Fibrefill:
-	# 		self._stuffing = Stuffing.Polyester_Fibrefill
-	# 	elif stuffing == Stuffing.Wool:
-	# 		self._stuffing = Stuffing.Wool
-	# 	else:
-	# 		self._stuffing = None
-	#
-	# def set_size(self, size):
-	# 	if size == Size.S:
-	# 		self._size = Size.S
-	# 	elif size == Size.M:
-	# 		self._size = Size.M
-	# 	elif size == Size.L:
-	# 		self._size = Size.L
-	# 	else:
-	# 		self._size = None
-	#
-	# def set_fabric(self, fabric):
-	# 	if fabric == Fabric.Linen:
-	# 		self._fabric = Fabric.Linen
-	# 	elif fabric == Fabric.Cotton:
-	# 		self._fabric = Fabric.Cotton
-	# 	elif fabric == Fabric.Acrylic:
-	# 		self._fabric = Fabric.Acrylic
-	# 	else:
-	# 		self._fabric = None
-	#
-	# def get_product_type(self):
-	# 	return "StuffedAnimal"
+    # def set_stuffing(self, stuffing):
+    # 	if stuffing == Stuffing.Polyester_Fibrefill:
+    # 		self._stuffing = Stuffing.Polyester_Fibrefill
+    # 	elif stuffing == Stuffing.Wool:
+    # 		self._stuffing = Stuffing.Wool
+    # 	else:
+    # 		self._stuffing = None
+    #
+    # def set_size(self, size):
+    # 	if size == Size.S:
+    # 		self._size = Size.S
+    # 	elif size == Size.M:
+    # 		self._size = Size.M
+    # 	elif size == Size.L:
+    # 		self._size = Size.L
+    # 	else:
+    # 		self._size = None
+    #
+    # def set_fabric(self, fabric):
+    # 	if fabric == Fabric.Linen:
+    # 		self._fabric = Fabric.Linen
+    # 	elif fabric == Fabric.Cotton:
+    # 		self._fabric = Fabric.Cotton
+    # 	elif fabric == Fabric.Acrylic:
+    # 		self._fabric = Fabric.Acrylic
+    # 	else:
+    # 		self._fabric = None
+    #
+    # def get_item_type(self):
+    # 	return "StuffedAnimal"
 
-	def get_item_type(self):
-		return self._item_type
+    def get_item_type(self):
+        return self._item_type
 
-	def __str__(self):
-		ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
-		      str(self.get_quantity()) + ", Name: " + self.get_name()
-		return ret
+    def __str__(self):
+        ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
+              str(self.get_quantity()) + ", Name: " + self.get_name()
+        return ret
 
 
 class DancingSkeleton(StuffedAnimal):
@@ -594,10 +594,10 @@ class DancingSkeleton(StuffedAnimal):
         Validate Dancing Skeleton's attributes.
         :param attribute_dict: dictionary that has all the information required to create Dancing Skeleton.
         """
-        valid_attributes_count = 6
-        if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
-            # print("extra column dancing monkey")
-            return None
+        # valid_attributes_count = 6
+        # if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
+        #     # print("extra column dancing monkey")
+        #     return None
         valid_dancing_skeleton_attributes = {"fabric": "", "has_glow": ""}
         for key_att_dict in att_dict.keys():
             value_from_dict = att_dict[key_att_dict]
@@ -621,25 +621,25 @@ class DancingSkeleton(StuffedAnimal):
         else:
             return valid_dancing_skeleton_attributes
 
-	def __init__(self, item_type='StuffedAnimal', quantity=0, name='No name', description='', product_id='',
-	             holiday=None, stuffing=None, size=None,
-	             fabric=None, has_glow=False):
-		super().__init__(item_type, quantity, name, description, product_id, holiday, stuffing, size, fabric)
-		self._has_glow = has_glow
+    def __init__(self, item_type='StuffedAnimal', quantity=0, name='No name', description='', product_id='',
+                 holiday=None, stuffing=None, size=None,
+                 fabric=None, has_glow=False):
+        super().__init__(item_type, quantity, name, description, product_id, holiday, stuffing, size, fabric)
+        self._has_glow = has_glow
 
-	# def set_has_glow(self, has_glow):
-	# 	self._has_glow = has_glow
-	#
-	# def get_product_type(self):
-	# 	return "DancingSkeleton"
-	#
-	# def get_has_glow(self):
-	# 	return self._has_glow
+    # def set_has_glow(self, has_glow):
+    # 	self._has_glow = has_glow
+    #
+    # def get_item_type(self):
+    # 	return "DancingSkeleton"
+    #
+    # def get_has_glow(self):
+    # 	return self._has_glow
 
-	def __str__(self):
-		ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
-		      str(self.get_quantity()) + ", Name: " + self.get_name()
-		return ret
+    def __str__(self):
+        ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
+              str(self.get_quantity()) + ", Name: " + self.get_name()
+        return ret
 
 
 class Reindeer(StuffedAnimal):
@@ -650,10 +650,10 @@ class Reindeer(StuffedAnimal):
         Validate Reindeer's attributes.
         :param att_dict: dictionary that has all the information required to create  Reindeer.
         """
-        valid_attributes_count = 6
-        if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
-            # print("extra column reindeer")
-            return None
+        # valid_attributes_count = 6
+        # if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
+        #     # print("extra column reindeer")
+        #     return None
         valid_reindeer_attributes = {"fabric": "", "has_glow": ""}
         for key_att_dict in att_dict.keys():
             value_from_dict = att_dict[key_att_dict]
@@ -677,25 +677,25 @@ class Reindeer(StuffedAnimal):
         else:
             return valid_reindeer_attributes
 
-	def __init__(self, item_type='StuffedAnimal', quantity=0, name='No name', description='', product_id='',
-	             holiday=None, stuffing=None, size=None,
-	             fabric=None, has_glow=False):
-		super().__init__(item_type, quantity, name, description, product_id, holiday, stuffing, size, fabric)
-		self._has_glow = has_glow
+    def __init__(self, item_type='StuffedAnimal', quantity=0, name='No name', description='', product_id='',
+                 holiday=None, stuffing=None, size=None,
+                 fabric=None, has_glow=False):
+        super().__init__(item_type, quantity, name, description, product_id, holiday, stuffing, size, fabric)
+        self._has_glow = has_glow
 
-	# def set_has_glow(self, has_glow):
-	# 	self._has_glow = has_glow
-	#
-	# def get_product_type(self):
-	# 	return "Reindeer"
-	#
-	# def get_has_glow(self):
-	# 	return self._has_glow
+    # def set_has_glow(self, has_glow):
+    # 	self._has_glow = has_glow
+    #
+    # def get_item_type(self):
+    # 	return "Reindeer"
+    #
+    # def get_has_glow(self):
+    # 	return self._has_glow
 
-	def __str__(self):
-		ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
-		      str(self.get_quantity()) + ", Name: " + self.get_name()
-		return ret
+    def __str__(self):
+        ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
+              str(self.get_quantity()) + ", Name: " + self.get_name()
+        return ret
 
 
 class EasterBunny(StuffedAnimal):
@@ -705,10 +705,10 @@ class EasterBunny(StuffedAnimal):
         Validate Easter Bunny's attributes.
         :param att_dict: dictionary that has all the information required to create Easter Bunny.
         """
-        valid_attributes_count = 6
-        if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
-            # print("extra column easter bunny")
-            return None
+        # valid_attributes_count = 6
+        # if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
+        #     # print("extra column easter bunny")
+        #     return None
         valid_reindeer_attributes = {"fabric": "", "colour": ""}
         for key_att_dict in att_dict.keys():
             value_from_dict = att_dict[key_att_dict]
@@ -736,44 +736,44 @@ class EasterBunny(StuffedAnimal):
         else:
             return valid_reindeer_attributes
 
-	# num of sound effect??
-	def __init__(self, item_type='StuffedAnimal', quantity=0, name='No name', description='', product_id='',
-	             holiday=None, stuffing=None, size=None,
-	             fabric=None, colour=None):
-		super().__init__(item_type, quantity, name, description, product_id, holiday, stuffing, size, fabric)
-		# self._num_of_sound_effects = num_sound  #
-		self._color = colour
+    # num of sound effect??
+    def __init__(self, item_type='StuffedAnimal', quantity=0, name='No name', description='', product_id='',
+                 holiday=None, stuffing=None, size=None,
+                 fabric=None, colour=None):
+        super().__init__(item_type, quantity, name, description, product_id, holiday, stuffing, size, fabric)
+        # self._num_of_sound_effects = num_sound  #
+        self._color = colour
 
-	# def set_num_of_sound_effects(self, num_sound):
-	# 	if num_sound < 0:
-	# 		self._num_of_sound_effects = 0
-	# 	self._num_of_sound_effects = num_sound
+    # def set_num_of_sound_effects(self, num_sound):
+    # 	if num_sound < 0:
+    # 		self._num_of_sound_effects = 0
+    # 	self._num_of_sound_effects = num_sound
 
-	# def set_color(self, colour):
-	# 	if colour == Colour.White:
-	# 		self._color = Colour.White
-	# 	elif colour == Colour.Grey:
-	# 		self._color = Colour.Grey
-	# 	elif colour == Colour.Pink:
-	# 		self._color = Colour.Pink
-	# 	elif colour == Colour.Blue:
-	# 		self._color = Colour.Blue
-	# 	else:
-	# 		self._color = None
+    # def set_color(self, colour):
+    # 	if colour == Colour.White:
+    # 		self._color = Colour.White
+    # 	elif colour == Colour.Grey:
+    # 		self._color = Colour.Grey
+    # 	elif colour == Colour.Pink:
+    # 		self._color = Colour.Pink
+    # 	elif colour == Colour.Blue:
+    # 		self._color = Colour.Blue
+    # 	else:
+    # 		self._color = None
 
-	# def get_product_type(self):
-	# 	return "EasterBunny"
+    # def get_item_type(self):
+    # 	return "EasterBunny"
 
-	# def get_num_of_sound_effects(self):
-	# 	return self._num_of_sound_effects
+    # def get_num_of_sound_effects(self):
+    # 	return self._num_of_sound_effects
 
-	# def get_color(self):
-	# 	return self._color
+    # def get_color(self):
+    # 	return self._color
 
-	def __str__(self):
-		ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
-		      str(self.get_quantity()) + ", Name: " + self.get_name()
-		return ret
+    def __str__(self):
+        ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
+              str(self.get_quantity()) + ", Name: " + self.get_name()
+        return ret
 
 
 class Candy(Product):
@@ -812,40 +812,39 @@ class Candy(Product):
                         valid_attribute_count += 1
                     else:
                         print("Invalid has_lactose input")
-        if valid_attribute_count != len(valid_attributes_candy):
-            print("Invalid order")
-        else:
-            return valid_attributes_candy
+        # if valid_attribute_count != len(valid_attributes_candy):
+        #     print("Invalid order")
+        return valid_attributes_candy
 
-	def __init__(self, item_type='Candy', quantity=0, name='No name', description='', product_id='', holiday=None,
-	             has_nuts=False,
-	             has_lactose=False):
-		super().__init__(item_type, quantity, name, description, product_id, holiday)
-		self._contains_nuts = has_nuts
-		self._is_lactose_free = has_lactose
+    def __init__(self, item_type='Candy', quantity=0, name='No name', description='', product_id='', holiday=None,
+                 has_nuts=False,
+                 has_lactose=False):
+        super().__init__(item_type, quantity, name, description, product_id, holiday)
+        self._contains_nuts = has_nuts
+        self._is_lactose_free = has_lactose
 
-	# def set_contains_nuts(self, has_nuts):
-	# 	self._contains_nuts = has_nuts
-	#
-	# def set_is_lactose_free(self, has_lactose):
-	# 	self._is_lactose_free = has_lactose
-	#
-	# def get_product_type(self):
-	# 	return "Candy"
-	#
-	# def get_contains_nuts(self):
-	# 	return self._contains_nuts
-	#
-	# def get_is_lactose_free(self):
-	# 	return self._is_lactose_free
+    # def set_contains_nuts(self, has_nuts):
+    # 	self._contains_nuts = has_nuts
+    #
+    # def set_is_lactose_free(self, has_lactose):
+    # 	self._is_lactose_free = has_lactose
+    #
+    # def get_item_type(self):
+    # 	return "Candy"
+    #
+    # def get_contains_nuts(self):
+    # 	return self._contains_nuts
+    #
+    # def get_is_lactose_free(self):
+    # 	return self._is_lactose_free
 
-	def get_item_type(self):
-		return self._item_type
+    def get_item_type(self):
+        return self._item_type
 
-	def __str__(self):
-		ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
-		      str(self.get_quantity()) + ", Name: " + self.get_name()
-		return ret
+    def __str__(self):
+        ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
+              str(self.get_quantity()) + ", Name: " + self.get_name()
+        return ret
 
 
 class PumpkinCaramelToffee(Candy):
@@ -855,10 +854,10 @@ class PumpkinCaramelToffee(Candy):
         Validate Pumpkin Caramel Toffee's attributes.
         :param att_dict: dictionary that has all the information required to create  Pumpkin Caramel Toffee.
         """
-        valid_attributes_count = 5
-        if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
-            # print("extra column")
-            return None
+        # valid_attributes_count = 5
+        # if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
+        #     # print("extra column")
+        #     return None
         valid_halloween_candy_attributes = {"variety": ""}
         for key_att_dict in att_dict.keys():
             value_from_dict = att_dict[key_att_dict]
@@ -872,30 +871,30 @@ class PumpkinCaramelToffee(Candy):
         else:
             return valid_halloween_candy_attributes
 
-	def __init__(self, item_type='Candy', quantity=0, name='No name', description='', product_id='', holiday=None,
-	             has_nuts=False,
-	             has_lactose=False, variety=''):
-		super().__init__(item_type, quantity, name, description, product_id, holiday, has_nuts, has_lactose)
-		self._variety = variety
+    def __init__(self, item_type='Candy', quantity=0, name='No name', description='', product_id='', holiday=None,
+                 has_nuts=False,
+                 has_lactose=False, variety=''):
+        super().__init__(item_type, quantity, name, description, product_id, holiday, has_nuts, has_lactose)
+        self._variety = variety
 
-	# def set_variety(self, variety):
-	# 	if variety == PumpkinCaramelVariety.Sea_Salt:
-	# 		self._variety = PumpkinCaramelVariety.Sea_Salt
-	# 	elif variety == PumpkinCaramelVariety.Regular:
-	# 		self._variety = PumpkinCaramelVariety.Regular
-	# 	else:
-	# 		self._variety = None
-	#
-	# def get_product_type(self):
-	# 	return "PumpkinCaramelToffee"
-	#
-	# def get_variety(self):
-	# 	return self._variety
+    # def set_variety(self, variety):
+    # 	if variety == PumpkinCaramelVariety.Sea_Salt:
+    # 		self._variety = PumpkinCaramelVariety.Sea_Salt
+    # 	elif variety == PumpkinCaramelVariety.Regular:
+    # 		self._variety = PumpkinCaramelVariety.Regular
+    # 	else:
+    # 		self._variety = None
+    #
+    # def get_item_type(self):
+    # 	return "PumpkinCaramelToffee"
+    #
+    # def get_variety(self):
+    # 	return self._variety
 
-	def __str__(self):
-		ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
-		      str(self.get_quantity()) + ", Name: " + self.get_name()
-		return ret
+    def __str__(self):
+        ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
+              str(self.get_quantity()) + ", Name: " + self.get_name()
+        return ret
 
 
 class CandyCanes(Candy):
@@ -906,10 +905,10 @@ class CandyCanes(Candy):
         Validate Pumpkin Candy Cane's attributes.
         :param att_dict: dictionary that has all the information required to create Candy Cane.
         """
-        valid_attributes_count = 5
-        if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
-            # print("extra column")
-            return None
+        # valid_attributes_count = 5
+        # if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
+        #     # print("extra column")
+        #     return None
         valid_candy_cane_attributes = {"colour": ""}
         for key_att_dict in att_dict.keys():
             value_from_dict = att_dict[key_att_dict]
@@ -923,30 +922,30 @@ class CandyCanes(Candy):
         else:
             return valid_candy_cane_attributes
 
-	def __init__(self, item_type='Candy', quantity=0, name='No name', description='', product_id='', holiday=None,
-	             has_nuts=False,
-	             has_lactose=False, colour=None):
-		super().__init__(item_type, quantity, name, description, product_id, holiday, has_nuts, has_lactose)
-		self._strips = colour
+    def __init__(self, item_type='Candy', quantity=0, name='No name', description='', product_id='', holiday=None,
+                 has_nuts=False,
+                 has_lactose=False, colour=None):
+        super().__init__(item_type, quantity, name, description, product_id, holiday, has_nuts, has_lactose)
+        self._strips = colour
 
-	# def set_strips(self, colour):
-	# 	if colour == CandyCanesStrips.Red:
-	# 		self._strips = CandyCanesStrips.Red
-	# 	elif colour == CandyCanesStrips.Green:
-	# 		self._strips = CandyCanesStrips.Green
-	# 	else:
-	# 		self._strips = None
-	#
-	# def get_product_type(self):
-	# 	return "CandyCanes"
-	#
-	# def get_strips(self):
-	# 	return self._strips
+    # def set_strips(self, colour):
+    # 	if colour == CandyCanesStrips.Red:
+    # 		self._strips = CandyCanesStrips.Red
+    # 	elif colour == CandyCanesStrips.Green:
+    # 		self._strips = CandyCanesStrips.Green
+    # 	else:
+    # 		self._strips = None
+    #
+    # def get_item_type(self):
+    # 	return "CandyCanes"
+    #
+    # def get_strips(self):
+    # 	return self._strips
 
-	def __str__(self):
-		ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
-		      str(self.get_quantity()) + ", Name: " + self.get_name()
-		return ret
+    def __str__(self):
+        ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
+              str(self.get_quantity()) + ", Name: " + self.get_name()
+        return ret
 
 
 class CreamEggs(Candy):
@@ -957,10 +956,10 @@ class CreamEggs(Candy):
         Validate Pumpkin Cream Egg's attributes.
         :param att_dict: dictionary that has all the information required to create Cream Egg.
         """
-        valid_attributes_count = 5
-        if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
-            # print("extra column")
-            return None
+        # valid_attributes_count = 5
+        # if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
+        #     # print("extra column")
+        #     return None
         valid_cream_egg_attributes = {"pack_size": ""}
         for key_att_dict in att_dict.keys():
             value_from_dict = att_dict[key_att_dict]
@@ -978,18 +977,18 @@ class CreamEggs(Candy):
         super().__init__(item_type, quantity, name, description, product_id, holiday, has_nuts, has_lactose)
         self._pack_size = pack_size
 
-	# def set_pack_size(self, pack_size):
-	# 	if pack_size < 0:
-	# 		self._pack_size = 0
-	# 	self._pack_size = pack_size
-	#
-	# def get_product_type(self):
-	# 	return "CreamEggs"
-	#
-	# def get_pack_size(self):
-	# 	return self._pack_size
+    # def set_pack_size(self, pack_size):
+    # 	if pack_size < 0:
+    # 		self._pack_size = 0
+    # 	self._pack_size = pack_size
+    #
+    # def get_item_type(self):
+    # 	return "CreamEggs"
+    #
+    # def get_pack_size(self):
+    # 	return self._pack_size
 
-	def __str__(self):
-		ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
-		      str(self.get_quantity()) + ", Name: " + self.get_name()
-		return ret
+    def __str__(self):
+        ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
+              str(self.get_quantity()) + ", Name: " + self.get_name()
+        return ret

@@ -1,36 +1,9 @@
-"""
-The Supply Chain Management System
-
-This program is a simulation of a supply chain management system. It is a
-command-line program that allows the user to create a gift factory and
-create orders for the factory to fulfill. The program will then process
-the orders and print out the results.
 class Inventory:
     def __init__(self):
         self._inventory_toy = {}
         self._inventory_stuffed_animal = {}
         self._inventory_candy = {}
 
-# Name1: Nash Baek (nash4comp@gmail.com)
-# Student number1: A01243888
-
-# Name2: Taylor Ji (taylor.ji719@gmail.com)
-# Student number2: A01304056
-
-UML diagram: https://app.diagrams.net/#G18MWO3bp974lfK4Ceehz2vUfH8YmqEEfE
-Sequence diagram: https://app.diagrams.net/#G1gf1FB-nTLsNcJypwlBpQREfXNScSEKYN
-"""
-
-
-def check_inventory(quantity):
-    if quantity >= 10:
-        return "In Stock"
-    elif 10 > quantity >= 3:
-        return "Low"
-    elif 3 > quantity > 0:
-        return "Very Low"
-    else:
-        return "Out of Stock"
     def check_item_quantity_helper(self, item, item_key_dict):
         """
         Helps check_item_quantity function to validate the order and its dictionary that has all the required
@@ -38,21 +11,22 @@ def check_inventory(quantity):
         :param item: Product, item to validate
         :param item_key_dict: dictionary, dictionary that has all the required information to create the item
         """
-        pid = item.get_pid()
+        pid = item.get_product_id()
         if pid in item_key_dict.keys():
             for pid in self._inventory_toy.keys():
                 toy_obj = self._inventory_toy[pid]
-                if pid == item.get_pid():
+                if pid == item.get_product_id():
                     if toy_obj.get_quantity() < item.get_quantity():
                         toy_obj.add_quantity(100)
                     toy_obj.subtract_quantity(item.get_quantity())
         else:
             item.initial_process(item.get_quantity())
-            item_key_dict[item.get_pid()] = item
+            item_key_dict[item.get_product_id()] = item
 
     def check_item_quantity(self, spec, factory):
         """
-        Check the item's quantity and if the item's quantity in the inventory is less than the item to process's quantity
+        Check the item's quantity and if the item's quantity in the inventory is
+        less than the item to process's quantity
         then add 100 items, then subtract item quantity to process.
         :param spec: dictionary
         :param factory: Factory
@@ -450,28 +424,22 @@ def check_inventory(quantity):
         Display each toys inside the inventory_toy
         """
         for item in self._inventory_toy.keys():
-            print(f"{self._inventory_toy[item].get_product_type()}, {self._inventory_toy[item].get_name()}"
-                  f", {self._inventory_toy[item].get_quantity()}"
-                  f", {self.check_inventory(self._inventory_toy[item].get_quantity())}")
+            print(f"[{self.check_inventory(self._inventory_toy[item].get_quantity())}] {self._inventory_toy[item]}")
 
     def display_stuffed_animals(self):
         """
         Display each toys inside the inventory_stuffed_animals
         """
         for item in self._inventory_stuffed_animal.keys():
-            print(f"{self._inventory_stuffed_animal[item].get_product_type()}, "
-                  f"{self._inventory_stuffed_animal[item].get_name()}"
-                  f", {self._inventory_stuffed_animal[item].get_quantity()}"
-                  f", {self.check_inventory(self._inventory_stuffed_animal[item].get_quantity())}")
+            print(f"[{self.check_inventory(self._inventory_stuffed_animal[item].get_quantity())}] "
+                  f"{self._inventory_stuffed_animal[item]}")
 
     def display_candy(self):
         """
         Display each toys inside the inventory_candy
         """
         for item in self._inventory_candy.keys():
-            print(f"{self._inventory_candy[item].get_product_type()}, {self._inventory_candy[item].get_name()}"
-                  f", {self._inventory_candy[item].get_quantity()}"
-                  f", {self.check_inventory(self._inventory_candy[item].get_quantity())}")
+            print(f"[{self.check_inventory(self._inventory_candy[item].get_quantity())}] {self._inventory_candy[item]}")
 
     def display_each_item_inventory(self):
         """
@@ -489,18 +457,18 @@ def check_inventory(quantity):
         print("\n")
         # for item in self._inventory_toy.keys():
         #     if item == "Toy":
-        #         print(f"{self._inventory_toy[item].get_product_type()}, {self._inventory_toy[item].get_name()}"
+        #         print(f"{self._inventory_toy[item].get_item_type()}, {self._inventory_toy[item].get_name()}"
         #             f", {self._inventory_toy[item].get_quantity()}"
         #             f", {self.check_inventory(self._inventory_toy[item].get_quantity())}")
         #     print("\n<Stuffed Animals>")
         #     if item == "StuffedAnimal":
-        #         print(f"{self._inventory_toy[item].get_product_type()}, {self._inventory_toy[item].get_name()}"
+        #         print(f"{self._inventory_toy[item].get_item_type()}, {self._inventory_toy[item].get_name()}"
         #               f", {self._inventory_toy[item].get_quantity()}"
         #               f", {self.check_inventory(self._inventory_toy[item].get_quantity())}")
         #     print("\n<Candy>")
         #     if item == "Candy":
         #         if item == "Candy":
-        #             print(f"{self._inventory_toy[item].get_product_type()}, {self._inventory_toy[item].get_name()}"
+        #             print(f"{self._inventory_toy[item].get_item_type()}, {self._inventory_toy[item].get_name()}"
         #                   f", {self._inventory_toy[item].get_quantity()}"
         #                   f", {self.check_inventory(self._inventory_toy[item].get_quantity())}")
         # print("\n")
