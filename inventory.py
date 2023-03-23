@@ -16,6 +16,7 @@ UML diagram: https://app.diagrams.net/#G18MWO3bp974lfK4Ceehz2vUfH8YmqEEfE
 Sequence diagram: https://app.diagrams.net/#G1gf1FB-nTLsNcJypwlBpQREfXNScSEKYN
 """
 
+
 class Inventory:
     def __init__(self):
         self._inventory_toy = []
@@ -114,199 +115,199 @@ class Inventory:
                                                  has_lactose=spec["has_lactose"], pack_size=spec["pack_size"])
                 self._inventory_candy.append(cream_eggs)
 
-    def inventory_test(self, items):
-        self._inventory_toy.append(items[0])
-        self._inventory_stuffed_animal.append(items[1])
-        self._inventory_candy.append(items[2])
-
-        self._inventory_toy.append(items[3])
-        self._inventory_stuffed_animal.append(items[4])
-        self._inventory_candy.append(items[5])
-
-        self._inventory_toy.append(items[6])
-        self._inventory_stuffed_animal.append(items[7])
-        self._inventory_candy.append(items[8])
-
-        self._inventory_toy.append(items[0])
-
-    def inventory_test2(self, factory):
-        spec = {"quantity": 20, "name": "Nash's Santas Workshop", "description": "", "product_id": "",
-                "holiday": "Christmas",
-                "item_type": "Toy", "has_batteries": False, "min_age": 10, "dimension": "", "num_rooms": 0}
-        spec2 = {"quantity": 5, "name": "Taylor's DancingSkeleton", "description": "", "product_id": "",
-                 "holiday": "Halloween", "item_type": "StuffedAnimal", "has_batteries": False, "min_age": 8,
-                 "dimension": "", "num_rooms": 1, "stuffing": "Polyester", "size": "Medium", "fabric": "Cotton",
-                 "has_glow": False, "num_sound": 0, "colour": ""}
-        spec3 = {"quantity": 3, "name": "Jeff's Candy Canes", "description": "", "product_id": "",
-                 "holiday": "Christmas", "item_type": "Candy", "has_batteries": False, "min_age": 8,
-                 "dimension": "", "num_rooms": 1, "stuffing": "Polyester", "size": "Medium", "fabric": "Cotton",
-                 "has_glow": False, "num_sound": 0, "variety": "Sea Salt", "has_lactose": True,
-                 "has_nuts": False, "colour": "Red"}
-        spec4 = {
-            "quantity": 20,
-            "name": "Nash's Halloween RC Spider",
-            "description": "",
-            "product_id": "",
-            "holiday": "Halloween",
-            "item_type": "Toy",
-            "has_batteries": False,
-            "min_age": 8,
-            "dimension": "",
-            "num_rooms": 1,
-            "stuffing": "Polyester",
-            "size": "Medium",
-            "fabric": "Cotton",
-            "has_glow": False,
-            "num_sound": 0,
-            "variety": "Sea Salt",
-            "has_lactose": True,
-            "has_nuts": False,
-            "colour": "Red",
-            "jump_height": 10,
-            "pack_size": 1,
-            "speed": 10,
-            "spider_type": "Tarantula"
-        }
-
-        spec5 = {
-            "quantity": 20,
-            "name": "Nash's Robot Bunny",
-            "description": "",
-            "product_id": "",
-            "holiday": "Easter",
-            "item_type": "Toy",
-            "has_batteries": False,
-            "min_age": 8,
-            "dimension": "",
-            "num_rooms": 1,
-            "stuffing": "Polyester",
-            "size": "Medium",
-            "fabric": "Cotton",
-            "has_glow": True,
-            "num_sound": 0,
-            "variety": "Sea Salt",
-            "has_lactose": True,
-            "has_nuts": False,
-            "colour": "Red",
-            "jump_height": 10,
-            "pack_size": 1,
-            "speed": 10,
-            "spider_type": "Tarantula"
-        }
-
-        spec6 = {
-            "quantity": 20,
-            "name": "Taylor's Reindeer",
-            "description": "",
-            "product_id": "",
-            "holiday": "Christmas",
-            "item_type": "StuffedAnimal",
-            "has_batteries": False,
-            "min_age": 8,
-            "dimension": "",
-            "num_rooms": 1,
-            "stuffing": "Polyester",
-            "size": "Medium",
-            "fabric": "Cotton",
-            "has_glow": True,
-            "num_sound": 0,
-            "variety": "Sea Salt",
-            "has_lactose": True,
-            "has_nuts": False,
-            "colour": "Red",
-            "jump_height": 10,
-            "pack_size": 1,
-            "speed": 10,
-            "spider_type": "Tarantula"
-        }
-
-        spec7 = {
-            "quantity": 20,
-            "name": "Taylor's Easter Bunny",
-            "description": "",
-            "product_id": "",
-            "holiday": "Easter",
-            "item_type": "StuffedAnimal",
-            "has_batteries": False,
-            "min_age": 8,
-            "dimension": "",
-            "num_rooms": 1,
-            "stuffing": "Polyester",
-            "size": "Medium",
-            "fabric": "Cotton",
-            "has_glow": True,
-            "num_sound": 0,
-            "variety": "Sea Salt",
-            "has_lactose": True,
-            "has_nuts": False,
-            "colour": "Red",
-            "jump_height": 10,
-            "pack_size": 1,
-            "speed": 10,
-            "spider_type": "Tarantula"
-        }
-
-        spec8 = {
-            "quantity": 20,
-            "name": "Jeff's Pumpkin Caramel Toffee",
-            "description": "",
-            "product_id": "",
-            "holiday": "Halloween",
-            "item_type": "Candy",
-            "has_batteries": False,
-            "min_age": 8,
-            "dimension": "",
-            "num_rooms": 1,
-            "stuffing": "Polyester",
-            "size": "Medium",
-            "fabric": "Cotton",
-            "has_glow": True,
-            "num_sound": 0,
-            "variety": "Sea Salt",
-            "has_lactose": True,
-            "has_nuts": False,
-            "colour": "Red",
-            "jump_height": 10,
-            "pack_size": 1,
-            "speed": 10,
-            "spider_type": "Tarantula"
-        }
-
-        spec9 = {
-            "quantity": 20,
-            "name": "Jeff's Cream Eggs",
-            "description": "",
-            "product_id": "",
-            "holiday": "Easter",
-            "item_type": "Candy",
-            "has_batteries": False,
-            "min_age": 8,
-            "dimension": "",
-            "num_rooms": 1,
-            "stuffing": "Polyester",
-            "size": "Medium",
-            "fabric": "Cotton",
-            "has_glow": True,
-            "num_sound": 0,
-            "variety": "Sea Salt",
-            "has_lactose": True,
-            "has_nuts": False,
-            "colour": "Red",
-            "jump_height": 10,
-            "pack_size": 1,
-            "speed": 10,
-            "spider_type": "Tarantula"
-        }
-
-        self.add_item(spec, factory)  # Santa's Workshop
-        self.add_item(spec2, factory)  # Dancing Skeleton
-        self.add_item(spec3, factory)  # Candy Canes
-        self.add_item(spec4, factory)  # RC Spider
-        self.add_item(spec5, factory)  # Robot Bunny
-        self.add_item(spec6, factory)  # Reindeer
-        self.add_item(spec7, factory)  # Easter Bunny
-        self.add_item(spec8, factory)  # Pumpkin Caramel Toffee
-        self.add_item(spec9, factory)  # Cream Eggs
+    # def inventory_test(self, items):
+    #     self._inventory_toy.append(items[0])
+    #     self._inventory_stuffed_animal.append(items[1])
+    #     self._inventory_candy.append(items[2])
+    #
+    #     self._inventory_toy.append(items[3])
+    #     self._inventory_stuffed_animal.append(items[4])
+    #     self._inventory_candy.append(items[5])
+    #
+    #     self._inventory_toy.append(items[6])
+    #     self._inventory_stuffed_animal.append(items[7])
+    #     self._inventory_candy.append(items[8])
+    #
+    #     self._inventory_toy.append(items[0])
+    #
+    # def inventory_test2(self, factory):
+    #     spec = {"quantity": 20, "name": "Nash's Santas Workshop", "description": "", "product_id": "",
+    #             "holiday": "Christmas",
+    #             "item_type": "Toy", "has_batteries": False, "min_age": 10, "dimension": "", "num_rooms": 0}
+    #     spec2 = {"quantity": 5, "name": "Taylor's DancingSkeleton", "description": "", "product_id": "",
+    #              "holiday": "Halloween", "item_type": "StuffedAnimal", "has_batteries": False, "min_age": 8,
+    #              "dimension": "", "num_rooms": 1, "stuffing": "Polyester", "size": "Medium", "fabric": "Cotton",
+    #              "has_glow": False, "num_sound": 0, "colour": ""}
+    #     spec3 = {"quantity": 3, "name": "Jeff's Candy Canes", "description": "", "product_id": "",
+    #              "holiday": "Christmas", "item_type": "Candy", "has_batteries": False, "min_age": 8,
+    #              "dimension": "", "num_rooms": 1, "stuffing": "Polyester", "size": "Medium", "fabric": "Cotton",
+    #              "has_glow": False, "num_sound": 0, "variety": "Sea Salt", "has_lactose": True,
+    #              "has_nuts": False, "colour": "Red"}
+    #     spec4 = {
+    #         "quantity": 20,
+    #         "name": "Nash's Halloween RC Spider",
+    #         "description": "",
+    #         "product_id": "",
+    #         "holiday": "Halloween",
+    #         "item_type": "Toy",
+    #         "has_batteries": False,
+    #         "min_age": 8,
+    #         "dimension": "",
+    #         "num_rooms": 1,
+    #         "stuffing": "Polyester",
+    #         "size": "Medium",
+    #         "fabric": "Cotton",
+    #         "has_glow": False,
+    #         "num_sound": 0,
+    #         "variety": "Sea Salt",
+    #         "has_lactose": True,
+    #         "has_nuts": False,
+    #         "colour": "Red",
+    #         "jump_height": 10,
+    #         "pack_size": 1,
+    #         "speed": 10,
+    #         "spider_type": "Tarantula"
+    #     }
+    #
+    #     spec5 = {
+    #         "quantity": 20,
+    #         "name": "Nash's Robot Bunny",
+    #         "description": "",
+    #         "product_id": "",
+    #         "holiday": "Easter",
+    #         "item_type": "Toy",
+    #         "has_batteries": False,
+    #         "min_age": 8,
+    #         "dimension": "",
+    #         "num_rooms": 1,
+    #         "stuffing": "Polyester",
+    #         "size": "Medium",
+    #         "fabric": "Cotton",
+    #         "has_glow": True,
+    #         "num_sound": 0,
+    #         "variety": "Sea Salt",
+    #         "has_lactose": True,
+    #         "has_nuts": False,
+    #         "colour": "Red",
+    #         "jump_height": 10,
+    #         "pack_size": 1,
+    #         "speed": 10,
+    #         "spider_type": "Tarantula"
+    #     }
+    #
+    #     spec6 = {
+    #         "quantity": 20,
+    #         "name": "Taylor's Reindeer",
+    #         "description": "",
+    #         "product_id": "",
+    #         "holiday": "Christmas",
+    #         "item_type": "StuffedAnimal",
+    #         "has_batteries": False,
+    #         "min_age": 8,
+    #         "dimension": "",
+    #         "num_rooms": 1,
+    #         "stuffing": "Polyester",
+    #         "size": "Medium",
+    #         "fabric": "Cotton",
+    #         "has_glow": True,
+    #         "num_sound": 0,
+    #         "variety": "Sea Salt",
+    #         "has_lactose": True,
+    #         "has_nuts": False,
+    #         "colour": "Red",
+    #         "jump_height": 10,
+    #         "pack_size": 1,
+    #         "speed": 10,
+    #         "spider_type": "Tarantula"
+    #     }
+    #
+    #     spec7 = {
+    #         "quantity": 20,
+    #         "name": "Taylor's Easter Bunny",
+    #         "description": "",
+    #         "product_id": "",
+    #         "holiday": "Easter",
+    #         "item_type": "StuffedAnimal",
+    #         "has_batteries": False,
+    #         "min_age": 8,
+    #         "dimension": "",
+    #         "num_rooms": 1,
+    #         "stuffing": "Polyester",
+    #         "size": "Medium",
+    #         "fabric": "Cotton",
+    #         "has_glow": True,
+    #         "num_sound": 0,
+    #         "variety": "Sea Salt",
+    #         "has_lactose": True,
+    #         "has_nuts": False,
+    #         "colour": "Red",
+    #         "jump_height": 10,
+    #         "pack_size": 1,
+    #         "speed": 10,
+    #         "spider_type": "Tarantula"
+    #     }
+    #
+    #     spec8 = {
+    #         "quantity": 20,
+    #         "name": "Jeff's Pumpkin Caramel Toffee",
+    #         "description": "",
+    #         "product_id": "",
+    #         "holiday": "Halloween",
+    #         "item_type": "Candy",
+    #         "has_batteries": False,
+    #         "min_age": 8,
+    #         "dimension": "",
+    #         "num_rooms": 1,
+    #         "stuffing": "Polyester",
+    #         "size": "Medium",
+    #         "fabric": "Cotton",
+    #         "has_glow": True,
+    #         "num_sound": 0,
+    #         "variety": "Sea Salt",
+    #         "has_lactose": True,
+    #         "has_nuts": False,
+    #         "colour": "Red",
+    #         "jump_height": 10,
+    #         "pack_size": 1,
+    #         "speed": 10,
+    #         "spider_type": "Tarantula"
+    #     }
+    #
+    #     spec9 = {
+    #         "quantity": 20,
+    #         "name": "Jeff's Cream Eggs",
+    #         "description": "",
+    #         "product_id": "",
+    #         "holiday": "Easter",
+    #         "item_type": "Candy",
+    #         "has_batteries": False,
+    #         "min_age": 8,
+    #         "dimension": "",
+    #         "num_rooms": 1,
+    #         "stuffing": "Polyester",
+    #         "size": "Medium",
+    #         "fabric": "Cotton",
+    #         "has_glow": True,
+    #         "num_sound": 0,
+    #         "variety": "Sea Salt",
+    #         "has_lactose": True,
+    #         "has_nuts": False,
+    #         "colour": "Red",
+    #         "jump_height": 10,
+    #         "pack_size": 1,
+    #         "speed": 10,
+    #         "spider_type": "Tarantula"
+    #     }
+    #
+    #     self.add_item(spec, factory)  # Santa's Workshop
+    #     self.add_item(spec2, factory)  # Dancing Skeleton
+    #     self.add_item(spec3, factory)  # Candy Canes
+    #     self.add_item(spec4, factory)  # RC Spider
+    #     self.add_item(spec5, factory)  # Robot Bunny
+    #     self.add_item(spec6, factory)  # Reindeer
+    #     self.add_item(spec7, factory)  # Easter Bunny
+    #     self.add_item(spec8, factory)  # Pumpkin Caramel Toffee
+    #     self.add_item(spec9, factory)  # Cream Eggs
 
     def display_inventory(self):
         print("Inventory List")
