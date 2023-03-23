@@ -16,10 +16,10 @@ UML diagram: https://app.diagrams.net/#G18MWO3bp974lfK4Ceehz2vUfH8YmqEEfE
 Sequence diagram: https://app.diagrams.net/#G1gf1FB-nTLsNcJypwlBpQREfXNScSEKYN
 """
 
-from enum import Enum
-
-
-class Item(Enum):
-    TOY = "Toy",
-    STUFFED_ANIMAL = "Stuffed Animal",
-    CANDY = "Candy"
+# from enum import Enum
+#
+#
+# class Item(Enum):
+#     TOY = "Toy",
+#     STUFFED_ANIMAL = "Stuffed Animal",
+#     CANDY = "Candy"

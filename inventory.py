@@ -17,21 +17,22 @@ Sequence diagram: https://app.diagrams.net/#G1gf1FB-nTLsNcJypwlBpQREfXNScSEKYN
 """
 
 
+def check_inventory(quantity):
+    if quantity >= 10:
+        return "In Stock"
+    elif 10 > quantity >= 3:
+        return "Low"
+    elif 3 > quantity > 0:
+        return "Very Low"
+    else:
+        return "Out of Stock"
+
+
 class Inventory:
     def __init__(self):
         self._inventory_toy = []
         self._inventory_stuffed_animal = []
         self._inventory_candy = []
-
-    def check_inventory(self, quantity):
-        if quantity >= 10:
-            return "In Stock"
-        elif 10 > quantity >= 3:
-            return "Low"
-        elif 3 > quantity > 0:
-            return "Very Low"
-        else:
-            return "Out of Stock"
 
     def add_item(self, spec, factory):
         item_type = spec["item_type"]
@@ -315,15 +316,15 @@ class Inventory:
         for item in self._inventory_toy:
             # print(item.get_product_type() + ", " + item.get_name() + ", " + str(item.get_quantity()) +
             #       ", " + self.check_inventory(item.get_quantity()))
-            print("[" + self.check_inventory(item.get_quantity()) + "] " + str(item))
+            print("[" + check_inventory(item.get_quantity()) + "] " + str(item))
         print("\n<Stuffed Animals>")
         for item in self._inventory_stuffed_animal:
             # print(item.get_product_type() + ", " + item.get_name() + ", " + str(item.get_quantity()) +
             #       ", " + self.check_inventory(item.get_quantity()))
-            print("[" + self.check_inventory(item.get_quantity()) + "] " + str(item))
+            print("[" + check_inventory(item.get_quantity()) + "] " + str(item))
         print("\n<Candy>")
         for item in self._inventory_candy:
             # print(item.get_product_type() + ", " + item.get_name() + ", " + str(item.get_quantity()) +
             #       ", " + self.check_inventory(item.get_quantity()))
-            print("[" + self.check_inventory(item.get_quantity()) + "] " + str(item))
+            print("[" + check_inventory(item.get_quantity()) + "] " + str(item))
         print("\n")
