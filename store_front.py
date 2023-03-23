@@ -26,7 +26,7 @@ class StoreFront:
 	def display_menu(self, inv, factory):
 		user_input = None
 		while user_input != 3:
-			print("Welcome to the store front!!!!!!!!!!!")
+			print("Welcome to the store front")
 			print("1. Process web orders")
 			print("2. Check inventory")
 			print("3. Exit")
