@@ -197,19 +197,19 @@ class Toy(Product):
                  min_age=0):
         super().__init__(item_type, quantity, name, description, product_id, holiday)
         self._item_type = item_type
-        self._is_battery_operated = has_batteries
+        self._has_batteries = has_batteries
         self._min_age = min_age
 
-    def set_is_battery_operated(self, has_batteries):
-        self._is_battery_operated = has_batteries
+    def set_has_batteries(self, has_batteries):
+        self._has_batteries = has_batteries
 
     def set_min_age(self, min_age):
         if min_age < 0:
             raise ValueError("Min age cannot be negative")
         self._min_age = min_age
 
-    def get_is_battery_operated(self):
-        return self._is_battery_operated
+    def get_has_batteries(self):
+        return self._has_batteries
 
     def get_min_age(self):
         return self._min_age
@@ -248,7 +248,7 @@ class SantasWorkshop(Toy):
         self._dimension = dimension
         # self._width = width
         # self._height = height
-        self._num_of_rooms = num_rooms
+        self._num_rooms = num_rooms
 
     # def set_width(self, width):
     #     if width < 0:
@@ -260,10 +260,10 @@ class SantasWorkshop(Toy):
     #         self._height = 0
     #     self._height = height
 
-    def set_num_of_rooms(self, num_rooms):
+    def set_num_rooms(self, num_rooms):
         if num_rooms < 0:
-            self._num_of_rooms = 0
-        self._num_of_rooms = num_rooms
+            self._num_rooms = 0
+        self._num_rooms = num_rooms
 
     def get_product_type(self):
         return "SantasWorkshop"
@@ -274,8 +274,8 @@ class SantasWorkshop(Toy):
     # def get_height(self):
     #     return self._height
 
-    def get_num_of_rooms(self):
-        return self._num_of_rooms
+    def get_num_rooms(self):
+        return self._num_rooms
 
     def __str__(self):
         return "SantasWorkshop"
