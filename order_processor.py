@@ -7,9 +7,9 @@ class OrderProcessor:
     def __init__(self):
         self._orders_dict = {}
         self._excel_to_dict = {}
-        self._order_ids = set()
         self._factory_map = GiftFactory()
         self._valid_orders = []
+        self._valid_order_nums = []
 
     def convert_dict_from_excel_file(self, excel_file):
         """
@@ -42,9 +42,6 @@ class OrderProcessor:
         """
         return self._orders_dict
 
-    def get_order_ids(self):
-        return self._order_ids
-
     def add_order(self, order, holiday):
         """
         Add order and holiday to order_dictionary
@@ -72,7 +69,7 @@ class OrderProcessor:
                     if key != "holiday":
                         if key in required_properties.keys():
                             if key == "product_id":
-                                if key not in self.get_order_ids() and key is not None:
+                                if key is not None:
                                     required_properties["product_id"] = value_from_key
                             if key == "item":
                                 if value_from_key in valid_item_types:
@@ -83,7 +80,7 @@ class OrderProcessor:
                                 if value_from_key is not None:
                                     required_properties["name"] = value_from_key
                             if key == "order_number":
-                                if key not in self.get_order_ids():
+                                if key is not None:
                                     required_properties["order_number"] = value_from_key
                                 else:
                                     print("duplicated product id")
@@ -99,34 +96,17 @@ class OrderProcessor:
                                       name=required_properties.get("name"),
                                       product_id=required_properties.get("product_id"),
                                       attribute=attributes)
-            self.add_order(created_order, holiday)
-            self.get_order_ids().add(created_order.get_id())
-            valid_order = created_order.validate_details(holiday)
-            if valid_order is not None:
-                self.get_valid_orders_list().append({created_order.get_order_num(): valid_order})
+            if created_order.get_order_num() not in self._valid_order_nums:
+                self.add_order(created_order, holiday)
+                valid_order = created_order.validate_details(holiday)
+                if valid_order is not None:
+                    self.get_valid_orders_list().append({created_order.get_order_num(): valid_order})
             holiday = ""
             attributes = {}  # empty the dictionary
 
     def get_holiday_of_an_item(self, order):
         return self.get_orders()[order][1]
 
-    def get_corresponding_factory(self, item_type, holiday):
-        # holiday = self.get_holiday_of_an_item(order)
-        # item_type = self.get_orders()[order][0].get_item_type()
-
-        # for holidays in self._factory_map_dict.keys():
-        #     if holiday == holidays:
-        #         self._factory_map_dict[holidays].create_item(item=item_type, quantity=10)
-        self._factory_map.classify_item(holiday, item_type, 10)
-
     def get_valid_orders_list(self):
         return self._valid_orders
-
-    def print_valid_order_product_name(self):
-        key = 1
-        for order in self.get_valid_orders_list():
-            # print(order)
-            print(order[key])
-            key+=1
-        print(len(self.get_valid_orders_list()))
 

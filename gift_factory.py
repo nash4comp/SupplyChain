@@ -122,6 +122,21 @@ class Product(ABC):
             raise ValueError("Quantity cannot be negative")
         self._quantity = quantity
 
+    def initial_process(self, initial_order_count):
+        initial_count = 100
+        processed_count = initial_count - initial_order_count
+        self.set_quantity(processed_count)
+
+    def add_quantity(self, quantity):
+        if quantity < 0:
+            raise ValueError("Quantity cannot be negative")
+        self._quantity = self.get_quantity() + quantity
+
+    def subtract_quantity(self, quantity):
+        if quantity < 0:
+            raise ValueError("Quantity cannot be negative")
+        self._quantity = self.get_quantity() - quantity
+
     def set_name(self, name):
         self._name = name
 
@@ -164,6 +179,10 @@ class Product(ABC):
 class Toy(Product):
     @staticmethod
     def validate_attribute(attribute_dict):
+        """
+        Validate toy's common attributes.
+        :param attribute_dict: dictionary that has all the information required to create an item.
+        """
         valid_attributes_toy = {"quantity": 0, "description": "", "has_batteries": False, "min_age": 0}
         valid_attribute_count = 0
         for attribute in valid_attributes_toy.keys():
@@ -193,7 +212,8 @@ class Toy(Product):
         else:
             return valid_attributes_toy
 
-    def __init__(self, item_type='TOY', quantity=0, name='No name', description='', product_id='', holiday=None, has_batteries=False,
+    def __init__(self, item_type='TOY', quantity=0, name='No name', description='', product_id='', holiday=None,
+                 has_batteries=False,
                  min_age=0):
         super().__init__(item_type, quantity, name, description, product_id, holiday)
         self._item_type = item_type
@@ -225,9 +245,13 @@ class SantasWorkshop(Toy):
 
     @staticmethod
     def santa_detail_validator(att_dict):
+        """
+        Validate Santa's attributes.
+        :param att_dict: dictionary that has all the information required to create Santa Workshop.
+        """
         valid_attributes_count = 6
         if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
-            print("extra column")
+            # print("extra column santa")
             return None
         valid_santa_attributes = {"dimension": "", "num_rooms": 0}
         for key_att_dict in att_dict.keys():
@@ -242,12 +266,11 @@ class SantasWorkshop(Toy):
         else:
             return valid_santa_attributes
 
-    def __init__(self, item_type='TOY', quantity=0, name='No name', description='', product_id='', holiday=None, has_batteries=False,
+    def __init__(self, item_type='TOY', quantity=0, name='No name', description='', product_id='', holiday=None,
+                 has_batteries=False,
                  min_age='', dimension="", num_rooms=0):
         super().__init__(item_type, quantity, name, description, product_id, holiday, has_batteries, min_age)
         self._dimension = dimension
-        # self._width = width
-        # self._height = height
         self._num_of_rooms = num_rooms
 
     # def set_width(self, width):
@@ -285,12 +308,14 @@ class RCSpider(Toy):
 
     @staticmethod
     def rc_spider_detail_validator(att_dict):
-        # desc, quan, has_batteries, min_age
-        # speed, jump_height, has_glow, spider_type
+        """
+        Validate RC Spider's attributes.
+        :param att_dict: dictionary that has all the information required to create RC Spider.
+        """
         valid_attributes_count = 8
         valid_attribute_count = 0
         if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
-            print("extra column")
+            # print("extra column rc spider")
             return None
         valid_spider_attributes = {"speed": 0, "jump_height": 0, "has_glow": "", "spider_type": ""}
         for key_att_dict in att_dict.keys():
@@ -322,13 +347,14 @@ class RCSpider(Toy):
                     print("Invalid spider type input")
         if valid_spider_attributes["speed"] == 0 \
                 or valid_spider_attributes["jump_height"] == 0 \
-                or valid_spider_attributes["has_glow"] == ""\
+                or valid_spider_attributes["has_glow"] == "" \
                 or valid_spider_attributes["spider_type"] == "":
             return None
         else:
             return valid_spider_attributes
 
-    def __init__(self, item_type='TOY', quantity=0, name='No name', description='', product_id='', holiday=None, has_batteries=False,
+    def __init__(self, item_type='TOY', quantity=0, name='No name', description='', product_id='', holiday=None,
+                 has_batteries=False,
                  min_age=0, speed=0, jump_height=0, has_glow=False, spider_type=None):
         super().__init__(item_type, quantity, name, description, product_id, holiday, has_batteries, min_age)
         self._speed = speed
@@ -380,12 +406,14 @@ class RobotBunny(Toy):
 
     @staticmethod
     def robot_bunny_detail_validator(att_dict):
-        # desc, quan, has_batteries, min_age
-        # num_sound, colour,
+        """
+        Validate Robot bunny's attributes.
+        :param att_dict: dictionary that has all the information required to create Robot bunny.
+        """
         valid_attributes_count = 6
         valid_attribute_count = 0
         if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
-            print("extra column")
+            # print("extra column robot bunny")
             return None
         valid_robot_bunny_details = {"num_sound": 0, "colour": ""}
         for key_att_dict in att_dict.keys():
@@ -404,14 +432,14 @@ class RobotBunny(Toy):
                     if value_from_dict == "Pink":
                         valid_robot_bunny_details["colour"] = "Pink"
                 valid_attribute_count += 1
-
         if valid_robot_bunny_details["num_sound"] == 0 \
                 or valid_robot_bunny_details["colour"] == "":
             return None
         else:
             return valid_robot_bunny_details
 
-    def __init__(self, item_type='TOY', quantity=0, name='No name', description='', product_id='', holiday=None, has_batteries=False,
+    def __init__(self, item_type='TOY', quantity=0, name='No name', description='', product_id='', holiday=None,
+                 has_batteries=False,
                  min_age=0, num_sound=0, colour=None):
         super().__init__(item_type, quantity, name, description, product_id, holiday, has_batteries, min_age)
         self._num_of_sound_effects = num_sound
@@ -448,6 +476,10 @@ class RobotBunny(Toy):
 class StuffedAnimal(Product):
     @staticmethod
     def validate_attribute(attribute_dict):
+        """
+        Validate Robot bunny's attributes.
+        :param attribute_dict: dictionary that has all the information required to create Stuffed Animal.
+        """
         valid_attributes_stuffed_animal = {"quantity": 0, "description": "", "stuffing": "", "size": ""}
         valid_attribute_count = 0
         for attribute in valid_attributes_stuffed_animal.keys():
@@ -480,11 +512,12 @@ class StuffedAnimal(Product):
                     else:
                         print("Invalid size input")
         if valid_attribute_count != len(valid_attributes_stuffed_animal):
-            print("Invalid order")
+            print("Invalid order stuffed animal")
         else:
             return valid_attributes_stuffed_animal
 
-    def __init__(self, item_type='StuffedAnimal', quantity=0, name='No name', description='', product_id='', holiday=None, stuffing=None, size=None,
+    def __init__(self, item_type='StuffedAnimal', quantity=0, name='No name', description='', product_id='',
+                 holiday=None, stuffing=None, size=None,
                  fabric=None):
         super().__init__(item_type, quantity, name, description, product_id, holiday)
         self._stuffing = stuffing
@@ -529,10 +562,13 @@ class StuffedAnimal(Product):
 class DancingSkeleton(StuffedAnimal):
     @staticmethod
     def dancing_skeleton_detail_validator(att_dict):
-        # quantity": 0, "description": "", "stuffing": "", "size": ""
+        """
+        Validate Dancing Skeleton's attributes.
+        :param attribute_dict: dictionary that has all the information required to create Dancing Skeleton.
+        """
         valid_attributes_count = 6
         if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
-            print("extra column")
+            # print("extra column dancing monkey")
             return None
         valid_dancing_skeleton_attributes = {"fabric": "", "has_glow": ""}
         for key_att_dict in att_dict.keys():
@@ -557,7 +593,8 @@ class DancingSkeleton(StuffedAnimal):
         else:
             return valid_dancing_skeleton_attributes
 
-    def __init__(self, item_type='StuffedAnimal', quantity=0, name='No name', description='', product_id='', holiday=None, stuffing=None, size=None,
+    def __init__(self, item_type='StuffedAnimal', quantity=0, name='No name', description='', product_id='',
+                 holiday=None, stuffing=None, size=None,
                  fabric=None, has_glow=False):
         super().__init__(item_type, quantity, name, description, product_id, holiday, stuffing, size, fabric)
         self._has_glow = has_glow
@@ -579,9 +616,13 @@ class Reindeer(StuffedAnimal):
 
     @staticmethod
     def rein_deer_detail_validator(att_dict):
+        """
+        Validate Reindeer's attributes.
+        :param att_dict: dictionary that has all the information required to create  Reindeer.
+        """
         valid_attributes_count = 6
         if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
-            print("extra column")
+            # print("extra column reindeer")
             return None
         valid_reindeer_attributes = {"fabric": "", "has_glow": ""}
         for key_att_dict in att_dict.keys():
@@ -606,7 +647,8 @@ class Reindeer(StuffedAnimal):
         else:
             return valid_reindeer_attributes
 
-    def __init__(self, item_type='StuffedAnimal', quantity=0, name='No name', description='', product_id='', holiday=None, stuffing=None, size=None,
+    def __init__(self, item_type='StuffedAnimal', quantity=0, name='No name', description='', product_id='',
+                 holiday=None, stuffing=None, size=None,
                  fabric=None, has_glow=False):
         super().__init__(item_type, quantity, name, description, product_id, holiday, stuffing, size, fabric)
         self._has_glow = has_glow
@@ -627,15 +669,13 @@ class Reindeer(StuffedAnimal):
 class EasterBunny(StuffedAnimal):
     @staticmethod
     def east_bunny_detail_validator(att_dict):
-        # quantity": 0, "description": "", "stuffing": "", "size": ""
-        # Orange = 1
-        # Blue = 2
-        # Pink = 3
-        # White = 4
-        # Grey = 5
+        """
+        Validate Easter Bunny's attributes.
+        :param att_dict: dictionary that has all the information required to create Easter Bunny.
+        """
         valid_attributes_count = 6
         if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
-            print("extra column")
+            # print("extra column easter bunny")
             return None
         valid_reindeer_attributes = {"fabric": "", "colour": ""}
         for key_att_dict in att_dict.keys():
@@ -664,8 +704,9 @@ class EasterBunny(StuffedAnimal):
         else:
             return valid_reindeer_attributes
 
-# num of sound effect??
-    def __init__(self, item_type='StuffedAnimal', quantity=0, name='No name', description='', product_id='', holiday=None, stuffing=None, size=None,
+    # num of sound effect??
+    def __init__(self, item_type='StuffedAnimal', quantity=0, name='No name', description='', product_id='',
+                 holiday=None, stuffing=None, size=None,
                  fabric=None, colour=None):
         super().__init__(item_type, quantity, name, description, product_id, holiday, stuffing, size, fabric)
         # self._num_of_sound_effects = num_sound  #
@@ -705,6 +746,10 @@ class Candy(Product):
 
     @staticmethod
     def validate_attribute(attribute_dict):
+        """
+        Validate Candy's common attributes.
+        :param attribute_dict: dictionary that has all the information required to create Candy.
+        """
         valid_attributes_candy = {"quantity": 0, "description": "", "has_nuts": "", "has_lactose": ""}
         valid_attribute_count = 0
         for attribute in valid_attributes_candy.keys():
@@ -738,7 +783,8 @@ class Candy(Product):
         else:
             return valid_attributes_candy
 
-    def __init__(self, item_type='Candy', quantity=0, name='No name', description='', product_id='', holiday=None, has_nuts=False,
+    def __init__(self, item_type='Candy', quantity=0, name='No name', description='', product_id='', holiday=None,
+                 has_nuts=False,
                  has_lactose=False):
         super().__init__(item_type, quantity, name, description, product_id, holiday)
         self._contains_nuts = has_nuts
@@ -766,10 +812,13 @@ class Candy(Product):
 class PumpkinCaramelToffee(Candy):
     @staticmethod
     def pumpkin_toffee_detail_validator(att_dict):
-        # quantity": 0, "description": "", "has_nuts": "", "has_lactose": ""
+        """
+        Validate Pumpkin Caramel Toffee's attributes.
+        :param att_dict: dictionary that has all the information required to create  Pumpkin Caramel Toffee.
+        """
         valid_attributes_count = 5
         if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
-            print("extra column")
+            # print("extra column")
             return None
         valid_halloween_candy_attributes = {"variety": ""}
         for key_att_dict in att_dict.keys():
@@ -784,7 +833,8 @@ class PumpkinCaramelToffee(Candy):
         else:
             return valid_halloween_candy_attributes
 
-    def __init__(self, item_type='Candy', quantity=0, name='No name', description='', product_id='', holiday=None, has_nuts=False,
+    def __init__(self, item_type='Candy', quantity=0, name='No name', description='', product_id='', holiday=None,
+                 has_nuts=False,
                  has_lactose=False, variety=''):
         super().__init__(item_type, quantity, name, description, product_id, holiday, has_nuts, has_lactose)
         self._variety = variety
@@ -811,12 +861,13 @@ class CandyCanes(Candy):
 
     @staticmethod
     def candy_cane_detail_validator(att_dict):
-        # quantity": 0, "description": "", "has_nuts": "", "has_lactose": "", "colour":"",
-        # Red = 1
-        # Green = 2
+        """
+        Validate Pumpkin Candy Cane's attributes.
+        :param att_dict: dictionary that has all the information required to create Candy Cane.
+        """
         valid_attributes_count = 5
         if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
-            print("extra column")
+            # print("extra column")
             return None
         valid_candy_cane_attributes = {"colour": ""}
         for key_att_dict in att_dict.keys():
@@ -831,7 +882,8 @@ class CandyCanes(Candy):
         else:
             return valid_candy_cane_attributes
 
-    def __init__(self, item_type='Candy', quantity=0, name='No name', description='', product_id='', holiday=None, has_nuts=False,
+    def __init__(self, item_type='Candy', quantity=0, name='No name', description='', product_id='', holiday=None,
+                 has_nuts=False,
                  has_lactose=False, colour=None):
         super().__init__(item_type, quantity, name, description, product_id, holiday, has_nuts, has_lactose)
         self._strips = colour
@@ -858,11 +910,13 @@ class CreamEggs(Candy):
 
     @staticmethod
     def cream_egg_detail_validator(att_dict):
-        # quantity": 0, "description": "", "has_nuts": "", "has_lactose": "", "colour":""
-        # pack_size
+        """
+        Validate Pumpkin Cream Egg's attributes.
+        :param att_dict: dictionary that has all the information required to create Cream Egg.
+        """
         valid_attributes_count = 5
         if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
-            print("extra column")
+            # print("extra column")
             return None
         valid_cream_egg_attributes = {"pack_size": ""}
         for key_att_dict in att_dict.keys():
@@ -874,7 +928,9 @@ class CreamEggs(Candy):
             return None
         else:
             return valid_cream_egg_attributes
-    def __init__(self, item_type='Candy', quantity=0, name='No name', description='', product_id='', holiday=None, has_nuts=False,
+
+    def __init__(self, item_type='Candy', quantity=0, name='No name', description='', product_id='', holiday=None,
+                 has_nuts=False,
                  has_lactose=False, pack_size=0):
         super().__init__(item_type, quantity, name, description, product_id, holiday, has_nuts, has_lactose)
         self._pack_size = pack_size
