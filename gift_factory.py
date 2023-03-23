@@ -284,10 +284,8 @@ class SantasWorkshop(Toy):
         return self._dimension
 
     def __str__(self):
-        ret = self.get_holiday() + ", " + self.get_item_type() + ", " + self.get_name() + ", Qty: " + \
-              str(self.get_quantity()) + ", PID: " + self.get_product_id() + ", " + self.get_description() + ", " + \
-              "Batteries: " + str(self.get_has_batteries()) + ", Min age:" + str(self.get_min_age()) + ", " + \
-              "Dimension: " + self.get_dimension() + ", Num of rooms:" + str(self.get_num_rooms())
+        ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
+              str(self.get_quantity()) + ", Name: " + self.get_name()
         return ret
 
 
@@ -383,7 +381,9 @@ class RCSpider(Toy):
         return self._spider_type
 
     def __str__(self):
-        return "RCSpider"
+        ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
+              str(self.get_quantity()) + ", Name: " + self.get_name()
+        return ret
 
 
 class RobotBunny(Toy):
@@ -452,7 +452,9 @@ class RobotBunny(Toy):
         return self._color
 
     def __str__(self):
-        return "RobotBunny"
+        ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
+              str(self.get_quantity()) + ", Name: " + self.get_name()
+        return ret
 
 
 class StuffedAnimal(Product):
@@ -532,8 +534,13 @@ class StuffedAnimal(Product):
     def get_product_type(self):
         return "StuffedAnimal"
 
+    def get_item_type(self):
+        return self._item_type
+
     def __str__(self):
-        return "StuffedAnimal"
+        ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
+              str(self.get_quantity()) + ", Name: " + self.get_name()
+        return ret
 
 
 class DancingSkeleton(StuffedAnimal):
@@ -582,7 +589,9 @@ class DancingSkeleton(StuffedAnimal):
         return self._has_glow
 
     def __str__(self):
-        return "DancingSkeleton"
+        ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
+              str(self.get_quantity()) + ", Name: " + self.get_name()
+        return ret
 
 
 class Reindeer(StuffedAnimal):
@@ -631,7 +640,9 @@ class Reindeer(StuffedAnimal):
         return self._has_glow
 
     def __str__(self):
-        return "Reindeer"
+        ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
+              str(self.get_quantity()) + ", Name: " + self.get_name()
+        return ret
 
 
 class EasterBunny(StuffedAnimal):
@@ -708,7 +719,9 @@ class EasterBunny(StuffedAnimal):
         return self._color
 
     def __str__(self):
-        return "EasterBunny"
+        ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
+              str(self.get_quantity()) + ", Name: " + self.get_name()
+        return ret
 
 
 class Candy(Product):
@@ -769,8 +782,13 @@ class Candy(Product):
     def get_is_lactose_free(self):
         return self._is_lactose_free
 
+    def get_item_type(self):
+        return self._item_type
+
     def __str__(self):
-        return "Candy"
+        ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
+              str(self.get_quantity()) + ", Name: " + self.get_name()
+        return ret
 
 
 class PumpkinCaramelToffee(Candy):
@@ -814,7 +832,9 @@ class PumpkinCaramelToffee(Candy):
         return self._variety
 
     def __str__(self):
-        return "PumpkinCaramelToffee"
+        ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
+              str(self.get_quantity()) + ", Name: " + self.get_name()
+        return ret
 
 
 class CandyCanes(Candy):
@@ -861,7 +881,9 @@ class CandyCanes(Candy):
         return self._strips
 
     def __str__(self):
-        return "CandyCanes"
+        ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
+              str(self.get_quantity()) + ", Name: " + self.get_name()
+        return ret
 
 
 class CreamEggs(Candy):
@@ -901,4 +923,6 @@ class CreamEggs(Candy):
         return self._pack_size
 
     def __str__(self):
-        return "CreamEggs"
+        ret = "Item: " + self.get_item_type() + ", PID: " + self.get_product_id() + ", Qty: " + \
+              str(self.get_quantity()) + ", Name: " + self.get_name()
+        return ret
