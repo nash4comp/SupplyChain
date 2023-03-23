@@ -111,8 +111,8 @@ class Product(ABC):
         self._quantity = quantity
         self._name = name
         self._description = description
-        self._pid = product_id
-        self._theme = holiday
+        self._product_id = product_id
+        self._holiday = holiday
 
     def __str__(self):
         return "Product"
@@ -128,18 +128,18 @@ class Product(ABC):
     def set_description(self, description):
         self._description = description
 
-    def set_pid(self, product_id):
-        self._pid = product_id
+    def set_product_id(self, product_id):
+        self._product_id = product_id
 
-    def set_theme(self, holiday):
+    def set_holiday(self, holiday):
         if holiday == Holiday.Christmas:
-            self._theme = Holiday.Christmas
+            self._holiday = Holiday.Christmas
         elif holiday == Holiday.Halloween:
-            self._theme = Holiday.Halloween
+            self._holiday = Holiday.Halloween
         elif holiday == Holiday.Easter:
-            self._theme = Holiday.Easter
+            self._holiday = Holiday.Easter
         else:
-            self._theme = None
+            self._holiday = None
 
     def get_quantity(self):
         return self._quantity
@@ -150,11 +150,11 @@ class Product(ABC):
     def get_description(self):
         return self._description
 
-    def get_pid(self):
-        return self._pid
+    def get_product_id(self):
+        return self._product_id
 
-    def get_theme(self):
-        return self._theme
+    def get_holiday(self):
+        return self._holiday
 
     @abc.abstractmethod
     def get_product_type(self):
