@@ -149,4 +149,3 @@ class OrderProcessor:
         :return: list of dictionary that contains each valid order
         """
         return self._valid_orders
-

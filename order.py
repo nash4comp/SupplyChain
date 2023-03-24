@@ -97,7 +97,6 @@ class Order:
         """
         return self._all_information
 
-    #
     def common_value(self, result, holiday):
         self._all_information["quantity"] = result["quantity"]
         self._all_information["name"] = self.get_name()

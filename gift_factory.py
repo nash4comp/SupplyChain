@@ -199,9 +199,8 @@ class Product(ABC):
 
     def initial_process(self, initial_order_count):
         """
-        TODO: Add comments
-        :param initial_order_count:
-        :return:
+        This method handles initial process when the item is not in the inventory.
+        :param initial_order_count: int, quantity to add to inventory
         """
         initial_count = 100
         processed_count = initial_count - initial_order_count
@@ -209,9 +208,8 @@ class Product(ABC):
 
     def add_quantity(self, quantity):
         """
-        TODO: Add comments
-        :param quantity:
-        :return:
+        Instantiate 100 objects of the item.
+        :param quantity: int quantity, would be 100
         """
         if quantity < 0:
             raise ValueError("Quantity cannot be negative")
@@ -219,9 +217,8 @@ class Product(ABC):
 
     def subtract_quantity(self, quantity):
         """
-        TODO: Add comments
-        :param quantity:
-        :return:
+        Subtract quantity that is passed.
+        :param quantity: int, quantity
         """
         if quantity < 0:
             raise ValueError("Quantity cannot be negative")
@@ -279,6 +276,7 @@ class Toy(Product):
         valid_attribute_count = 0
         for attribute in valid_attributes_toy.keys():
             if attribute in attribute_dict.keys():
+                #  This method checks the input value that order has, so this structure is used throughout this function
                 if attribute == "quantity" and type(attribute_dict[attribute]) == int:
                     valid_attributes_toy["quantity"] = attribute_dict[attribute]
                     valid_attribute_count += 1
@@ -641,10 +639,6 @@ class DancingSkeleton(StuffedAnimal):
 		Validate Dancing Skeleton's attributes.
 		:param att_dict: dictionary that has all the information required to create Dancing Skeleton.
 		"""
-        # valid_attributes_count = 6
-        # if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
-        #     # print("extra column dancing monkey")
-        #     return None
         valid_dancing_skeleton_attributes = {"fabric": "", "has_glow": ""}
         for key_att_dict in att_dict.keys():
             value_from_dict = att_dict[key_att_dict]
@@ -898,10 +892,6 @@ class PumpkinCaramelToffee(Candy):
 		Validate Pumpkin Caramel Toffee's attributes.
 		:param att_dict: dictionary that has all the information required to create  Pumpkin Caramel Toffee.
 		"""
-        # valid_attributes_count = 5
-        # if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
-        #     # print("extra column")
-        #     return None
         valid_halloween_candy_attributes = {"variety": ""}
         for key_att_dict in att_dict.keys():
             value_from_dict = att_dict[key_att_dict]
