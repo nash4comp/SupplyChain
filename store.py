@@ -20,6 +20,18 @@ import datetime
 from order_processor import OrderProcessor
 
 
+def text_file_name_generator():
+    """
+    Format text_file_name
+    :return: formatted string
+    """
+    now = datetime.datetime.now()
+    date_str = now.strftime('%d%m%y')
+    time_str = now.strftime('%H%M')
+    file_name = f"DTR_{date_str}_{time_str}.txt"
+    return file_name
+
+
 class Store:
     """
     This class is backend for store_front.
@@ -37,7 +49,7 @@ class Store:
     def menu_process_web_orders(self, inv, factory):
         """
         Process web order by reading an Excel file and creating Order objects.
-        Based on created Order objects, validate them, if validate then check inventory
+        Based on created Order objects, validate them, if validate then check inventory.
         :param inv: Inventory
         :param factory: GiftFactory
         """
@@ -62,7 +74,7 @@ class Store:
         """
         Write Daily Transaction Report (DRT) that contains valid orders
         """
-        text_file_name = self.text_file_name_generator()
+        text_file_name = text_file_name_generator()
         now = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
         with open(text_file_name, 'w', encoding='utf-8') as f:
             f.write("Holiday Store - Daily Transaction Report(DTR)\n")
@@ -80,17 +92,6 @@ class Store:
         :return: OrderProcessor
         """
         return self._order_processor
-
-    def text_file_name_generator(self):
-        """
-        Format text_file_name
-        :return: formatted string
-        """
-        now = datetime.datetime.now()
-        date_str = now.strftime('%d%m%y')
-        time_str = now.strftime('%H%M')
-        file_name = f"DTR_{date_str}_{time_str}.txt"
-        return file_name
 
     def update_orders_without_validation(self, dict_to_update):
         """

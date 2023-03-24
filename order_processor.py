@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 from order import Order
 from gift_factory import GiftFactory
@@ -16,10 +18,13 @@ class OrderProcessor:
         Converts an Excel file to dictionary. Replace nan with empty String.
         :param excel_file: String, the name of Excel file to convert
         """
-        excel_data_df = pd.read_excel(excel_file, sheet_name='Sheet1')
-        excel_data_df.fillna('', inplace=True)
-        dict_version = excel_data_df.to_dict('index')
-        self.update_excel_to_dict(dict_version)
+        if os.path.isfile(excel_file):
+            excel_data_df = pd.read_excel(excel_file, sheet_name='Sheet1')
+            excel_data_df.fillna('', inplace=True)
+            dict_version = excel_data_df.to_dict('index')
+            self.update_excel_to_dict(dict_version)
+        else:
+            print(f"The file {excel_file} does not exist in the current directory.")
 
     def update_excel_to_dict(self, dict_to_update):
         """
@@ -85,8 +90,6 @@ class OrderProcessor:
                     else:
                         if value_from_key in valid_theme:
                             holiday = value_from_key
-                        # else:
-                            # print("Invalid holiday")
                 created_order = Order(item_type=required_properties.get("item"),
                                       order_number=required_properties.get("order_number"),
                                       name=required_properties.get("name"),
@@ -122,4 +125,3 @@ class OrderProcessor:
         :return: list of dictionary that contains each valid order
         """
         return self._valid_orders
-

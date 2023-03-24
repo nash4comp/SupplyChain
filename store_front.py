@@ -24,6 +24,7 @@ class StoreFront:
 		self._store = Store()
 
 	def display_menu(self, inv, factory):
+		valid_user_inputs = ["1", "2", "3"]
 		user_input = None
 		while user_input != 3:
 			print("Welcome to the store front")
@@ -32,6 +33,9 @@ class StoreFront:
 			print("3. Exit")
 			string_input = input("Please enter a number from 1 - 3\n> ")
 			if string_input == '':
+				continue
+			if string_input not in valid_user_inputs:
+				print("Please enter a number between 1 to 3")
 				continue
 			user_input = int(string_input)
 			if user_input == 1:
