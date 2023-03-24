@@ -63,29 +63,25 @@ class OrderProcessor:
         holiday = ""
         for key in self.get_excel_to_dict().keys():
             order_to_process = self.get_excel_to_dict()[key]  # get the nth dictionary
-            for key in order_to_process.keys():
-                value_from_key = order_to_process[key]
+            for key_inside in order_to_process.keys():
+                value_from_key = order_to_process[key_inside]
                 if value_from_key != "":
-                    if key != "holiday":
-                        if key in required_properties.keys():
-                            if key == "product_id":
-                                if key is not None:
+                    if key_inside != "holiday":
+                        if key_inside in required_properties.keys():
+                            if key_inside == "product_id":
+                                if key_inside is not None:
                                     required_properties["product_id"] = value_from_key
-                            if key == "item":
+                            if key_inside == "item":
                                 if value_from_key in valid_item_types:
                                     required_properties["item"] = value_from_key
-                                # else:
-                                #     print("Item type error")
-                            if key == "name":
+                            if key_inside == "name":
                                 if value_from_key is not None:
                                     required_properties["name"] = value_from_key
-                            if key == "order_number":
-                                if key is not None:
+                            if key_inside == "order_number":
+                                if key_inside is not None:
                                     required_properties["order_number"] = value_from_key
-                                # else:
-                                #     print("duplicated product id")
                         else:
-                            attributes[key] = value_from_key
+                            attributes[key_inside] = value_from_key
                     else:
                         if value_from_key in valid_theme:
                             holiday = value_from_key
@@ -101,12 +97,29 @@ class OrderProcessor:
                 valid_order = created_order.validate_details(holiday)
                 if valid_order is not None:
                     self.get_valid_orders_list().append({created_order.get_order_num(): valid_order})
+                    self.get_valid_order_num().append(created_order.get_order_num())
             holiday = ""
             attributes = {}
 
     def get_holiday_of_an_item(self, order):
+        """
+        Getter for holiday of an order
+        :param order: Order
+        :return: String, holiday
+        """
         return self.get_orders()[order][1]
 
+    def get_valid_order_num(self):
+        """
+        Getter for valid_order_num list.
+        :return: list, list of valid order numbers
+        """
+        return self._valid_order_nums
+
     def get_valid_orders_list(self):
+        """
+        Getter for valid order list.
+        :return: list of dictionary that contains each valid order
+        """
         return self._valid_orders
 

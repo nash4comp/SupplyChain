@@ -46,18 +46,8 @@ class Store:
         self.get_order_processor().create_orders()  # just create orders without any validation
         self.update_orders_without_validation(self.get_order_processor().get_orders())
         self.validate_order()
-        print(self.get_order_processor().get_orders().values())
-        print(len(self.get_order_processor().get_orders().values()))
-        print(self.get_order_processor().get_valid_orders_list())
-        print(len(self.get_order_processor().get_valid_orders_list()))
-        for each_order_dict in self.get_order_processor().get_valid_orders_list():
-            key = each_order_dict.values()
-            print(key)
-            print(type(key))
-            # inv.check_item_quantity(each_order[0].get_all_info_dict_for_factory_creation(), factory)
-
-        # for each_order in self.get_order_processor().get_orders().values():
-        #     inv.check_item_quantity(each_order[0].get_all_info_dict_for_factory_creation(), factory)
+        for each_order in self.get_order_processor().get_orders().values():
+            inv.check_item_quantity(each_order[0].get_all_info_dict_for_factory_creation(), factory)
 
     def validate_order(self):
         """
@@ -80,8 +70,9 @@ class Store:
             f.write("\n")
             key = 1
             for order in self.get_order_processor().get_valid_orders_list():
-                f.write(f"{order[key]}\n")
-                key += 1
+                if order[key] is not None:
+                    f.write(f"{order[key]}\n")
+                    key += 1
 
     def get_order_processor(self):
         """

@@ -19,11 +19,13 @@ Sequence diagram: https://app.diagrams.net/#G1gf1FB-nTLsNcJypwlBpQREfXNScSEKYN
 from enum import Enum
 import gift_factory
 
+
 class Order:
     """
     This class takes care of order. Order has all_information dictionary containing all the information to create an
     item.
     """
+
     def __init__(self, item_type, order_number, name, product_id, **kwargs):
         """
         Initialize Order
@@ -39,7 +41,7 @@ class Order:
         self._pid = product_id
         self._detail = kwargs
         self._factory = None
-        self._all_information = {"quantity": "", "name": "", "item_type": "", #3
+        self._all_information = {"quantity": "", "name": "", "item_type": "",  # 3
                                  "description": "", "product_id": "", "holiday": "",  # 3
                                  "has_batteries": False,  # 1
                                  "min_age": 0, "dimension": "", "num_rooms": 0, "stuffing": "", "size": "",  # 5
