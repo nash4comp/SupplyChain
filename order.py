@@ -99,11 +99,20 @@ class Order:
         """
         return self._all_information
 
+    #
+    def common_value(self, result, holiday):
+        self._all_information["quantity"] = result["quantity"]
+        self._all_information["name"] = self.get_name()
+        self._all_information["description"] = result["description"]
+        self._all_information["product_id"] = self.get_id()
+        self._all_information["item_type"] = self.get_item_type()
+        self._all_information["holiday"] = holiday
+
     def validate_details(self, holiday):
         """
         Validate all the details required to create an item.
         :param holiday: String, holiday of the item
-        :return: dictionary if valid None if invalid.
+        :return: dictionary if valid None, if invalid.
         """
         item_type = self.get_item_type()
         if holiday == "Christmas":
@@ -112,16 +121,11 @@ class Order:
                 if type(result) == dict:
                     santa_detail = gift_factory.SantasWorkshop.santa_detail_validator(self.get_attributes())
                     if santa_detail is not None:
-                        self._all_information["quantity"] = result["quantity"]
-                        self._all_information["item_type"] = self.get_item_type()
-                        self._all_information["name"] = self.get_name()
-                        self._all_information["description"] = result["description"]
-                        self._all_information["product_id"] = self.get_id()
+                        self.common_value(result, holiday)
                         self._all_information["has_batteries"] = result["has_batteries"]
                         self._all_information["min_age"] = result["min_age"]
                         self._all_information["dimension"] = santa_detail["dimension"]
                         self._all_information["num_rooms"] = santa_detail["num_rooms"]
-                        self._all_information["holiday"] = holiday
                         return self
                     else:
                         return None
@@ -130,12 +134,7 @@ class Order:
                 if type(result) == dict:
                     rein_deer_detail = gift_factory.Reindeer.rein_deer_detail_validator(self.get_attributes())
                     if rein_deer_detail is not None:
-                        self._all_information["quantity"] = result["quantity"]
-                        self._all_information["name"] = self.get_name()
-                        self._all_information["description"] = result["description"]
-                        self._all_information["item_type"] = self.get_item_type()
-                        self._all_information["product_id"] = self.get_id()
-                        self._all_information["holiday"] = holiday
+                        self.common_value(result, holiday)
                         self._all_information["stuffing"] = result["stuffing"]
                         self._all_information["size"] = result["size"]
                         return self
@@ -146,11 +145,7 @@ class Order:
                 if type(result) == dict:
                     candy_detail = gift_factory.CandyCanes.candy_cane_detail_validator(self.get_attributes())
                     if candy_detail is not None:
-                        self._all_information["quantity"] = result["quantity"]
-                        self._all_information["name"] = self.get_name()
-                        self._all_information["description"] = result["description"]
-                        self._all_information["product_id"] = self.get_id()
-                        self._all_information["item_type"] = self.get_item_type()
+                        self.common_value(result, holiday)
                         self._all_information["holiday"] = holiday
                         self._all_information["has_nuts"] = result["has_nuts"]
                         self._all_information["has_lactose"] = result["has_lactose"]
@@ -165,12 +160,7 @@ class Order:
                 if type(result) == dict:
                     spider_detail = gift_factory.RCSpider.rc_spider_detail_validator(self.get_attributes())
                     if spider_detail is not None:
-                        self._all_information["quantity"] = result["quantity"]
-                        self._all_information["name"] = self.get_name()
-                        self._all_information["description"] = result["description"]
-                        self._all_information["product_id"] = self.get_id()
-                        self._all_information["item_type"] = self.get_item_type()
-                        self._all_information["holiday"] = holiday
+                        self.common_value(result, holiday)
                         self._all_information["has_batteries"] = result["has_batteries"]
                         self._all_information["min_age"] = result["min_age"]
                         self._all_information["speed"] = spider_detail["speed"]
@@ -185,12 +175,7 @@ class Order:
                     dancing_skeleton_detail = gift_factory.DancingSkeleton.dancing_skeleton_detail_validator(
                         self.get_attributes())
                     if dancing_skeleton_detail is not None:
-                        self._all_information["quantity"] = result["quantity"]
-                        self._all_information["name"] = self.get_name()
-                        self._all_information["description"] = result["description"]
-                        self._all_information["product_id"] = self.get_id()
-                        self._all_information["item_type"] = self.get_item_type()
-                        self._all_information["holiday"] = holiday
+                        self.common_value(result, holiday)
                         self._all_information["stuffing"] = result["stuffing"]
                         self._all_information["size"] = result["size"]
                         self._all_information["fabric"] = dancing_skeleton_detail["fabric"]
@@ -204,12 +189,7 @@ class Order:
                     pumpkin_candy_detail = gift_factory.PumpkinCaramelToffee.pumpkin_toffee_detail_validator(
                         self.get_attributes())
                     if pumpkin_candy_detail is not None:
-                        self._all_information["quantity"] = result["quantity"]
-                        self._all_information["name"] = self.get_name()
-                        self._all_information["description"] = result["description"]
-                        self._all_information["product_id"] = self.get_id()
-                        self._all_information["item_type"] = self.get_item_type()
-                        self._all_information["holiday"] = holiday
+                        self.common_value(result, holiday)
                         self._all_information["has_nuts"] = result["has_nuts"]
                         self._all_information["has_lactose"] = result["has_lactose"]
                         self._all_information["variety"] = pumpkin_candy_detail["variety"]
@@ -224,12 +204,7 @@ class Order:
                 if type(result) == dict:
                     robot_bunny_detail = gift_factory.RobotBunny.robot_bunny_detail_validator(self.get_attributes())
                     if robot_bunny_detail is not None:
-                        self._all_information["quantity"] = result["quantity"]
-                        self._all_information["name"] = self.get_name()
-                        self._all_information["description"] = result["description"]
-                        self._all_information["product_id"] = self.get_id()
-                        self._all_information["item_type"] = self.get_item_type()
-                        self._all_information["holiday"] = holiday
+                        self.common_value(result, holiday)
                         self._all_information["has_batteries"] = result["has_batteries"]
                         self._all_information["min_age"] = result["min_age"]
                         self._all_information["num_sound"] = robot_bunny_detail["num_sound"]
@@ -242,12 +217,7 @@ class Order:
                 if type(result) == dict:
                     east_bunny_detail = gift_factory.EasterBunny.east_bunny_detail_validator(self.get_attributes())
                     if east_bunny_detail is not None:
-                        self._all_information["quantity"] = result["quantity"]
-                        self._all_information["name"] = self.get_name()
-                        self._all_information["description"] = result["description"]
-                        self._all_information["product_id"] = self.get_id()
-                        self._all_information["item_type"] = self.get_item_type()
-                        self._all_information["holiday"] = holiday
+                        self.common_value(result, holiday)
                         self._all_information["stuffing"] = result["stuffing"]
                         self._all_information["size"] = result["size"]
                         self._all_information["fabric"] = east_bunny_detail["fabric"]
@@ -260,12 +230,7 @@ class Order:
                 if type(result) == dict:
                     cream_egg_detail = gift_factory.CreamEggs.cream_egg_detail_validator(self.get_attributes())
                     if cream_egg_detail is not None:
-                        self._all_information["quantity"] = result["quantity"]
-                        self._all_information["name"] = self.get_name()
-                        self._all_information["description"] = result["description"]
-                        self._all_information["product_id"] = self.get_id()
-                        self._all_information["item_type"] = self.get_item_type()
-                        self._all_information["holiday"] = holiday
+                        self.common_value(result, holiday)
                         self._all_information["has_nuts"] = result["has_nuts"]
                         self._all_information["has_lactose"] = result["has_lactose"]
                         self._all_information["pack_size"] = cream_egg_detail["pack_size"]
