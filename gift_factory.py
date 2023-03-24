@@ -216,9 +216,6 @@ class Toy(Product):
                     int_age = int(attribute_dict[attribute])
                     valid_attributes_toy["min_age"] = int_age
                     valid_attribute_count += 1
-        if valid_attribute_count != len(valid_attributes_toy):
-            print("Invalid order")
-        else:
             return valid_attributes_toy
 
     def __init__(self, item_type='TOY', quantity=0, name='No name', description='', product_id='', holiday=None,
@@ -362,8 +359,8 @@ class RCSpider(Toy):
                 elif att_dict["spider_type"] == "Wolf Spider":
                     valid_spider_attributes["spider_type"] = "Wolf Spider"
                     valid_attribute_count += 1
-                else:
-                    print("Invalid spider type input")
+                # else:
+                #     print("Invalid spider type input")
         if valid_spider_attributes["speed"] == 0 \
                 or valid_spider_attributes["jump_height"] == 0 \
                 or valid_spider_attributes["has_glow"] == "" \
@@ -532,8 +529,8 @@ class StuffedAnimal(Product):
                     elif attribute_dict["size"] == "L":
                         valid_attributes_stuffed_animal["size"] = "L"
                         valid_attribute_count += 1
-                    else:
-                        print("Invalid size input")
+                    # else:
+                    #     print("Invalid size input")
         # if valid_attribute_count != len(valid_attributes_stuffed_animal):
         #     print("Invalid order stuffed animal")
         # else:
@@ -613,8 +610,8 @@ class DancingSkeleton(StuffedAnimal):
                     valid_dancing_skeleton_attributes["has_glow"] = False
                 elif value_from_dict == "Y":
                     valid_dancing_skeleton_attributes["has_glow"] = True
-                else:
-                    print("Invalid fabric")
+                # else:
+                #     print("Invalid fabric")
         if valid_dancing_skeleton_attributes["fabric"] == "" \
                 or valid_dancing_skeleton_attributes["has_glow"] == "":
             return None
@@ -669,8 +666,8 @@ class Reindeer(StuffedAnimal):
                     valid_reindeer_attributes["has_glow"] = False
                 elif value_from_dict == "Y":
                     valid_reindeer_attributes["has_glow"] = True
-                else:
-                    print("Invalid glow")
+                # else:
+                #     print("Invalid glow")
         if valid_reindeer_attributes["fabric"] == "" \
                 or valid_reindeer_attributes["has_glow"] == "":
             return None
@@ -801,8 +798,8 @@ class Candy(Product):
                     elif attribute_dict["has_nuts"] == "Y":
                         valid_attributes_candy["has_nuts"] = True
                         valid_attribute_count += 1
-                    else:
-                        print("Invalid has_nuts input")
+                    # else:
+                    #     print("Invalid has_nuts input")
                 if attribute == "has_lactose":
                     if attribute_dict["has_lactose"] == "N":
                         valid_attributes_candy["has_lactose"] = False
@@ -810,8 +807,8 @@ class Candy(Product):
                     elif attribute_dict["has_lactose"] == "Y":
                         valid_attributes_candy["has_lactose"] = True
                         valid_attribute_count += 1
-                    else:
-                        print("Invalid has_lactose input")
+                    # else:
+                    #     print("Invalid has_lactose input")
         # if valid_attribute_count != len(valid_attributes_candy):
         #     print("Invalid order")
         return valid_attributes_candy

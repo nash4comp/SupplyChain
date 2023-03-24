@@ -74,23 +74,23 @@ class OrderProcessor:
                             if key == "item":
                                 if value_from_key in valid_item_types:
                                     required_properties["item"] = value_from_key
-                                else:
-                                    print("Item type error")
+                                # else:
+                                #     print("Item type error")
                             if key == "name":
                                 if value_from_key is not None:
                                     required_properties["name"] = value_from_key
                             if key == "order_number":
                                 if key is not None:
                                     required_properties["order_number"] = value_from_key
-                                else:
-                                    print("duplicated product id")
+                                # else:
+                                #     print("duplicated product id")
                         else:
                             attributes[key] = value_from_key
                     else:
                         if value_from_key in valid_theme:
                             holiday = value_from_key
-                        else:
-                            print("Invalid holiday")
+                        # else:
+                            # print("Invalid holiday")
                 created_order = Order(item_type=required_properties.get("item"),
                                       order_number=required_properties.get("order_number"),
                                       name=required_properties.get("name"),
