@@ -16,7 +16,6 @@ UML diagram: https://app.diagrams.net/#G18MWO3bp974lfK4Ceehz2vUfH8YmqEEfE
 Sequence diagram: https://app.diagrams.net/#G1gf1FB-nTLsNcJypwlBpQREfXNScSEKYN
 """
 
-from enum import Enum
 import gift_factory
 
 
@@ -25,7 +24,6 @@ class Order:
     This class takes care of order. Order has all_information dictionary containing all the information to create an
     item.
     """
-
     def __init__(self, item_type, order_number, name, product_id, **kwargs):
         """
         Initialize Order
@@ -41,13 +39,13 @@ class Order:
         self._pid = product_id
         self._detail = kwargs
         self._factory = None
-        self._all_information = {"quantity": "", "name": "", "item_type": "",  # 3
-                                 "description": "", "product_id": "", "holiday": "",  # 3
-                                 "has_batteries": False,  # 1
-                                 "min_age": 0, "dimension": "", "num_rooms": 0, "stuffing": "", "size": "",  # 5
-                                 "has_nuts": False, "has_lactose": False, "speed": 0,  # 3
-                                 "jump_height": 0,  # 1
-                                 "spider_type": "", "fabric": "", "has_glow": False, "num_sound": 0,  # 4
+        self._all_information = {"quantity": "", "name": "", "item_type": "",
+                                 "description": "", "product_id": "", "holiday": "",
+                                 "has_batteries": False,
+                                 "min_age": 0, "dimension": "", "num_rooms": 0, "stuffing": "", "size": "",
+                                 "has_nuts": False, "has_lactose": False, "speed": 0,
+                                 "jump_height": 0,
+                                 "spider_type": "", "fabric": "", "has_glow": False, "num_sound": 0,
                                  "colour": "", "pack_size": "", "variety": ""}  # 3
 
     def get_id(self):
@@ -252,15 +250,3 @@ class Order:
                f"name: {self._name}, " \
                f"id: {self.get_id()}, " \
                f"quantity : {self.get_quantity()}"
-
-
-class Item(Enum):
-    TOY = "Toy",
-    STUFFED_ANIMAL = "StuffedAnimal",
-    CANDY = "Candy"
-
-
-class Holiday(Enum):
-    XMAS = "Christmas",
-    EASTER = "Easter",
-    HALLOWEEN = "Halloween"

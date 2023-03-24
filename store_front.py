@@ -20,11 +20,23 @@ from store import Store
 
 
 class StoreFront:
+	"""
+	StoreFront class that displays the menu for the user.
+	"""
 	def __init__(self):
+		"""
+		Constructor for StoreFront class.
+		"""
 		self._store = Store()
 
 	def display_menu(self, inv, factory):
 		valid_user_inputs = ["1", "2", "3"]
+		"""
+		Displays the menu for the user.
+		:param inv: the inventory object
+		:param factory: the factory object
+		:return: the user's input
+		"""
 		user_input = None
 		while user_input != 3:
 			print("Welcome to the store front")

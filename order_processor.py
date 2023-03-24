@@ -1,12 +1,36 @@
 import os
 
+"""
+The Supply Chain Management System
+
+This program is a simulation of a supply chain management system. It is a
+command-line program that allows the user to create a gift factory and
+create orders for the factory to fulfill. The program will then process
+the orders and print out the results.
+
+# Name1: Nash Baek (nash4comp@gmail.com)
+# Student number1: A01243888
+
+# Name2: Taylor Ji (taylor.ji719@gmail.com)
+# Student number2: A01304056
+
+UML diagram: https://app.diagrams.net/#G18MWO3bp974lfK4Ceehz2vUfH8YmqEEfE
+Sequence diagram: https://app.diagrams.net/#G1gf1FB-nTLsNcJypwlBpQREfXNScSEKYN
+"""
+
 import pandas as pd
 from order import Order
 from gift_factory import GiftFactory
 
 
 class OrderProcessor:
+    """
+    OrderProcessor class that processes orders from Excel file.
+    """
     def __init__(self):
+        """
+        Constructor for OrderProcessor class.
+        """
         self._orders_dict = {}
         self._excel_to_dict = {}
         self._factory_map = GiftFactory()
@@ -125,3 +149,4 @@ class OrderProcessor:
         :return: list of dictionary that contains each valid order
         """
         return self._valid_orders
+
