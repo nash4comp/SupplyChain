@@ -123,7 +123,7 @@ class CandyCanesStrips(Enum):
 
 class GiftFactory:
 	"""
-	This class is a factory that creates products for the store front.
+	This class is a factory that creates products for the storefront.
 	"""
 
 	@staticmethod
@@ -440,9 +440,9 @@ class RCSpider(Toy):
 				else:
 					print("Invalid spider type input")
 		if valid_spider_attributes["speed"] == 0 \
-				or valid_spider_attributes["jump_height"] == 0 \
-				or valid_spider_attributes["has_glow"] == "" \
-				or valid_spider_attributes["spider_type"] == "":
+			or valid_spider_attributes["jump_height"] == 0 \
+			or valid_spider_attributes["has_glow"] == "" \
+			or valid_spider_attributes["spider_type"] == "":
 			return None
 		else:
 			return valid_spider_attributes
@@ -518,7 +518,7 @@ class RobotBunny(Toy):
 						valid_robot_bunny_details["colour"] = "Pink"
 				valid_attribute_count += 1
 		if valid_robot_bunny_details["num_sound"] == 0 \
-				or valid_robot_bunny_details["colour"] == "":
+			or valid_robot_bunny_details["colour"] == "":
 			return None
 		else:
 			return valid_robot_bunny_details
@@ -646,7 +646,7 @@ class DancingSkeleton(StuffedAnimal):
 	def dancing_skeleton_detail_validator(att_dict):
 		"""
 		Validate Dancing Skeleton's attributes.
-		:param attribute_dict: dictionary that has all the information required to create Dancing Skeleton.
+		:param att_dict: dictionary that has all the information required to create Dancing Skeleton.
 		"""
 		# valid_attributes_count = 6
 		# if len(att_dict.keys()) != valid_attributes_count:  # filter extra column
@@ -670,7 +670,7 @@ class DancingSkeleton(StuffedAnimal):
 				else:
 					print("Invalid fabric")
 		if valid_dancing_skeleton_attributes["fabric"] == "" \
-				or valid_dancing_skeleton_attributes["has_glow"] == "":
+			or valid_dancing_skeleton_attributes["has_glow"] == "":
 			return None
 		else:
 			return valid_dancing_skeleton_attributes
@@ -732,7 +732,7 @@ class Reindeer(StuffedAnimal):
 				else:
 					print("Invalid glow")
 		if valid_reindeer_attributes["fabric"] == "" \
-				or valid_reindeer_attributes["has_glow"] == "":
+			or valid_reindeer_attributes["has_glow"] == "":
 			return None
 		else:
 			return valid_reindeer_attributes
@@ -794,7 +794,7 @@ class EasterBunny(StuffedAnimal):
 				if value_from_dict == "Grey":
 					valid_reindeer_attributes["colour"] = "Grey"
 		if valid_reindeer_attributes["fabric"] == "" \
-				or valid_reindeer_attributes["colour"] == "":
+			or valid_reindeer_attributes["colour"] == "":
 			return None
 		else:
 			return valid_reindeer_attributes

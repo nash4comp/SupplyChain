@@ -22,6 +22,9 @@ import gift_factory
 
 
 def main():
+	"""
+	Drives the program.
+	"""
 	inv = inventory.Inventory()
 	test_store_front = StoreFront()
 	factory = gift_factory.GiftFactory()

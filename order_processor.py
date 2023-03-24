@@ -1,10 +1,34 @@
+"""
+The Supply Chain Management System
+
+This program is a simulation of a supply chain management system. It is a
+command-line program that allows the user to create a gift factory and
+create orders for the factory to fulfill. The program will then process
+the orders and print out the results.
+
+# Name1: Nash Baek (nash4comp@gmail.com)
+# Student number1: A01243888
+
+# Name2: Taylor Ji (taylor.ji719@gmail.com)
+# Student number2: A01304056
+
+UML diagram: https://app.diagrams.net/#G18MWO3bp974lfK4Ceehz2vUfH8YmqEEfE
+Sequence diagram: https://app.diagrams.net/#G1gf1FB-nTLsNcJypwlBpQREfXNScSEKYN
+"""
+
 import pandas as pd
 from order import Order
 from gift_factory import GiftFactory
 
 
 class OrderProcessor:
+    """
+    OrderProcessor class that processes orders from Excel file.
+    """
     def __init__(self):
+        """
+        Constructor for OrderProcessor class.
+        """
         self._orders_dict = {}
         self._excel_to_dict = {}
         self._factory_map = GiftFactory()
@@ -62,7 +86,7 @@ class OrderProcessor:
         created_order = None
         holiday = ""
         for key in self.get_excel_to_dict().keys():
-            order_to_process = self.get_excel_to_dict()[key]  # get the nth dictionary
+            order_to_process = self.get_excel_to_dict()[key]  # TODO the warning regarding the key is here
             for key in order_to_process.keys():
                 value_from_key = order_to_process[key]
                 if value_from_key != "":
@@ -105,8 +129,16 @@ class OrderProcessor:
             attributes = {}
 
     def get_holiday_of_an_item(self, order):
+        """
+        TODO: update comment
+        :param order:
+        :return:
+        """
         return self.get_orders()[order][1]
 
     def get_valid_orders_list(self):
+        """
+        TODO: update comment
+        :return:
+        """
         return self._valid_orders
-

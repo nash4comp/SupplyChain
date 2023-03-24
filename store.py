@@ -38,8 +38,8 @@ class Store:
         """
         Process web order by reading an Excel file and creating Order objects.
         Based on created Order objects, validate them, if validate then check inventory
-        :param inv: Inventory
-        :param factory: GiftFactory
+        :param inv: the inventory object
+        :param factory: the factory object
         """
         file_to_read = input("Please enter the Excel file name: ")
         self.get_order_processor().convert_dict_from_excel_file(file_to_read)
@@ -80,6 +80,7 @@ class Store:
         """
         return self._order_processor
 
+    # TODO resolve the static method issue
     def text_file_name_generator(self):
         """
         Format text_file_name
